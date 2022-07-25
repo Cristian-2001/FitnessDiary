@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/immPalestra"
                 android:text="@string/palestra"
-                android:textSize="70dp"
+                android:textSize="70sp"
                 android:textStyle="italic|bold"/>
 
         </RelativeLayout>
@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/immDieta"
                 android:text="@string/dieta"
-                android:textSize="70dp"
+                android:textSize="70sp"
                 android:textStyle="italic|bold"/>
         </RelativeLayout>
 

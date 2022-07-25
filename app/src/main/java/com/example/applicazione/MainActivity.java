@@ -3,6 +3,8 @@ package com.example.applicazione;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "Cliccato", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(MainActivity.this, ElencoAllenamentiActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
 
