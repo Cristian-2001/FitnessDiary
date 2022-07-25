@@ -9,14 +9,12 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvPalestra"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_height="364dp"
+        android:elevation="7dp"
         app:cardBackgroundColor="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="7dp"
-        android:elevation="7dp">
+        app:layout_constraintTop_toTopOf="parent">>
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -24,20 +22,56 @@
 
 
             <ImageView
+                android:id="@+id/immPalestra"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:id="@+id/immPalestra"
-                android:src="@mipmap/ic_launcher_round"/>
+                android:src="@mipmap/ic_launcher_round" />
 
             <TextView
+                android:id="@+id/txtPalestra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtPalestra"
-                android:text="Palestra"
-                android:layout_below="@+id/immPalestra"/>
+                android:layout_below="@+id/immPalestra"
+                android:text="@string/palestra"
+                android:textSize="70dp"
+                android:textStyle="italic|bold"/>
+
         </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvDieta"
+        android:layout_width="match_parent"
+        android:layout_height="364dp"
+        android:layout_marginTop="2dp"
+        android:elevation="7dp"
+        app:cardBackgroundColor="#F44336"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvPalestra">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
 
+            <ImageView
+                android:id="@+id/immDieta"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@android:drawable/arrow_up_float" />
+
+            <TextView
+                android:id="@+id/txtDieta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/immDieta"
+                android:text="@string/dieta"
+                android:textSize="70dp"
+                android:textStyle="italic|bold"/>
+        </RelativeLayout>
 
 
     </com.google.android.material.card.MaterialCardView>

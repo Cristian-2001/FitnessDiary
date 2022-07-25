@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private CardView cvPalestra;
+    private CardView cvDieta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +26,18 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Cliccato", Toast.LENGTH_SHORT).show();
             }
         });
+
+        cvDieta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Cliccato Dieta", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initView(){
         cvPalestra = findViewById(R.id.cvPalestra);
+        cvDieta = findViewById(R.id.cvDieta);
     }
 }
 
