@@ -5,12 +5,14 @@ public class Allenamento {
     private String nome;
     private double kcal;
     public String getImageUrl;
+    private Esercizio[] E;
 
-    public Allenamento(int id, String nome, double kcal, String getImageUrl) {
+    public Allenamento(int id, String nome, double kcal, String getImageUrl, Esercizio[] e) {
         this.id = id;
         this.nome = nome;
         this.kcal = kcal;
         this.getImageUrl = getImageUrl;
+        E = e;
     }
 
     public int getId() {

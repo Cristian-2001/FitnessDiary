@@ -1,13 +1,10 @@
 package com.example.applicazione;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate;
-
-import android.os.Bundle;
-
-import java.util.ArrayList;
 
 public class ElencoAllenamentiActivity extends AppCompatActivity {
 
@@ -27,12 +24,12 @@ public class ElencoAllenamentiActivity extends AppCompatActivity {
         allenamentiRecView.setLayoutManager(new LinearLayoutManager(this));
 
         //creo un'ArrayList di allenamenti
-        ArrayList<Allenamento> allenamenti = new ArrayList<>();
+        /*ArrayList<Allenamento> allenamenti = new ArrayList<>();
         allenamenti.add(new Allenamento(1, "Piegamenti", 500,
                 "https://www.invictusarena.com/it/wp-content/uploads/2020/03/piegamenti-sulle-braccia-1.jpg"));
         allenamenti.add(new Allenamento(2, "Squat", 420,
                 "https://www.staiinforma.com/wp-content/uploads/2018/07/Squat-a-corpo-libero.jpg"));
 
-        adapter.setAllenamenti(allenamenti);
+        adapter.setAllenamenti(allenamenti);*/
     }
 }
