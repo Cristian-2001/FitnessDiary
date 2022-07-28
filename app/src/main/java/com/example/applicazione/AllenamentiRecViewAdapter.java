@@ -40,7 +40,7 @@ public class AllenamentiRecViewAdapter extends RecyclerView.Adapter<AllenamentiR
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Log.d(TAG, "onBinfViewHolder: Called");
+        Log.d(TAG, "onBindViewHolder: Called");
         holder.txtAllenamento.setText(allenamenti.get(position).getNome());
         Glide.with(mContext)
                 .asBitmap()
