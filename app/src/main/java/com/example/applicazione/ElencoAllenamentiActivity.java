@@ -45,7 +45,7 @@ public class ElencoAllenamentiActivity extends AppCompatActivity {
         adapter.setAllenamenti(allenamenti);*/
     }
 
-    private void initView(){
+    private void initView() {
         //creo un nuovo adapter e una nuova RecView e li inizializzo
         adapter = new AllenamentiRecViewAdapter(this);
         allenamentiRecView = findViewById(R.id.allenamentiRecView);
