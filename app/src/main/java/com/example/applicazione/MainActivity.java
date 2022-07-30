@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "Cliccato Dieta", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(MainActivity.this, ElencoDieteActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
     }

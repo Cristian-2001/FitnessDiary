@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
+    android:layout_width="150dp"
+    android:layout_height="200dp"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="32dp"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="7dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="NOME"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/txtCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNome"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="Categoria"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtEnergia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCategoria"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="Energia"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtLipidi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtEnergia"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="Lipidi"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtProteine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtLipidi"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="Proteine"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtCarboidrati"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtProteine"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="Carboidrati"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>
