@@ -44,8 +44,16 @@ public class DatabaseAccess {
 
     public String getCarbo(String name){
 
-        c= db.rawQuery("select Carboidrati (g) from ");
+        c= db.rawQuery("select CARBOIDRATI from Foglio1 where NOME = '"+name+"'", new String[]{});
+        StringBuffer buffer = new StringBuffer();
 
+        while(c.moveToNext()){
+
+            String carbo = c.getString(0);
+            buffer.append(""+carbo);
+
+        }
+        return buffer.toString();
     }
 
 }
