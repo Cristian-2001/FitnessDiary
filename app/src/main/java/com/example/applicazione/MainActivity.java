@@ -1,13 +1,12 @@
 package com.example.applicazione;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void initView(){
         cvPalestra = findViewById(R.id.cvPalestra);

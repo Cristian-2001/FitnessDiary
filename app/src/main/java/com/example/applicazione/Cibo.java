@@ -14,6 +14,7 @@ public class Cibo {
     Double proteine;
     Double sale;
 
+
     //TODO: Deve prenderlo dal database
     public Cibo(int id, String nome, String categoria, Double energia, Double lipidi, Double acidigrassi, Double colesterolo, Double carboidrati, Double zuccheri, Double fibre, Double proteine, Double sale) {
         this.id = id;

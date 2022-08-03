@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.ViewHolder>{
+
+
+
     private static final String TAG = "CibiRecViewAdapter";
 
     //elenco dei cibi selezionati
@@ -41,6 +44,10 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+
+
+
         Log.d(TAG, "onBindViewHolder: Called");
         holder.txtNome.setText(cibi.get(position).getNome());
         holder.txtCategoria.setText(cibi.get(position).getCategoria());
@@ -76,6 +83,9 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
             txtLipidi = itemView.findViewById(R.id.txtLipidi);
             txtProteine = itemView.findViewById(R.id.txtProteine);
             txtCarboidrati = itemView.findViewById(R.id.txtCarboidrati);
+
+
+
         }
     }
 }
