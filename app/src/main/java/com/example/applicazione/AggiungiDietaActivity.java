@@ -8,12 +8,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class AggiungiDietaActivity extends AppCompatActivity {
 
     private Spinner spnCategoria;
     private Button btnScegli;
     private RecyclerView cibiRecView;
     private CibiRecViewAdapter adapter;
+
+    DataBaseHelper dataBaseHelper;
 
 
 
@@ -25,18 +29,12 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aggiungi_dieta);
 
-
-
-
         initView();
 
-
-
-
-
-
-
-
+        dataBaseHelper = new DataBaseHelper(AggiungiDietaActivity.this);
+        ArrayList<Cibo> cibi = new ArrayList<>();
+        cibi = dataBaseHelper.getAllCibi();
+        adapter.setCibi(cibi);
     }
 
     public void initView() {

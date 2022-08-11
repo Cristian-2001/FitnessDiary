@@ -1,5 +1,6 @@
 package com.example.applicazione;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +27,8 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
     //contesto
     private Context mContext;
 
+    DataBaseHelper dataBaseHelper;
+
     public CibiRecViewAdapter(Context mContext) {
         this.mContext = mContext;
     }
@@ -43,7 +46,7 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
 
 
