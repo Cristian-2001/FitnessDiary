@@ -10,7 +10,8 @@
     app:cardCornerRadius="7dp"
     app:cardElevation="7dp"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_margin="22dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,7 +25,9 @@
             android:layout_marginTop="5dp"
             android:text="NOME"
             android:textSize="20sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp" />
 
         <TextView
             android:id="@+id/txtCategoria"
@@ -34,7 +37,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:text="Categoria"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"/>
 
         <TextView
             android:id="@+id/txtEnergia"

@@ -54,10 +54,10 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
         Log.d(TAG, "onBindViewHolder: Called");
         holder.txtNome.setText(cibi.get(position).getNome());
         holder.txtCategoria.setText(cibi.get(position).getCategoria());
-        holder.txtEnergia.setText(cibi.get(position).getEnergia().toString());
-        holder.txtLipidi.setText(cibi.get(position).getLipidi().toString());
-        holder.txtProteine.setText(cibi.get(position).getProteine().toString());
-        holder.txtCarboidrati.setText(cibi.get(position).getCarboidrati().toString());
+        holder.txtEnergia.setText("Calorie: " + cibi.get(position).getEnergia().toString() + " kcal");
+        holder.txtLipidi.setText("Lipidi: " + cibi.get(position).getLipidi().toString() + " g");
+        holder.txtProteine.setText("Proteine: " + cibi.get(position).getProteine().toString() + " g");
+        holder.txtCarboidrati.setText("Carboidrati: " + cibi.get(position).getCarboidrati().toString() + " g");
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
