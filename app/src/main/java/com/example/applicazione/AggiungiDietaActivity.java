@@ -20,10 +20,10 @@ public class AggiungiDietaActivity extends AppCompatActivity {
     private static final String TAG = "AggiungiDietaActivity";
 
     private Spinner spnCategoria;
-    private Button btnApplica;
+    private Button btnCerca;
     private RecyclerView cibiRecView;
     private CibiRecViewAdapter adapter;
-    private ArrayList<Cibo> cibi;
+    private ArrayList<Cibo> cibi = new ArrayList<>();
     private EditText edtTxtCercaNome;
     private TextView txtEmpty;
 
@@ -41,11 +41,13 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         cibi = dataBaseHelper.getAllCibi();
         adapter.setCibi(cibi);
 
-        btnApplica.setOnClickListener(new View.OnClickListener() {
+        btnCerca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                if (imm.isAcceptingText()) {
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                }
                 txtEmpty.setVisibility(View.GONE);
 
                 String cat = spnCategoria.getSelectedItem().toString();
@@ -61,7 +63,7 @@ public class AggiungiDietaActivity extends AppCompatActivity {
                 adapter.setCibi(cibi);
                 cibiRecView.setAdapter(adapter);
 
-                if(adapter.getItemCount() == 0){
+                if (adapter.getItemCount() == 0) {
                     txtEmpty.setVisibility(View.VISIBLE);
                 }
             }
@@ -72,7 +74,7 @@ public class AggiungiDietaActivity extends AppCompatActivity {
     public void initView() {
         adapter = new CibiRecViewAdapter(this);
         spnCategoria = findViewById(R.id.spnCategoria);
-        btnApplica = findViewById(R.id.btnCerca);
+        btnCerca = findViewById(R.id.btnCerca);
         cibiRecView = findViewById(R.id.cibiRecView);
         edtTxtCercaNome = findViewById(R.id.edtTxtCercaNome);
         txtEmpty = findViewById(R.id.txtEmpty);
