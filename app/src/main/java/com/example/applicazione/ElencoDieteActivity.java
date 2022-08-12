@@ -1,12 +1,17 @@
 package com.example.applicazione;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,6 +26,8 @@ public class ElencoDieteActivity extends AppCompatActivity {
     private FloatingActionButton fltABAddDieta;
 
     private ListView lv_carbo;
+
+    private String nomeDieta;
 
     DataBaseHelper dataBaseHelper;
     ArrayAdapter customerArrayAdapter;
@@ -37,8 +44,44 @@ public class ElencoDieteActivity extends AppCompatActivity {
         fltABAddDieta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ElencoDieteActivity.this, AggiungiDietaActivity.class);
-                ElencoDieteActivity.this.startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ElencoDieteActivity.this);
+                builder.setMessage("Inserisci il nome della dieta: ");
+
+                final EditText input = new EditText(ElencoDieteActivity.this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                builder.setView(input);
+
+                builder.setPositiveButton("Avanti", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //non faccio nulla perché faccio l'override più avanti
+                    }
+                });
+
+                builder.setNegativeButton("Annulla", null);
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (input.getText().toString().equals("")) {
+                            Toast.makeText(ElencoDieteActivity.this, "Inserire il nome della dieta", Toast.LENGTH_SHORT).show();
+                        } else {
+                            nomeDieta = input.getText().toString();
+                            Toast.makeText(ElencoDieteActivity.this, "Nome: " + nomeDieta, Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(ElencoDieteActivity.this, AggiungiDietaActivity.class);
+                            ElencoDieteActivity.this.startActivity(intent);
+                            dialog.dismiss();
+                        }
+                    }
+                });
+
+
 
                 /*dataBaseHelper = new DataBaseHelper(ElencoDieteActivity.this);
 

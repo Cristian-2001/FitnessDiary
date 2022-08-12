@@ -1,7 +1,10 @@
 package com.example.applicazione;
 
+import static com.example.applicazione.SelezionaCiboActivity.CIBO_ID_KEY;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,13 +30,10 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
     //contesto
     private Context mContext;
 
-    DataBaseHelper dataBaseHelper;
-
     public CibiRecViewAdapter(Context mContext) {
         this.mContext = mContext;
     }
 
-    //TODO: Deve settare l'ArrayList dal database
     public void setCibi(ArrayList<Cibo> cibi) {
         this.cibi = cibi;
     }
@@ -62,7 +62,9 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, cibi.get(position).getNome() + " Selected", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, SelezionaCiboActivity.class);
+                intent.putExtra(CIBO_ID_KEY, cibi.get(position).getId());
+                mContext.startActivity(intent);
             }
         });
     }

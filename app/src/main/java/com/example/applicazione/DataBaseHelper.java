@@ -174,4 +174,39 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+
+    //ritorna l'elenco di cibi della categoria data
+    public ArrayList<Cibo> getCibiByCat(String cat) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String queryString = "SELECT *" + " FROM " + TABLE_CIBI + " WHERE " + COLUMN_CATEGORIA + " = '" + cat + "'";
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        ArrayList<Cibo> returnList = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String nome = cursor.getString(1);
+                String categoria = cursor.getString(2);
+                Double energia = cursor.getDouble(3);
+                Double lipidi = cursor.getDouble(4);
+                Double acidigrassi = cursor.getDouble(5);
+                Double colesterolo = cursor.getDouble(6);
+                Double carboidrati = cursor.getDouble(7);
+                Double zuccheri = cursor.getDouble(8);
+                Double fibre = cursor.getDouble(9);
+                Double proteine = cursor.getDouble(10);
+                Double sale = cursor.getDouble(11);
+                returnList.add(new Cibo(id, nome, categoria, energia, lipidi, acidigrassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale));
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
+    }
 }

@@ -10,9 +10,9 @@
         android:id="@+id/spnCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:entries="@array/categorie"
         app:layout_constraintBottom_toBottomOf="@+id/txtCategoria"
-        app:layout_constraintEnd_toStartOf="@+id/btnScegli"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtCategoria"
         app:layout_constraintTop_toTopOf="@+id/txtCategoria" />
 
@@ -28,24 +28,34 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnScegli"
+        android:id="@+id/btnApplica"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scegli"
-        app:layout_constraintBottom_toBottomOf="@+id/spnCategoria"
+        android:layout_marginTop="8dp"
+        android:text="Applica"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/spnCategoria"
-        app:layout_constraintTop_toTopOf="@+id/spnCategoria" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spnCategoria" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cibiRecView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnScegli" />
+        app:layout_constraintTop_toBottomOf="@+id/txtInfo"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <TextView
+        android:id="@+id/txtInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Tutti i valori sono riferiti a 100g di prodotto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnApplica"
+        android:layout_marginLeft="5dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
