@@ -2,4 +2,30 @@
     <string name="app_name">Applicazione</string>
     <string name="palestra">Palestra</string>
     <string name="dieta">Dieta</string>
+
+    <string-array name="categorie">
+        <item>Tutte</item>
+        <item>Bevande Alcoliche</item>
+        <item>Bevande Analcoliche</item>
+        <item>Brodi</item>
+        <item>Carne</item>
+        <item>Cibi Asiatici</item>
+        <item>Cibi italiani</item>
+        <item>Cibi salati</item>
+        <item>Dolciumi</item>
+        <item>Frutta</item>
+        <item>Grassi e oli</item>
+        <item>Insaccati</item>
+        <item>Insalate</item>
+        <item>Legumi</item>
+        <item>Pane e cereali</item>
+        <item>Pasta</item>
+        <item>Patate</item>
+        <item>Pesce</item>
+        <item>Salse</item>
+        <item>Spezie</item>
+        <item>Torte salate</item>
+        <item>Uova e latticini</item>
+        <item>Verdure</item>
+    </string-array>
 </resources>
