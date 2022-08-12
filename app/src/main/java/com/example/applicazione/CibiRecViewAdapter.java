@@ -88,9 +88,6 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
             txtLipidi = itemView.findViewById(R.id.txtLipidi);
             txtProteine = itemView.findViewById(R.id.txtProteine);
             txtCarboidrati = itemView.findViewById(R.id.txtCarboidrati);
-
-
-
         }
     }
 }

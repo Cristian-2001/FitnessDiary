@@ -80,7 +80,5 @@ public class AggiungiDietaActivity extends AppCompatActivity {
 
         cibiRecView.setAdapter(adapter);
         cibiRecView.setLayoutManager(new GridLayoutManager(this, 2));
-
-
     }
 }

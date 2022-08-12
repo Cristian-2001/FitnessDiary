@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -25,12 +27,11 @@ public class ElencoDieteActivity extends AppCompatActivity {
 
     private FloatingActionButton fltABAddDieta;
 
-    private ListView lv_carbo;
+    private RecyclerView dieteRecView;
+    private DieteRecViewAdapter adapter;
+    private ArrayList<Dieta> diete = new ArrayList<>();
 
     private String nomeDieta;
-
-    DataBaseHelper dataBaseHelper;
-    ArrayAdapter customerArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,10 @@ public class ElencoDieteActivity extends AppCompatActivity {
 
         initView();
 
+        diete.add(new Dieta(1, "Prova 1", 3));
+        diete.add(new Dieta(2, "Prova 2", 5));
+
+        adapter.setDiete(diete);
 
         fltABAddDieta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +103,11 @@ public class ElencoDieteActivity extends AppCompatActivity {
     }
 
     public void initView() {
+        adapter = new DieteRecViewAdapter(this);
+        dieteRecView = findViewById(R.id.dieteRecView);
         fltABAddDieta = findViewById(R.id.fltABAddDieta);
-        lv_carbo = findViewById(R.id.lv_carbo);
+
+        dieteRecView.setAdapter(adapter);
+        dieteRecView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
