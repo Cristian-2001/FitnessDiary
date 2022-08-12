@@ -3,8 +3,11 @@ package com.example.applicazione;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -21,6 +24,8 @@ public class AggiungiDietaActivity extends AppCompatActivity {
     private RecyclerView cibiRecView;
     private CibiRecViewAdapter adapter;
     private ArrayList<Cibo> cibi;
+    private EditText edtTxtCercaNome;
+    private TextView txtEmpty;
 
     DataBaseHelper dataBaseHelper;
 
@@ -39,17 +44,26 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         btnApplica.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String cat = spnCategoria.getSelectedItem().toString();
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                txtEmpty.setVisibility(View.GONE);
 
-                if (cat.equals("Tutte")) {
+                String cat = spnCategoria.getSelectedItem().toString();
+                String nome = edtTxtCercaNome.getText().toString();
+
+                if (cat.equals("Tutte") && nome.equals("")) {
                     cibi = dataBaseHelper.getAllCibi();
                 } else {
                     Log.d(TAG, "onClick: ECCOMI");
-                    cibi = dataBaseHelper.getCibiByCat(cat);
+                    cibi = dataBaseHelper.getCibiByCatNome(cat, nome);
                 }
 
                 adapter.setCibi(cibi);
                 cibiRecView.setAdapter(adapter);
+
+                if(adapter.getItemCount() == 0){
+                    txtEmpty.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
@@ -58,8 +72,10 @@ public class AggiungiDietaActivity extends AppCompatActivity {
     public void initView() {
         adapter = new CibiRecViewAdapter(this);
         spnCategoria = findViewById(R.id.spnCategoria);
-        btnApplica = findViewById(R.id.btnApplica);
+        btnApplica = findViewById(R.id.btnCerca);
         cibiRecView = findViewById(R.id.cibiRecView);
+        edtTxtCercaNome = findViewById(R.id.edtTxtCercaNome);
+        txtEmpty = findViewById(R.id.txtEmpty);
 
 
         cibiRecView.setAdapter(adapter);

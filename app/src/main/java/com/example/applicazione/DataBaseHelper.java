@@ -176,11 +176,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     //ritorna l'elenco di cibi della categoria data
-    public ArrayList<Cibo> getCibiByCat(String cat) {
+    public ArrayList<Cibo> getCibiByCatNome(String cat, String name) {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String queryString = "SELECT *" + " FROM " + TABLE_CIBI + " WHERE " + COLUMN_CATEGORIA + " = '" + cat + "'";
+        if (cat.equals("Tutte")) {
+            cat = "%";
+        }
+
+        if (name.equals("")) {
+            name = "%";
+        }
+
+        String queryString = "SELECT *" + " FROM " + TABLE_CIBI + " WHERE " + COLUMN_CATEGORIA + " like '" + cat + "' AND "
+                + COLUMN_NOME + " like '" + name + "%'";
 
         Cursor cursor = db.rawQuery(queryString, null);
 
