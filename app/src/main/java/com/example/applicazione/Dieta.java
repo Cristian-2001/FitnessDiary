@@ -1,5 +1,6 @@
 package com.example.applicazione;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Dieta {
@@ -81,6 +82,20 @@ public class Dieta {
 
     }
 
+    public ArrayList<Integer> IdToArray(String s){
+
+        ArrayList<Integer> returnList = null;
+
+        String[] tokens = s.split(",");
+
+        for(int i = 0; i < tokens.length; i++) {
+            returnList.set(i,Integer.parseInt(tokens[i]));
+        }
+
+        return returnList;
+
+    }
+
     public String QtaToString(){
 
         String returnString = cibiQta.get(0).toString();
@@ -91,6 +106,20 @@ public class Dieta {
         }
 
         return returnString;
+
+    }
+
+    public ArrayList<Double> QtaToArray(String s){
+
+        ArrayList<Double> returnList = null;
+
+        String[] tokens = s.split(",");
+
+        for(int i = 0; i < tokens.length; i++) {
+            returnList.set(i,Double.parseDouble(tokens[i]));
+        }
+
+        return returnList;
 
     }
 
