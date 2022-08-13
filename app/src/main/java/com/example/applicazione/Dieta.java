@@ -67,4 +67,31 @@ public class Dieta {
                 ", numElem=" + numElem +
                 '}';
     }
+
+    public String IdToString(){
+
+        String returnString = cibiId.get(0).toString();
+
+        for(int i = 1; i < cibiId.size(); i++) {
+           returnString += "," +cibiId.get(i).toString();
+
+        }
+
+        return returnString;
+
+    }
+
+    public String QtaToString(){
+
+        String returnString = cibiQta.get(0).toString();
+
+        for(int i = 1; i < cibiQta.size(); i++) {
+            returnString += "," +cibiQta.get(i).toString();
+
+        }
+
+        return returnString;
+
+    }
+
 }
