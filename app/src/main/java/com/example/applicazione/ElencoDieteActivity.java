@@ -2,6 +2,7 @@ package com.example.applicazione;
 
 import static com.example.applicazione.AggiungiDietaActivity.DIETA_NOME;
 import static com.example.applicazione.AggiungiDietaActivity.ELENCO_DIETE;
+import static com.example.applicazione.VisualizzaDietaActivity.DIETA_ID_KEY;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -103,6 +104,7 @@ public class ElencoDieteActivity extends AppCompatActivity {
                             Intent intent = new Intent(ElencoDieteActivity.this, AggiungiDietaActivity.class);
                             intent.putExtra(DIETA_NOME, nomeDieta);
                             intent.putExtra(ELENCO_DIETE, 1);
+                            intent.putExtra(DIETA_ID_KEY, -2);
                             ElencoDieteActivity.this.startActivity(intent);
                             dialog.dismiss();
                         }

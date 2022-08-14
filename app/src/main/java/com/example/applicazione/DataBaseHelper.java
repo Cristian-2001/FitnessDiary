@@ -189,7 +189,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
         String queryString = "SELECT *" + " FROM " + TABLE_CIBI + " WHERE " + COLUMN_CATEGORIA + " like '" + cat + "' AND "
-                + COLUMN_NOME + " like '" + name + "%'";
+                + COLUMN_NOME + " like '%" + name + "%'";
 
         Cursor cursor = db.rawQuery(queryString, null);
 
