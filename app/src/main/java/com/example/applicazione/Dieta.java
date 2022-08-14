@@ -4,17 +4,36 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Dieta {
+    public static Object dieta;
     int id;
     String nome;
     ArrayList<Integer> cibiId;
     ArrayList<Double> cibiQta;
     Integer numElem;
 
-    public Dieta(int id, String nome, /*ArrayList<Integer> cibiId, ArrayList<Double> cibiQta,*/ Integer numElem) {
+    public Dieta(String nome, Integer numElem) {
+        this.nome = nome;
+        this.numElem = numElem;
+    }
+
+    public Dieta(int id, String nome, ArrayList<Integer> cibiId, ArrayList<Double> cibiQta, Integer numElem) {
         this.id = id;
         this.nome = nome;
-        /*this.cibiId = cibiId;
-        this.cibiQta = cibiQta;*/
+        this.cibiId = cibiId;
+        this.cibiQta = cibiQta;
+        this.numElem = numElem;
+    }
+
+    public Dieta(int id, String nome, Integer numElem) {
+        this.id = id;
+        this.nome = nome;
+        this.numElem = numElem;
+    }
+
+    public Dieta(String nome, ArrayList<Integer> cibiId, ArrayList<Double> cibiQta, Integer numElem) {
+        this.nome = nome;
+        this.cibiId = cibiId;
+        this.cibiQta = cibiQta;
         this.numElem = numElem;
     }
 
@@ -84,12 +103,12 @@ public class Dieta {
 
     public ArrayList<Integer> IdToArray(String s){
 
-        ArrayList<Integer> returnList = null;
+        ArrayList<Integer> returnList = new ArrayList<>();
 
         String[] tokens = s.split(",");
 
         for(int i = 0; i < tokens.length; i++) {
-            returnList.set(i,Integer.parseInt(tokens[i]));
+            returnList.add(Integer.parseInt(tokens[i]));
         }
 
         return returnList;
@@ -111,16 +130,19 @@ public class Dieta {
 
     public ArrayList<Double> QtaToArray(String s){
 
-        ArrayList<Double> returnList = null;
+        ArrayList<Double> returnList = new ArrayList<>();
 
         String[] tokens = s.split(",");
 
         for(int i = 0; i < tokens.length; i++) {
-            returnList.set(i,Double.parseDouble(tokens[i]));
+            returnList.add(Double.parseDouble(tokens[i]));
         }
 
         return returnList;
 
     }
 
+    public void incrementNum(){
+        numElem++;
+    }
 }

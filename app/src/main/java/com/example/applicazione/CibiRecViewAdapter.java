@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.ViewHolder>{
-
-
 
     private static final String TAG = "CibiRecViewAdapter";
 
@@ -59,6 +58,12 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
         holder.txtProteine.setText("Proteine: " + cibi.get(position).getProteine().toString() + " g");
         holder.txtCarboidrati.setText("Carboidrati: " + cibi.get(position).getCarboidrati().toString() + " g");
 
+        //nascondo gli elementi da non visualizzare
+        holder.btnDownArrow.setVisibility(View.GONE);
+        holder.btnEdit.setVisibility(View.GONE);
+        holder.btnDelete.setVisibility(View.GONE);
+        holder.txtQta.setVisibility(View.GONE);
+
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +84,10 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
         private CardView parent;
         private TextView txtNome, txtCategoria, txtEnergia, txtLipidi, txtProteine, txtCarboidrati;
 
+        //elementi da nascondere
+        private ImageView btnDownArrow, btnEdit, btnDelete;
+        private TextView txtQta;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             parent = itemView.findViewById(R.id.parent);
@@ -88,6 +97,11 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
             txtLipidi = itemView.findViewById(R.id.txtLipidi);
             txtProteine = itemView.findViewById(R.id.txtProteine);
             txtCarboidrati = itemView.findViewById(R.id.txtCarboidrati);
+
+            btnDownArrow = itemView.findViewById(R.id.btnDownArrow);
+            btnEdit = itemView.findViewById(R.id.btnEdit);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
+            txtQta = itemView.findViewById(R.id.txtQta);
         }
     }
 }

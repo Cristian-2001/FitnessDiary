@@ -2,6 +2,9 @@
     <string name="app_name">Applicazione</string>
     <string name="palestra">Palestra</string>
     <string name="dieta">Dieta</string>
+    <string name="salva">Salva</string>
+    <string name="elimina">Elimina</string>
+    <string name="aggiungi_cibi">Aggiungi degli elementi</string>
 
     <string-array name="categorie">
         <item>Tutte</item>

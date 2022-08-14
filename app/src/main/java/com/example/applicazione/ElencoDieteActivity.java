@@ -1,16 +1,23 @@
 package com.example.applicazione;
 
+import static com.example.applicazione.AggiungiDietaActivity.DIETA_NOME;
+import static com.example.applicazione.AggiungiDietaActivity.ELENCO_DIETE;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +33,7 @@ public class ElencoDieteActivity extends AppCompatActivity {
     private static final String TAG = "ElencoDieteActivity";
 
     private FloatingActionButton fltABAddDieta;
+    private TextView txtEmptyDiete;
 
     private RecyclerView dieteRecView;
     private DieteRecViewAdapter adapter;
@@ -33,18 +41,31 @@ public class ElencoDieteActivity extends AppCompatActivity {
 
     private String nomeDieta;
 
+    private DataBaseDieta dataBaseDieta;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elenco_diete);
 
+        //chiamo l'action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        //mostro il back button
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         initView();
 
-        diete.add(new Dieta(1, "Prova 1", 3));
-        diete.add(new Dieta(2, "Prova 2", 5));
+        dataBaseDieta = new DataBaseDieta(ElencoDieteActivity.this);
+
+        diete = dataBaseDieta.getAllDiete();
 
         adapter.setDiete(diete);
+
+        if (adapter.getItemCount() == 0) {
+            txtEmptyDiete.setVisibility(View.VISIBLE);
+        }
 
         fltABAddDieta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,8 +99,10 @@ public class ElencoDieteActivity extends AppCompatActivity {
                             Toast.makeText(ElencoDieteActivity.this, "Inserire il nome della dieta", Toast.LENGTH_SHORT).show();
                         } else {
                             nomeDieta = input.getText().toString();
-                            Toast.makeText(ElencoDieteActivity.this, "Nome: " + nomeDieta, Toast.LENGTH_SHORT).show();
+
                             Intent intent = new Intent(ElencoDieteActivity.this, AggiungiDietaActivity.class);
+                            intent.putExtra(DIETA_NOME, nomeDieta);
+                            intent.putExtra(ELENCO_DIETE, 1);
                             ElencoDieteActivity.this.startActivity(intent);
                             dialog.dismiss();
                         }
@@ -103,11 +126,35 @@ public class ElencoDieteActivity extends AppCompatActivity {
     }
 
     public void initView() {
+        txtEmptyDiete = findViewById(R.id.txtEmptyDiete);
+
         adapter = new DieteRecViewAdapter(this);
         dieteRecView = findViewById(R.id.dieteRecView);
         fltABAddDieta = findViewById(R.id.fltABAddDieta);
 
         dieteRecView.setAdapter(adapter);
         dieteRecView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                Intent intent = new Intent(ElencoDieteActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                ElencoDieteActivity.this.startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

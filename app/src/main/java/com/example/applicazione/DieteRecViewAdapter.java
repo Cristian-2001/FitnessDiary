@@ -1,7 +1,10 @@
 package com.example.applicazione;
 
+import static com.example.applicazione.VisualizzaDietaActivity.DIETA_ID_KEY;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +51,14 @@ public class DieteRecViewAdapter extends RecyclerView.Adapter<DieteRecViewAdapte
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, diete.get(position).getNome() + " cliccata", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(mContext, VisualizzaDietaActivity.class);
+
+                Log.d(TAG, "onClick: POSIZIONE: " + position);
+                Log.d(TAG, "onClick: ID: " + diete.get(position).getId());
+
+                intent.putExtra(DIETA_ID_KEY, diete.get(position).getId());
+                mContext.startActivity(intent);
             }
         });
     }

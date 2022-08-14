@@ -1,11 +1,18 @@
 package com.example.applicazione;
 
+import static com.example.applicazione.AggiungiDietaActivity.ELENCO_DIETE;
+import static com.example.applicazione.AggiungiDietaActivity.dieta;
+import static com.example.applicazione.VisualizzaDietaActivity.DIETA_ID_KEY;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -13,12 +20,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class SelezionaCiboActivity extends AppCompatActivity {
+    //chiave per l'id del cibo selezionato
     public static final String CIBO_ID_KEY = "ciboId";
+
+    //variabile per controllare se è una nuova dieta o è già esistente
+    // vale -2 se nuova, l'id della dieta se è già esistente, -1 default
+    private int dietaId;
 
     private TextView txtNomeCibo, txtInsMsg, txtValori;
     private EditText edtTxtQta;
     private Button btnAnnulla, btnInserisci, btnCalcola;
+    private int ciboId;
+    private Double qta;
 
     private Cibo cibo;
 
@@ -29,11 +45,17 @@ public class SelezionaCiboActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seleziona_cibo);
 
+        //chiamo l'action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        //mostro il back button
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         initView();
 
         Intent intent = getIntent();
         if (intent != null) {
-            int ciboId = intent.getIntExtra(CIBO_ID_KEY, -1);
+            ciboId = intent.getIntExtra(CIBO_ID_KEY, -1);
             if (ciboId != -1) {
                 cibo = dataBaseHelper.getCiboById(ciboId);
                 txtNomeCibo.setText(cibo.getNome());
@@ -46,7 +68,12 @@ public class SelezionaCiboActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
             }
+
+            dietaId = intent.getIntExtra(DIETA_ID_KEY, -1);
         }
 
         btnCalcola.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +83,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
                 Double energia, lipidi, acidi_grassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale;
-                Double qta = Double.valueOf(edtTxtQta.getText().toString());
+                qta = Double.valueOf(edtTxtQta.getText().toString());
                 energia = cibo.getEnergia() * qta / 100;
                 lipidi = cibo.getLipidi() * qta / 100;
                 acidi_grassi = cibo.getAcidigrassi() * qta / 100;
@@ -67,15 +94,15 @@ public class SelezionaCiboActivity extends AppCompatActivity {
                 proteine = cibo.getProteine() * qta / 100;
                 sale = cibo.getSale() * qta / 100;
 
-                txtValori.setText("Energia: " + energia.toString() + " kcal\n"
-                        + "Lipidi: " + lipidi.toString() + " g\n"
-                        + "Acidi grassi: " + acidi_grassi.toString() + " g\n"
-                        + "Colesterolo: " + colesterolo.toString() + " g\n"
-                        + "Carboidrati: " + carboidrati.toString() + " g\n"
-                        + "Zuccheri: " + zuccheri.toString() + " g\n"
-                        + "Fibre: " + fibre.toString() + " g\n"
-                        + "Proteine: " + proteine.toString() + " g\n"
-                        + "Sale: " + sale.toString() + " g\n");
+                txtValori.setText("Calorie: " + energia + " kcal\n"
+                        + "Lipidi: " + lipidi + " g\n"
+                        + "Acidi grassi: " + acidi_grassi + " g\n"
+                        + "Colesterolo: " + colesterolo + " g\n"
+                        + "Carboidrati: " + carboidrati + " g\n"
+                        + "Zuccheri: " + zuccheri + " g\n"
+                        + "Fibre: " + fibre + " g\n"
+                        + "Proteine: " + proteine + " g\n"
+                        + "Sale: " + sale + " g\n");
                 txtValori.setVisibility(View.VISIBLE);
             }
         });
@@ -93,7 +120,15 @@ public class SelezionaCiboActivity extends AppCompatActivity {
                 if (edtTxtQta.getText().toString().equals("")) {
                     Toast.makeText(SelezionaCiboActivity.this, "Inserire la quantità", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(SelezionaCiboActivity.this, "Inserisci cliccato", Toast.LENGTH_SHORT).show();
+                    AggiungiDietaActivity.modificaDieta(ciboId, qta);
+
+                    Toast.makeText(SelezionaCiboActivity.this, dataBaseHelper.getCiboById(ciboId).getNome() + " inserito",
+                            Toast.LENGTH_SHORT).show();
+
+                    Intent intent1 = new Intent(SelezionaCiboActivity.this, AggiungiDietaActivity.class);
+                    intent1.putExtra(ELENCO_DIETE, -1);
+                    intent1.putExtra(DIETA_ID_KEY, dietaId);
+                    SelezionaCiboActivity.this.startActivity(intent1);
                 }
             }
         });
@@ -112,5 +147,24 @@ public class SelezionaCiboActivity extends AppCompatActivity {
         btnCalcola = findViewById(R.id.btnCalcola);
 
         dataBaseHelper = new DataBaseHelper(SelezionaCiboActivity.this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, AggiungiDietaActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

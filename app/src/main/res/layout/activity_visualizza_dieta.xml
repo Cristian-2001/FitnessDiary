@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VisualizzaDietaActivity">
+
+    <TextView
+        android:id="@+id/txtDietaSel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Dieta Selezionata"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtElemSel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Numero Elementi"
+        app:layout_constraintEnd_toEndOf="@+id/txtDietaSel"
+        app:layout_constraintStart_toStartOf="@+id/txtDietaSel"
+        app:layout_constraintTop_toBottomOf="@+id/txtDietaSel" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cibiDietaRecView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="175dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnValoriTot" />
+
+    <Button
+        android:id="@+id/btnValoriTot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Visualizza i valori nutrizionali complessivi"
+        app:layout_constraintEnd_toEndOf="@+id/txtElemSel"
+        app:layout_constraintStart_toStartOf="@+id/txtElemSel"
+        app:layout_constraintTop_toBottomOf="@+id/txtElemSel" />
+
+    <TextView
+        android:id="@+id/txtEmptyDieta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dieta vuota"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

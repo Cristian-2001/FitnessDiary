@@ -5,44 +5,69 @@
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_margin="22dp"
     android:layout_marginStart="32dp"
     android:layout_marginTop="32dp"
+    android:orientation="vertical"
     app:cardCornerRadius="7dp"
     app:cardElevation="7dp"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_margin="22dp">
+    app:layout_constraintTop_toTopOf="parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/txtNome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/btnDelete"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="7dp"
+            android:gravity="center"
             android:text="NOME"
             android:textSize="20sp"
-            android:textStyle="bold|italic"
-            android:gravity="center"/>
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/txtCategoria"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/txtQta"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="7dp"
+            android:gravity="center"
+            android:text="Categoria"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtQta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/txtNome"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
-            android:text="Categoria"
-            android:textSize="18sp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="7dp"
-            android:gravity="center"/>
+            android:text="Quantità"
+            android:textSize="15dp" />
+
+        <ImageView
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_delete" />
+
+        <ImageView
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/btnDelete"
+            android:src="@drawable/ic_edit" />
 
         <TextView
             android:id="@+id/txtEnergia"
@@ -81,9 +106,83 @@
             android:layout_below="@+id/txtProteine"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="7dp"
             android:text="Carboidrati"
-            android:textSize="15sp"
-            android:layout_marginBottom="7dp"/>
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/btnDownArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCarboidrati"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_down_arrow" />
+
+        <RelativeLayout
+            android:id="@+id/expandedRelLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCarboidrati"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/txtAcidiGrassi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Acidi Grassi"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtColesterolo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtAcidiGrassi"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Colesterolo"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtZuccheri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtColesterolo"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Zuccheri"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtFibre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtZuccheri"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Fibre"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txtSale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtFibre"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Sale"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/btnUpArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtSale"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_up_arrow" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

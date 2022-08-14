@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         cvPalestra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Cliccato", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(MainActivity.this, ElencoAllenamentiActivity.class);
                 MainActivity.this.startActivity(intent);
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         cvDieta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Cliccato Dieta", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(MainActivity.this, ElencoDieteActivity.class);
                 MainActivity.this.startActivity(intent);
@@ -46,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
     private void initView(){
         cvPalestra = findViewById(R.id.cvPalestra);
         cvDieta = findViewById(R.id.cvDieta);
+    }
+
+    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
 

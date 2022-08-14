@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/aggiungi_cibo_menu"
+        android:title="@string/aggiungi_cibi"/>
+
+    <item
+        android:id="@+id/salva_menu"
+        android:title="@string/salva" />
+
+    <item
+        android:id="@+id/elimina_menu"
+        android:title="@string/elimina" />
+</menu>

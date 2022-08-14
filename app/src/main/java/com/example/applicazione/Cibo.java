@@ -1,18 +1,19 @@
 package com.example.applicazione;
 
 public class Cibo {
-    int id;
-    String nome;
-    String categoria;
-    Double energia;
-    Double lipidi;
-    Double acidigrassi;
-    Double colesterolo;
-    Double carboidrati;
-    Double zuccheri;
-    Double fibre;
-    Double proteine;
-    Double sale;
+    private int id;
+    private String nome;
+    private String categoria;
+    private Double energia;
+    private Double lipidi;
+    private Double acidigrassi;
+    private Double colesterolo;
+    private Double carboidrati;
+    private Double zuccheri;
+    private Double fibre;
+    private Double proteine;
+    private Double sale;
+    private boolean isExpanded;
 
 
     public Cibo(int id, String nome, String categoria, Double energia, Double lipidi, Double acidigrassi, Double colesterolo, Double carboidrati, Double zuccheri, Double fibre, Double proteine, Double sale) {
@@ -28,6 +29,7 @@ public class Cibo {
         this.fibre = fibre;
         this.proteine = proteine;
         this.sale = sale;
+        isExpanded = false;
     }
 
     public int getId() {
@@ -124,6 +126,14 @@ public class Cibo {
 
     public void setSale(Double sale) {
         this.sale = sale;
+    }
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
     }
 
     @Override

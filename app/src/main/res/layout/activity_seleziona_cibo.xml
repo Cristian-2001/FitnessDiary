@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="@+id/txtInsMsg"
         app:layout_constraintStart_toStartOf="@+id/txtInsMsg"
         app:layout_constraintTop_toBottomOf="@+id/txtInsMsg" />
