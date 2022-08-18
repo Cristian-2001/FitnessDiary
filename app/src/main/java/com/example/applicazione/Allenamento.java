@@ -1,5 +1,7 @@
 package com.example.applicazione;
 
+import java.util.ArrayList;
+
 public class Allenamento {
     private int id;
     private String nome;

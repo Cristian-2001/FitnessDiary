@@ -17,12 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllenamentiRecViewAdapter extends RecyclerView.Adapter<AllenamentiRecViewAdapter.ViewHolder> {
     private static final String TAG = "AllenamentiRecViewAdapt";
 
     //elenco degli allenamenti
-    private ArrayList<Allenamento> allenamenti = new ArrayList<>();
+    private List<Allenamento> allenamenti = new ArrayList<>();
 
     //contesto
     private Context mContext;
@@ -60,7 +61,7 @@ public class AllenamentiRecViewAdapter extends RecyclerView.Adapter<AllenamentiR
         return allenamenti.size();
     }
 
-    public void setAllenamenti(ArrayList<Allenamento> allenamenti) {
+    public void setAllenamenti(List<Allenamento> allenamenti) {
         this.allenamenti = allenamenti;
 
         //notifico quando ci sono dei cambiamenti all'array

@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VisualizzaDietaActivity extends AppCompatActivity {
     private static final String TAG = "VisualizzaDietaActivity";
@@ -46,13 +47,13 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
     private int numElem;
 
     //ArrayList degli id dei cibi
-    private ArrayList<Integer> cibiId;
+    private List<Integer> cibiId;
 
     //ArrayList delle quantità dei cibi
-    private ArrayList<Double> cibiQta;
+    private List<Double> cibiQta;
 
     //ArrayList dei cibi
-    private ArrayList<Cibo> cibi = new ArrayList<>();
+    private List<Cibo> cibi = new ArrayList<>();
 
     private DataBaseDieta dataBaseDieta;
     private DataBaseHelper dataBaseHelper;
@@ -267,7 +268,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
         cibiDietaRecView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private String calcolaValori(ArrayList<Cibo> cibi, ArrayList<Double> quantita) {
+    private String calcolaValori(List<Cibo> cibi, List<Double> quantita) {
         Log.d(TAG, "calcolaValori: Called");
 
         Double qta;
