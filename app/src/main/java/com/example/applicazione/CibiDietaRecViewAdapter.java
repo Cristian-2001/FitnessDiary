@@ -1,13 +1,7 @@
 package com.example.applicazione;
 
-import static com.example.applicazione.AggiungiDietaActivity.DIETA_NOME;
-import static com.example.applicazione.AggiungiDietaActivity.ELENCO_DIETE;
-import static com.example.applicazione.SelezionaCiboActivity.CIBO_ID_KEY;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.text.InputType;
 import android.util.Log;
@@ -34,7 +28,7 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
 
     private static final String TAG = "CibiRecViewAdapter";
 
-    private DataBaseHelper dataBaseHelper;
+    private DataBaseCibo dataBaseCibo;
 
     //elenco degli id dei cibi
     private List<Integer> cibiId = new ArrayList<>();
@@ -137,7 +131,7 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            dataBaseHelper = new DataBaseHelper(mContext);
+            dataBaseCibo = new DataBaseCibo(mContext);
 
             parent = itemView.findViewById(R.id.parent);
             txtNome = itemView.findViewById(R.id.txtNome);
@@ -161,8 +155,8 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
             btnUpArrow = itemView.findViewById(R.id.btnUpArrow);
 
             for (int id : cibiId) {
-                Log.d(TAG, "onCreate: CIAO " + dataBaseHelper.getCiboById(id).toString());
-                cibi.add(dataBaseHelper.getCiboById(id));
+                Log.d(TAG, "onCreate: CIAO " + dataBaseCibo.getCiboById(id).toString());
+                cibi.add(dataBaseCibo.getCiboById(id));
             }
 
             btnDownArrow.setOnClickListener(new View.OnClickListener() {

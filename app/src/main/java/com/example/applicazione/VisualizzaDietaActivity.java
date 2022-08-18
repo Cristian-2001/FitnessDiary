@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +54,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
     private List<Cibo> cibi = new ArrayList<>();
 
     private DataBaseDieta dataBaseDieta;
-    private DataBaseHelper dataBaseHelper;
+    private DataBaseCibo dataBaseCibo;
 
     public static void setModificato() {
         VisualizzaDietaActivity.modificato = true;
@@ -78,7 +76,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         dataBaseDieta = new DataBaseDieta(VisualizzaDietaActivity.this);
-        dataBaseHelper = new DataBaseHelper(VisualizzaDietaActivity.this);
+        dataBaseCibo = new DataBaseCibo(VisualizzaDietaActivity.this);
 
         initView();
         modificato = false;
@@ -120,8 +118,8 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
         }
 
         for (int id : cibiId) {
-            Log.d(TAG, "onCreate: CIAO " + dataBaseHelper.getCiboById(id).toString());
-            cibi.add(dataBaseHelper.getCiboById(id));
+            Log.d(TAG, "onCreate: CIAO " + dataBaseCibo.getCiboById(id).toString());
+            cibi.add(dataBaseCibo.getCiboById(id));
         }
 
         Log.d(TAG, "onCreate: CIBI: " + cibi.toString());

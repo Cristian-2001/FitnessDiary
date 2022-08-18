@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataBaseHelper extends SQLiteOpenHelper {
+public class DataBaseCibo extends SQLiteOpenHelper {
 
 
     private static final String TABLE_CIBI = "CIBI";
@@ -28,7 +28,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PROTEINE = "PROTEINE";
     private static final String COLUMN_SALE = "SALE";
 
-    public DataBaseHelper(@Nullable Context context) {
+    public DataBaseCibo(@Nullable Context context) {
         super(context, "ValoriNutrizionali.db", null, 3);
     }
 

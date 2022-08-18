@@ -50,7 +50,7 @@ public class AggiungiDietaActivity extends AppCompatActivity {
     private static int num = 0;
     private static String nomeDieta = null;
 
-    DataBaseHelper dataBaseHelper;
+    DataBaseCibo dataBaseCibo;
     DataBaseDieta dataBaseDieta;
 
 
@@ -70,8 +70,8 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         initView();
 
         dataBaseDieta = new DataBaseDieta(AggiungiDietaActivity.this);
-        dataBaseHelper = new DataBaseHelper(AggiungiDietaActivity.this);
-        cibi = dataBaseHelper.getAllCibi();
+        dataBaseCibo = new DataBaseCibo(AggiungiDietaActivity.this);
+        cibi = dataBaseCibo.getAllCibi();
         adapter.setCibi(cibi);
 
         Intent intent = getIntent();
@@ -120,10 +120,10 @@ public class AggiungiDietaActivity extends AppCompatActivity {
                 String nome = edtTxtCercaNome.getText().toString();
 
                 if (cat.equals("Tutte") && nome.equals("")) {
-                    cibi = dataBaseHelper.getAllCibi();
+                    cibi = dataBaseCibo.getAllCibi();
                 } else {
                     Log.d(TAG, "onClick: ECCOMI");
-                    cibi = dataBaseHelper.getCibiByCatNome(cat, nome);
+                    cibi = dataBaseCibo.getCibiByCatNome(cat, nome);
                 }
 
                 adapter.setCibi(cibi);

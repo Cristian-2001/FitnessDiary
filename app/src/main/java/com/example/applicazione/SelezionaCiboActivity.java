@@ -1,7 +1,6 @@
 package com.example.applicazione;
 
 import static com.example.applicazione.AggiungiDietaActivity.ELENCO_DIETE;
-import static com.example.applicazione.AggiungiDietaActivity.dieta;
 import static com.example.applicazione.VisualizzaDietaActivity.DIETA_ID_KEY;
 
 import androidx.annotation.NonNull;
@@ -20,8 +19,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class SelezionaCiboActivity extends AppCompatActivity {
     //chiave per l'id del cibo selezionato
     public static final String CIBO_ID_KEY = "ciboId";
@@ -38,7 +35,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
 
     private Cibo cibo;
 
-    DataBaseHelper dataBaseHelper;
+    DataBaseCibo dataBaseCibo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +54,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
         if (intent != null) {
             ciboId = intent.getIntExtra(CIBO_ID_KEY, -1);
             if (ciboId != -1) {
-                cibo = dataBaseHelper.getCiboById(ciboId);
+                cibo = dataBaseCibo.getCiboById(ciboId);
                 txtNomeCibo.setText(cibo.getNome());
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SelezionaCiboActivity.this);
@@ -122,7 +119,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
                 } else {
                     AggiungiDietaActivity.modificaDieta(ciboId, qta);
 
-                    Toast.makeText(SelezionaCiboActivity.this, dataBaseHelper.getCiboById(ciboId).getNome() + " inserito",
+                    Toast.makeText(SelezionaCiboActivity.this, dataBaseCibo.getCiboById(ciboId).getNome() + " inserito",
                             Toast.LENGTH_SHORT).show();
 
                     Intent intent1 = new Intent(SelezionaCiboActivity.this, AggiungiDietaActivity.class);
@@ -146,7 +143,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
         btnInserisci = findViewById(R.id.btnInserisci);
         btnCalcola = findViewById(R.id.btnCalcola);
 
-        dataBaseHelper = new DataBaseHelper(SelezionaCiboActivity.this);
+        dataBaseCibo = new DataBaseCibo(SelezionaCiboActivity.this);
     }
 
     @Override
