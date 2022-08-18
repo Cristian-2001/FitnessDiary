@@ -11,14 +11,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.applicazione.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -57,6 +63,9 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
 
     //ArrayList dei cibi
     private List<Cibo> cibi = new ArrayList<>();
+
+    //nome della dieta
+    String nomeDieta;
 
     private DataBaseDieta dataBaseDieta;
     private DataBaseCibo dataBaseCibo;
@@ -108,6 +117,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
             cibiId = dataBaseDieta.getDietaById(dietaId).getCibiId();
             cibiQta = dataBaseDieta.getDietaById(dietaId).getCibiQta();
             numElem = dataBaseDieta.getDietaById(dietaId).getNumElem();
+            nomeDieta = dataBaseDieta.getDietaById(dietaId).getNome();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaDietaActivity.this);
             builder.setMessage("Si è verificato un errore");
@@ -176,6 +186,44 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.modifica_nome:
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                builder2.setMessage("Inserisci il nuovo nome: ");
+
+                final EditText input = new EditText(this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                builder2.setView(input);
+
+                builder2.setPositiveButton("Modifica", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //non faccio nulla perché faccio l'override più avanti
+                    }
+                });
+
+                builder2.setNegativeButton("Annulla", null);
+
+                final AlertDialog dialog2 = builder2.create();
+                dialog2.show();
+
+                dialog2.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (input.getText().toString().equals("")) {
+                            Toast.makeText(VisualizzaDietaActivity.this, "Inserire il nome", Toast.LENGTH_SHORT).show();
+                        } else {
+                            nomeDieta = input.getText().toString();
+                            dataBaseDieta.modificaNome(dietaId, nomeDieta);
+                            txtDietaSel.setText(nomeDieta);
+                            dialog2.dismiss();
+                        }
+                    }
+                });
+                return true;
+
             case R.id.salva_menu:
                 modificato = false;
 
@@ -201,7 +249,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
                     dialog.show();
                 } else {
                     //altrimenti salvo la nuova dieta
-                    Dieta dieta = new Dieta(dietaId, dataBaseDieta.getDietaById(dietaId).getNome(),
+                    Dieta dieta = new Dieta(dietaId, nomeDieta,
                             cibiId, cibiQta, adapter.getItemCount());
                     dataBaseDieta.modificaDieta(dietaId, dieta);
                     overridePendingTransition(0, 0);
