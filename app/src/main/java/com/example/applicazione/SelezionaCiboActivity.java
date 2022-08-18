@@ -8,8 +8,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +35,8 @@ public class SelezionaCiboActivity extends AppCompatActivity {
     private int ciboId;
     private Double qta;
 
+    ColorStateList oldColors;
+
     private Cibo cibo;
 
     DataBaseCibo dataBaseCibo;
@@ -46,7 +50,9 @@ public class SelezionaCiboActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         //mostro il back button
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         initView();
 
@@ -74,33 +80,42 @@ public class SelezionaCiboActivity extends AppCompatActivity {
         }
 
         btnCalcola.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                if (edtTxtQta.getText().toString().equals("")) {
+                    Toast.makeText(SelezionaCiboActivity.this, "Inserire la quantità", Toast.LENGTH_SHORT).show();
+                    txtInsMsg.setTextColor(getResources().getColor(R.color.red));
+                }else{
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
-                Double energia, lipidi, acidi_grassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale;
-                qta = Double.valueOf(edtTxtQta.getText().toString());
-                energia = cibo.getEnergia() * qta / 100;
-                lipidi = cibo.getLipidi() * qta / 100;
-                acidi_grassi = cibo.getAcidigrassi() * qta / 100;
-                colesterolo = cibo.getColesterolo() * qta / 100;
-                carboidrati = cibo.getCarboidrati() * qta / 100;
-                zuccheri = cibo.getZuccheri() * qta / 100;
-                fibre = cibo.getFibre() * qta / 100;
-                proteine = cibo.getProteine() * qta / 100;
-                sale = cibo.getSale() * qta / 100;
+                    txtInsMsg.setTextColor(oldColors);
 
-                txtValori.setText("Calorie: " + energia + " kcal\n"
-                        + "Lipidi: " + lipidi + " g\n"
-                        + "Acidi grassi: " + acidi_grassi + " g\n"
-                        + "Colesterolo: " + colesterolo + " g\n"
-                        + "Carboidrati: " + carboidrati + " g\n"
-                        + "Zuccheri: " + zuccheri + " g\n"
-                        + "Fibre: " + fibre + " g\n"
-                        + "Proteine: " + proteine + " g\n"
-                        + "Sale: " + sale + " g\n");
-                txtValori.setVisibility(View.VISIBLE);
+                    Double energia, lipidi, acidi_grassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale;
+                    qta = Double.valueOf(edtTxtQta.getText().toString());
+                    energia = cibo.getEnergia() * qta / 100;
+                    lipidi = cibo.getLipidi() * qta / 100;
+                    acidi_grassi = cibo.getAcidigrassi() * qta / 100;
+                    colesterolo = cibo.getColesterolo() * qta / 100;
+                    carboidrati = cibo.getCarboidrati() * qta / 100;
+                    zuccheri = cibo.getZuccheri() * qta / 100;
+                    fibre = cibo.getFibre() * qta / 100;
+                    proteine = cibo.getProteine() * qta / 100;
+                    sale = cibo.getSale() * qta / 100;
+
+                    txtValori.setText("Calorie: " + energia + " kcal\n"
+                            + "Lipidi: " + lipidi + " g\n"
+                            + "Acidi grassi: " + acidi_grassi + " g\n"
+                            + "Colesterolo: " + colesterolo + " g\n"
+                            + "Carboidrati: " + carboidrati + " g\n"
+                            + "Zuccheri: " + zuccheri + " g\n"
+                            + "Fibre: " + fibre + " g\n"
+                            + "Proteine: " + proteine + " g\n"
+                            + "Sale: " + sale + " g\n");
+                    txtValori.setVisibility(View.VISIBLE);
+                }
+
             }
         });
 
@@ -116,6 +131,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (edtTxtQta.getText().toString().equals("")) {
                     Toast.makeText(SelezionaCiboActivity.this, "Inserire la quantità", Toast.LENGTH_SHORT).show();
+                    txtInsMsg.setTextColor(getResources().getColor(R.color.red));
                 } else {
                     AggiungiDietaActivity.modificaDieta(ciboId, qta);
 
@@ -142,6 +158,8 @@ public class SelezionaCiboActivity extends AppCompatActivity {
         btnAnnulla = findViewById(R.id.btnAnnulla);
         btnInserisci = findViewById(R.id.btnInserisci);
         btnCalcola = findViewById(R.id.btnCalcola);
+
+        oldColors = txtInsMsg.getTextColors();
 
         dataBaseCibo = new DataBaseCibo(SelezionaCiboActivity.this);
     }

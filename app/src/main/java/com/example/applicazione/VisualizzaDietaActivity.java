@@ -20,6 +20,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,8 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
 
     private TextView txtDietaSel, txtElemSel, txtEmptyDieta;
     private Button btnValoriTot;
+    private FloatingActionButton fltABAddCibo;
+
     private RecyclerView cibiDietaRecView;
     private CibiDietaRecViewAdapter adapter = new CibiDietaRecViewAdapter(VisualizzaDietaActivity.this);
 
@@ -149,6 +153,15 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+        fltABAddCibo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(VisualizzaDietaActivity.this, AggiungiDietaActivity.class);
+                intent2.putExtra(DIETA_ID_KEY, dietaId);
+                VisualizzaDietaActivity.this.startActivity(intent2);
+            }
+        });
     }
 
     @Override
@@ -162,13 +175,6 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.aggiungi_cibo_menu:
-                Log.d(TAG, "onOptionsItemSelected: IDID: " + dietaId);
-                Intent intent2 = new Intent(VisualizzaDietaActivity.this, AggiungiDietaActivity.class);
-                intent2.putExtra(DIETA_ID_KEY, dietaId);
-                VisualizzaDietaActivity.this.startActivity(intent2);
-                return true;
-
             case R.id.salva_menu:
                 modificato = false;
 
@@ -259,6 +265,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
         txtEmptyDieta = findViewById(R.id.txtEmptyDieta);
         btnValoriTot = findViewById(R.id.btnValoriTot);
         cibiDietaRecView = findViewById(R.id.cibiDietaRecView);
+        fltABAddCibo = findViewById(R.id.fltABAddCibo);
 
         adapter = new CibiDietaRecViewAdapter(this);
 
