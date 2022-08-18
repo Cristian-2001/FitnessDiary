@@ -18,13 +18,14 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.ViewHolder>{
 
     private static final String TAG = "CibiRecViewAdapter";
 
     //elenco dei cibi selezionati
-    private ArrayList<Cibo> cibi = new ArrayList<>();
+    private List<Cibo> cibi = new ArrayList<>();
 
     //contesto
     private Context mContext;
@@ -33,7 +34,7 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
         this.mContext = mContext;
     }
 
-    public void setCibi(ArrayList<Cibo> cibi) {
+    public void setCibi(List<Cibo> cibi) {
         this.cibi = cibi;
     }
 

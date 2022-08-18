@@ -28,6 +28,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class ElencoDieteActivity extends AppCompatActivity {
 
@@ -38,7 +39,7 @@ public class ElencoDieteActivity extends AppCompatActivity {
 
     private RecyclerView dieteRecView;
     private DieteRecViewAdapter adapter;
-    private ArrayList<Dieta> diete = new ArrayList<>();
+    private List<Dieta> diete = new ArrayList<>();
 
     private String nomeDieta;
 

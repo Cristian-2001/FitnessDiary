@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataBaseDieta extends SQLiteOpenHelper {
 
@@ -57,10 +58,10 @@ public class DataBaseDieta extends SQLiteOpenHelper {
         return insert != -1;
     }
 
-    public ArrayList<Dieta> getAllDiete(){
+    public List<Dieta> getAllDiete(){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        ArrayList<Dieta> returnList = new ArrayList<>();
+        List<Dieta> returnList = new ArrayList<>();
 
         String queryString = "SELECT *" + " FROM DIETE";
 

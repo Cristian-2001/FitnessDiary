@@ -17,12 +17,13 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DieteRecViewAdapter extends RecyclerView.Adapter<DieteRecViewAdapter.ViewHolder> {
     private final static String TAG = "DieteRecViewAdapter";
 
     //elenco diete
-    private ArrayList<Dieta> diete = new ArrayList<>();
+    private List<Dieta> diete = new ArrayList<>();
 
     //contesto
     private Context mContext;
@@ -31,7 +32,7 @@ public class DieteRecViewAdapter extends RecyclerView.Adapter<DieteRecViewAdapte
         this.mContext = mContext;
     }
 
-    public void setDiete(ArrayList<Dieta> diete) {
+    public void setDiete(List<Dieta> diete) {
         this.diete = diete;
     }
 

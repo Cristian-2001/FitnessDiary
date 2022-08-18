@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.TransitionManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecViewAdapter.ViewHolder> {
 
@@ -36,13 +37,13 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
     private DataBaseHelper dataBaseHelper;
 
     //elenco degli id dei cibi
-    private ArrayList<Integer> cibiId = new ArrayList<>();
+    private List<Integer> cibiId = new ArrayList<>();
 
     //elenco delle quantità inserite
-    private ArrayList<Double> quantita = new ArrayList<>();
+    private List<Double> quantita = new ArrayList<>();
 
     //elenco dei cibi selezionati
-    private ArrayList<Cibo> cibi = new ArrayList<>();
+    private List<Cibo> cibi = new ArrayList<>();
 
     //numero di elementi
     private int numElem;
@@ -54,11 +55,11 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
         this.mContext = mContext;
     }
 
-    public void setCibiId(ArrayList<Integer> cibiId) {
+    public void setCibiId(List<Integer> cibiId) {
         this.cibiId = cibiId;
     }
 
-    public void setQuantita(ArrayList<Double> quantita) {
+    public void setQuantita(List<Double> quantita) {
         this.quantita = quantita;
     }
 

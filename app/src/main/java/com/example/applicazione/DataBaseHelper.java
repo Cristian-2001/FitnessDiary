@@ -141,7 +141,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     //ritorna l'elenco di tutti i cibi
-    public ArrayList<Cibo> getAllCibi() {
+    public List<Cibo> getAllCibi() {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -149,7 +149,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(queryString, null);
 
-        ArrayList<Cibo> returnList = new ArrayList<>();
+        List<Cibo> returnList = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
             do {
@@ -176,7 +176,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     //ritorna l'elenco di cibi della categoria data
-    public ArrayList<Cibo> getCibiByCatNome(String cat, String name) {
+    public List<Cibo> getCibiByCatNome(String cat, String name) {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -193,7 +193,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(queryString, null);
 
-        ArrayList<Cibo> returnList = new ArrayList<>();
+        List<Cibo> returnList = new ArrayList<>();
 
         if (cursor.moveToFirst()) {
             do {

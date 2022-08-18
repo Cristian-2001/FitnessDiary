@@ -2,13 +2,14 @@ package com.example.applicazione;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Dieta {
     public static Object dieta;
     int id;
     String nome;
-    ArrayList<Integer> cibiId;
-    ArrayList<Double> cibiQta;
+    List<Integer> cibiId;
+    List<Double> cibiQta;
     Integer numElem;
 
     public Dieta(String nome, Integer numElem) {
@@ -16,7 +17,7 @@ public class Dieta {
         this.numElem = numElem;
     }
 
-    public Dieta(int id, String nome, ArrayList<Integer> cibiId, ArrayList<Double> cibiQta, Integer numElem) {
+    public Dieta(int id, String nome, List<Integer> cibiId, List<Double> cibiQta, Integer numElem) {
         this.id = id;
         this.nome = nome;
         this.cibiId = cibiId;
@@ -30,7 +31,7 @@ public class Dieta {
         this.numElem = numElem;
     }
 
-    public Dieta(String nome, ArrayList<Integer> cibiId, ArrayList<Double> cibiQta, Integer numElem) {
+    public Dieta(String nome, List<Integer> cibiId, List<Double> cibiQta, Integer numElem) {
         this.nome = nome;
         this.cibiId = cibiId;
         this.cibiQta = cibiQta;
@@ -53,19 +54,19 @@ public class Dieta {
         this.nome = nome;
     }
 
-    public ArrayList<Integer> getCibiId() {
+    public List<Integer> getCibiId() {
         return cibiId;
     }
 
-    public void setCibiId(ArrayList<Integer> cibiId) {
+    public void setCibiId(List<Integer> cibiId) {
         this.cibiId = cibiId;
     }
 
-    public ArrayList<Double> getCibiQta() {
+    public List<Double> getCibiQta() {
         return cibiQta;
     }
 
-    public void setCibiQta(ArrayList<Double> cibiQta) {
+    public void setCibiQta(List<Double> cibiQta) {
         this.cibiQta = cibiQta;
     }
 
@@ -101,9 +102,9 @@ public class Dieta {
 
     }
 
-    public ArrayList<Integer> IdToArray(String s){
+    public List<Integer> IdToArray(String s){
 
-        ArrayList<Integer> returnList = new ArrayList<>();
+        List<Integer> returnList = new ArrayList<>();
 
         String[] tokens = s.split(",");
 
@@ -128,9 +129,9 @@ public class Dieta {
 
     }
 
-    public ArrayList<Double> QtaToArray(String s){
+    public List<Double> QtaToArray(String s){
 
-        ArrayList<Double> returnList = new ArrayList<>();
+        List<Double> returnList = new ArrayList<>();
 
         String[] tokens = s.split(",");
 

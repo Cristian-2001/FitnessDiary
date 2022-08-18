@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AggiungiDietaActivity extends AppCompatActivity {
 
@@ -37,15 +38,15 @@ public class AggiungiDietaActivity extends AppCompatActivity {
     private Button btnCerca;
     private RecyclerView cibiRecView;
     private CibiRecViewAdapter adapter;
-    private ArrayList<Cibo> cibi = new ArrayList<>();
+    private List<Cibo> cibi = new ArrayList<>();
     private EditText edtTxtCercaNome;
     private TextView txtEmpty;
-    private TextView txtNomeCorr, txtNumCorr;
+    private TextView txtNumCorr;
     private Button btnSalvaDieta;
 
     public static Dieta dieta = null;
-    private static ArrayList<Integer> cibiDieta = new ArrayList<>();
-    private static ArrayList<Double> qtaDieta = new ArrayList<>();
+    private static List<Integer> cibiDieta = new ArrayList<>();
+    private static List<Double> qtaDieta = new ArrayList<>();
     private static int num = 0;
     private static String nomeDieta = null;
 
@@ -92,7 +93,7 @@ public class AggiungiDietaActivity extends AppCompatActivity {
                 cibiDieta = dataBaseDieta.getDietaById(dietaId).getCibiId();
                 qtaDieta = dataBaseDieta.getDietaById(dietaId).getCibiQta();
                 num = dataBaseDieta.getDietaById(dietaId).getNumElem();
-            } else if (intent.getIntExtra(DIETA_ID_KEY, -1) == -2){
+            } else if (intent.getIntExtra(DIETA_ID_KEY, -1) == -2) {
                 dietaId = intent.getIntExtra(DIETA_ID_KEY, -1);
             }
         }
@@ -100,8 +101,11 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: NUM: " + num);
         Log.d(TAG, "onCreate: ID: " + dietaId);
 
-        txtNomeCorr.setText(nomeDieta);
-        txtNumCorr.setText(num + " elementi");
+        if (num == 1) {
+            txtNumCorr.setText(num + " elemento");
+        } else {
+            txtNumCorr.setText(num + " elementi");
+        }
 
         btnCerca.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,7 +170,6 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         cibiRecView = findViewById(R.id.cibiRecView);
         edtTxtCercaNome = findViewById(R.id.edtTxtCercaNome);
         txtEmpty = findViewById(R.id.txtEmpty);
-        txtNomeCorr = findViewById(R.id.txtNomeCorr);
         txtNumCorr = findViewById(R.id.txtNumCorr);
         btnSalvaDieta = findViewById(R.id.btnSalvaDieta);
 
@@ -183,11 +186,11 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         Log.d(TAG, "modificaDieta: NUM: " + num);
     }
 
-    public static ArrayList<Integer> getDietaCibiId() {
+    public static List<Integer> getDietaCibiId() {
         return dieta.getCibiId();
     }
 
-    public static ArrayList<Double> getDietaCibiQta() {
+    public static List<Double> getDietaCibiQta() {
         return dieta.getCibiQta();
     }
 
