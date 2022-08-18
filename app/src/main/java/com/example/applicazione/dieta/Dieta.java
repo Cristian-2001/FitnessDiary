@@ -1,4 +1,4 @@
-package com.example.applicazione;
+package com.example.applicazione.dieta;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

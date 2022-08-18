@@ -1,4 +1,4 @@
-package com.example.applicazione;
+package com.example.applicazione.dieta;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.example.applicazione.dieta.Cibo;
 
 import java.util.ArrayList;
 import java.util.List;

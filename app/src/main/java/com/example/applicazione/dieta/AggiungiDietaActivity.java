@@ -1,6 +1,6 @@
-package com.example.applicazione;
+package com.example.applicazione.dieta;
 
-import static com.example.applicazione.VisualizzaDietaActivity.DIETA_ID_KEY;
+import static com.example.applicazione.dieta.VisualizzaDietaActivity.DIETA_ID_KEY;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +21,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.applicazione.R;
 
 import java.util.ArrayList;
 import java.util.List;

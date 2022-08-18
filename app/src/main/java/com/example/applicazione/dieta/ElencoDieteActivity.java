@@ -1,8 +1,8 @@
-package com.example.applicazione;
+package com.example.applicazione.dieta;
 
-import static com.example.applicazione.AggiungiDietaActivity.DIETA_NOME;
-import static com.example.applicazione.AggiungiDietaActivity.ELENCO_DIETE;
-import static com.example.applicazione.VisualizzaDietaActivity.DIETA_ID_KEY;
+import static com.example.applicazione.dieta.AggiungiDietaActivity.DIETA_NOME;
+import static com.example.applicazione.dieta.AggiungiDietaActivity.ELENCO_DIETE;
+import static com.example.applicazione.dieta.VisualizzaDietaActivity.DIETA_ID_KEY;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,10 +10,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.applicazione.MainActivity;
+import com.example.applicazione.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ElencoDieteActivity extends AppCompatActivity {

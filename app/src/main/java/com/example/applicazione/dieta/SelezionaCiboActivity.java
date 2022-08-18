@@ -1,7 +1,7 @@
-package com.example.applicazione;
+package com.example.applicazione.dieta;
 
-import static com.example.applicazione.AggiungiDietaActivity.ELENCO_DIETE;
-import static com.example.applicazione.VisualizzaDietaActivity.DIETA_ID_KEY;
+import static com.example.applicazione.dieta.AggiungiDietaActivity.ELENCO_DIETE;
+import static com.example.applicazione.dieta.VisualizzaDietaActivity.DIETA_ID_KEY;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -20,6 +20,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.applicazione.R;
 
 public class SelezionaCiboActivity extends AppCompatActivity {
     //chiave per l'id del cibo selezionato

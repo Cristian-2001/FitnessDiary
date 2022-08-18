@@ -1,4 +1,4 @@
-package com.example.applicazione;
+package com.example.applicazione.dieta;
 
 public class Cibo {
     private int id;

@@ -1,4 +1,4 @@
-package com.example.applicazione;
+package com.example.applicazione.dieta;
 
 
 import androidx.annotation.NonNull;
@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.applicazione.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

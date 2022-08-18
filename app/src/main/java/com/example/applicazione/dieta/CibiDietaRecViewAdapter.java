@@ -1,4 +1,4 @@
-package com.example.applicazione;
+package com.example.applicazione.dieta;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,6 +20,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.TransitionManager;
+
+import com.example.applicazione.R;
 
 import java.util.ArrayList;
 import java.util.List;
