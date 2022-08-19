@@ -86,7 +86,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (edtTxtQta.getText().toString().equals("")) {
-                    Toast.makeText(SelezionaCiboActivity.this, "Inserire la quantità", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SelezionaCiboActivity.this, "Inserire la quantità", Toast.LENGTH_SHORT).show();
                     txtInsMsg.setTextColor(getResources().getColor(R.color.red));
                 }else{
                     InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -132,7 +132,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (edtTxtQta.getText().toString().equals("")) {
-                    Toast.makeText(SelezionaCiboActivity.this, "Inserire la quantità", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SelezionaCiboActivity.this, "Inserire la quantità", Toast.LENGTH_SHORT).show();
                     txtInsMsg.setTextColor(getResources().getColor(R.color.red));
                 } else {
                     AggiungiDietaActivity.modificaDieta(ciboId, qta);

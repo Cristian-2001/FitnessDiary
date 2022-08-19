@@ -148,4 +148,15 @@ public class DataBaseDieta extends SQLiteOpenHelper {
 
         return delete != -1;
     }
+
+    public boolean modificaNome(int id, String nome){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put("NOME", nome);
+
+        long modifica = db.update("DIETE", cv, "ID = ?", new String[]{String.valueOf(id)});
+
+        return modifica != -1;
+    }
 }
