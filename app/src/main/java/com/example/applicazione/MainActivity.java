@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.applicazione.allenamento.ElencoAllenamentiActivity;
 import com.example.applicazione.dieta.ElencoDieteActivity;
 
 public class MainActivity extends AppCompatActivity {

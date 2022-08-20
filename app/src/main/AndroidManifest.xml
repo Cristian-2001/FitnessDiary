@@ -28,10 +28,10 @@
             android:name=".dieta.AggiungiDietaActivity"
             android:exported="false" />
         <activity
-            android:name=".AggiungiAllenamentoActivity"
+            android:name=".allenamento.AggiungiAllenamentoActivity"
             android:exported="false" />
         <activity
-            android:name=".ElencoAllenamentiActivity"
+            android:name=".allenamento.ElencoAllenamentiActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

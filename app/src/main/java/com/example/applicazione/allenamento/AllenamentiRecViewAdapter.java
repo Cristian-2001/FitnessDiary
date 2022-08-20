@@ -1,4 +1,4 @@
-package com.example.applicazione;
+package com.example.applicazione.allenamento;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,6 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.applicazione.R;
 
 import java.util.ArrayList;
 import java.util.List;

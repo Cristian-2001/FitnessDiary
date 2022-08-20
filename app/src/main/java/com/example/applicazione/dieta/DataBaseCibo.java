@@ -56,6 +56,7 @@ public class DataBaseCibo extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onDowngrade(db, oldVersion, newVersion);
     }
+
 //i miei metodi possono essere messi anche qui
 
 
