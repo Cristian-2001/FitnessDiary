@@ -40,7 +40,6 @@ public class FiltriAllenamentiActivity extends AppCompatActivity {
 
         initView();
 
-        //TODO passare gli elementi all'altra activity
         btnAnnullaA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

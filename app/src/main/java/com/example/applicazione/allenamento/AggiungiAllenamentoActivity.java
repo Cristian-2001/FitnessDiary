@@ -60,8 +60,6 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
     private static List<Integer> eserciziTRec = new ArrayList<>();
     private static int numElem = 0;
 
-    //TODO finire questa activity
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
