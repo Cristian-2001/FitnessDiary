@@ -54,7 +54,9 @@ public class ElencoDieteActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         //mostro il back button
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         initView();
 

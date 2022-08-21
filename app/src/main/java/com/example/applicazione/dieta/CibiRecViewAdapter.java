@@ -21,7 +21,7 @@ import com.example.applicazione.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.ViewHolder>{
+public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.ViewHolder> {
 
     private static final String TAG = "CibiRecViewAdapter";
 
@@ -48,10 +48,6 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-
-
-
-
         Log.d(TAG, "onBindViewHolder: Called");
         holder.txtNome.setText(cibi.get(position).getNome());
         holder.txtCategoria.setText(cibi.get(position).getCategoria());

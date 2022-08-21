@@ -37,11 +37,11 @@ public class SelezionaCiboActivity extends AppCompatActivity {
     private int ciboId;
     private Double qta;
 
-    ColorStateList oldColors;
+    private ColorStateList oldColors;
 
     private Cibo cibo;
 
-    DataBaseCibo dataBaseCibo;
+    private DataBaseCibo dataBaseCibo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

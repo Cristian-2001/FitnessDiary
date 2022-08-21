@@ -1,21 +1,50 @@
 package com.example.applicazione.allenamento;
 
+import static com.example.applicazione.allenamento.AggiungiAllenamentoActivity.ALLENAMENTO_NOME;
+import static com.example.applicazione.allenamento.AggiungiAllenamentoActivity.ELENCO_ALL;
+import static com.example.applicazione.allenamento.VisualizzaAllenamentoActivity.ALLENAMENTO_ID_KEY;
+import static com.example.applicazione.dieta.AggiungiDietaActivity.DIETA_NOME;
+import static com.example.applicazione.dieta.AggiungiDietaActivity.ELENCO_DIETE;
+import static com.example.applicazione.dieta.VisualizzaDietaActivity.DIETA_ID_KEY;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.applicazione.MainActivity;
 import com.example.applicazione.R;
+import com.example.applicazione.dieta.AggiungiDietaActivity;
+import com.example.applicazione.dieta.ElencoDieteActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
 
 public class ElencoAllenamentiActivity extends AppCompatActivity {
 
+    private FloatingActionButton fltABAddAll;
+    private TextView txtEmptyAll;
+
     private RecyclerView allenamentiRecView;
     private AllenamentiRecViewAdapter adapter;
-    private FloatingActionButton fltABAddAll;
+    private List<Allenamento> allenamenti;
+
+    private String nomeAllenamento;
+
+    private DataBaseAllenamento dataBaseAllenamento;
 
 
     @Override
@@ -23,28 +52,77 @@ public class ElencoAllenamentiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_elenco_allenamenti);
 
+        //chiamo l'action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        //mostro il back button
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         initView();
+
+        dataBaseAllenamento = new DataBaseAllenamento(ElencoAllenamentiActivity.this);
+
+        allenamenti = dataBaseAllenamento.getAllAllenamenti();
+
+        adapter.setAllenamenti(allenamenti);
+
+        if (adapter.getItemCount() == 0) {
+            txtEmptyAll.setVisibility(View.VISIBLE);
+        }
 
         //creo un OnClickListener per il pulsante (apre l'Activity per aggiungere un allenamento)
         fltABAddAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ElencoAllenamentiActivity.this, AggiungiAllenamentoActivity.class);
-                ElencoAllenamentiActivity.this.startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ElencoAllenamentiActivity.this);
+                builder.setMessage("Inserisci il nome dell'allenamento: ");
+
+                final EditText input = new EditText(ElencoAllenamentiActivity.this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                builder.setView(input);
+
+                builder.setPositiveButton("Avanti", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //non faccio nulla perché faccio l'override più avanti
+                    }
+                });
+
+                builder.setNegativeButton("Annulla", null);
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (input.getText().toString().equals("")) {
+                            Toast.makeText(ElencoAllenamentiActivity.this, "Inserire il nome dell'allenamento", Toast.LENGTH_SHORT).show();
+                        } else {
+                            nomeAllenamento = input.getText().toString();
+
+                            Intent intent = new Intent(ElencoAllenamentiActivity.this, AggiungiAllenamentoActivity.class);
+
+                            intent.putExtra(ALLENAMENTO_NOME, nomeAllenamento);
+                            intent.putExtra(ELENCO_ALL, 1);
+                            intent.putExtra(ALLENAMENTO_ID_KEY, -2);
+                            ElencoAllenamentiActivity.this.startActivity(intent);
+                            dialog.dismiss();
+                        }
+                    }
+                });
             }
         });
-
-        //creo un'ArrayList di allenamenti
-        /*ArrayList<Allenamento> allenamenti = new ArrayList<>();
-        allenamenti.add(new Allenamento(1, "Piegamenti", 500,
-                "https://www.invictusarena.com/it/wp-content/uploads/2020/03/piegamenti-sulle-braccia-1.jpg"));
-        allenamenti.add(new Allenamento(2, "Squat", 420,
-                "https://www.staiinforma.com/wp-content/uploads/2018/07/Squat-a-corpo-libero.jpg"));
-
-        adapter.setAllenamenti(allenamenti);*/
     }
 
     private void initView() {
+        txtEmptyAll = findViewById(R.id.txtEmptyAll);
+
         //creo un nuovo adapter e una nuova RecView e li inizializzo
         adapter = new AllenamentiRecViewAdapter(this);
         allenamentiRecView = findViewById(R.id.allenamentiRecView);
@@ -54,5 +132,26 @@ public class ElencoAllenamentiActivity extends AppCompatActivity {
 
         //inizializzo il Floating Action Button
         fltABAddAll = findViewById(R.id.fltABAddAll);
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                Intent intent = new Intent(ElencoAllenamentiActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                ElencoAllenamentiActivity.this.startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

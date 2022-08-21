@@ -48,7 +48,11 @@ public class DieteRecViewAdapter extends RecyclerView.Adapter<DieteRecViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Log.d(TAG, "onBindViewHolder: Called");
         holder.txtNomeDieta.setText(diete.get(position).getNome());
-        holder.txtNumElem.setText(diete.get(position).getNumElem().toString() + " elementi");
+        if (diete.get(position).getNumElem() == 1) {
+            holder.txtNumElem.setText(diete.get(position).getNumElem().toString() + " elemento");
+        } else {
+            holder.txtNumElem.setText(diete.get(position).getNumElem().toString() + " elementi");
+        }
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +74,7 @@ public class DieteRecViewAdapter extends RecyclerView.Adapter<DieteRecViewAdapte
         return diete.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView parent;
         private TextView txtNomeDieta, txtNumElem;
 

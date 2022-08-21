@@ -21,8 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:text="Nome dieta"
-            android:textSize="20dp"
+            android:text="@string/nome_dieta"
+            android:textSize="20sp"
             android:textStyle="italic|bold" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@+id/txtNomeDieta"
-            android:text="Numero di elementi"
+            android:text="@string/numero_elementi"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

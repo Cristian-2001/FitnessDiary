@@ -1,0 +1,289 @@
+package com.example.applicazione.allenamento;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.applicazione.R;
+import com.example.applicazione.dieta.Dieta;
+import com.example.applicazione.dieta.ElencoDieteActivity;
+import com.example.applicazione.dieta.VisualizzaDietaActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class VisualizzaAllenamentoActivity extends AppCompatActivity {
+    public static final String ALLENAMENTO_ID_KEY = "allenamentoId";
+
+    private TextView txtAllSel, txtElemSelA, txtEmptyAllenamento;
+    private RecyclerView esAllRecView;
+    private EsAllenamentoRecViewAdapter adapter;
+
+    //id dell'allenamento ricevuto dall'activity ElencoAllenamenti
+    private int allenamentoId;
+
+    //numero di elementi dell'allenamento
+    private int numElem;
+
+    //List degli id degli esercizi
+    List<Integer> eserciziId;
+
+    //List delle serie
+    List<Integer> eserciziSerie;
+
+    //List delle ripetizioni
+    List<Integer> eserciziReps;
+
+    //List dei tempi di recupero
+    List<Integer> eserciziTRec;
+
+    //List degli esercizi
+    List<Esercizio> esercizi = new ArrayList<>();
+
+    //nome dell'allenamento
+    String nomeAllenamento;
+
+    private DataBaseAllenamento dataBaseAllenamento;
+    private DataBaseEsercizio dataBaseEsercizio;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_visualizza_allenamento);
+
+        //chiamo l'action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        //mostro il back button
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
+        dataBaseAllenamento = new DataBaseAllenamento(VisualizzaAllenamentoActivity.this);
+        dataBaseEsercizio = new DataBaseEsercizio(VisualizzaAllenamentoActivity.this);
+
+        initView();
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            allenamentoId = intent.getIntExtra(ALLENAMENTO_ID_KEY, -1);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaAllenamentoActivity.this);
+            builder.setMessage("Si è verificato un errore");
+            builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent1 = new Intent(VisualizzaAllenamentoActivity.this, ElencoAllenamentiActivity.class);
+                    VisualizzaAllenamentoActivity.this.startActivity(intent1);
+                }
+            });
+            final AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+
+        if (allenamentoId != -1) {
+            numElem = dataBaseAllenamento.getAllenamentoById(allenamentoId).getNumElem();
+            eserciziId = dataBaseAllenamento.getAllenamentoById(allenamentoId).getEserciziId();
+            eserciziSerie = dataBaseAllenamento.getAllenamentoById(allenamentoId).getEserciziSerie();
+            eserciziReps = dataBaseAllenamento.getAllenamentoById(allenamentoId).getEserciziReps();
+            eserciziTRec = dataBaseAllenamento.getAllenamentoById(allenamentoId).getEserciziTrec();
+            nomeAllenamento = dataBaseAllenamento.getAllenamentoById(allenamentoId).getNome();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaAllenamentoActivity.this);
+            builder.setMessage("Si è verificato un errore");
+            builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent1 = new Intent(VisualizzaAllenamentoActivity.this, ElencoAllenamentiActivity.class);
+                    VisualizzaAllenamentoActivity.this.startActivity(intent1);
+                }
+            });
+            final AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+
+        for(int id : eserciziId){
+            esercizi.add(dataBaseEsercizio.getEsercizioById(id));
+        }
+
+        //setto l'adapter
+        adapter.setEsercizi(esercizi);
+
+        txtAllSel.setText(nomeAllenamento);
+
+        if(numElem == 1){
+            txtElemSelA.setText(numElem + " elemento");
+        }else{
+            txtElemSelA.setText(numElem + " elementi");
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.visualizza_elenco_menu, menu);
+        return true;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.modifica_nome:
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                builder2.setMessage("Inserisci il nuovo nome: ");
+
+                final EditText input = new EditText(this);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                builder2.setView(input);
+
+                builder2.setPositiveButton("Modifica", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //non faccio nulla perché faccio l'override più avanti
+                    }
+                });
+
+                builder2.setNegativeButton("Annulla", null);
+
+                final AlertDialog dialog2 = builder2.create();
+                dialog2.show();
+
+                dialog2.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (input.getText().toString().equals("")) {
+                            Toast.makeText(VisualizzaAllenamentoActivity.this, "Inserire il nome", Toast.LENGTH_SHORT).show();
+                        } else {
+                            nomeAllenamento = input.getText().toString();
+                            dataBaseAllenamento.modificaNome(allenamentoId, nomeAllenamento);
+                            txtAllSel.setText(nomeAllenamento);
+                            dialog2.dismiss();
+                        }
+                    }
+                });
+                return true;
+
+            case R.id.salva_menu:
+                //TODO aggiungi le modifiche all'allenamento poi metti a posto il salvataggio
+                /*modificato = false;
+
+                Log.d(TAG, "onOptionsItemSelected: LAST: " + last_item);
+
+                //se ho eliminato l'ultimo elemento
+                if (last_item) {
+                    //avviso che la dieta è rimasta vuota e verrà eliminata
+                    AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaDietaActivity.this);
+                    builder.setMessage("La dieta è vuota e verrà eliminata. Continuare?");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dataBaseDieta.eliminaDieta(dietaId);
+                            overridePendingTransition(0, 0);
+                            startActivity(getIntent());
+                            overridePendingTransition(0, 0);
+                        }
+                    });
+                    builder.setNegativeButton("Annulla", null);
+
+                    final AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else {
+                    //altrimenti salvo la nuova dieta
+                    Dieta dieta = new Dieta(dietaId, nomeDieta,
+                            cibiId, cibiQta, adapter.getItemCount());
+                    dataBaseDieta.modificaDieta(dietaId, dieta);
+                    overridePendingTransition(0, 0);
+                    startActivity(getIntent());
+                    overridePendingTransition(0, 0);
+                }*/
+                return true;
+
+            case R.id.elimina_menu:
+                AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaAllenamentoActivity.this);
+                builder.setMessage("Eliminare l'allenamento " + dataBaseAllenamento.getAllenamentoById(allenamentoId).getNome() + "?");
+                builder.setPositiveButton("Elimina", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        VisualizzaAllenamentoActivity.this.finish();
+                        Intent intent = new Intent(VisualizzaAllenamentoActivity.this, ElencoAllenamentiActivity.class);
+                        VisualizzaAllenamentoActivity.this.startActivity(intent);
+                        dataBaseAllenamento.eliminaAllenamento(allenamentoId);
+                    }
+                });
+                builder.setNegativeButton("Annulla", null);
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                return true;
+
+            case android.R.id.home:
+                //TODO Aggiungi le modifiche all'allenamento poi metti a posto pure qui
+                //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+                //controllo anche che non ci siano modifiche non salvate, altrimenti lo segnalo
+                /*if (modificato) {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(VisualizzaDietaActivity.this);
+                    builder1.setMessage("Le modifiche non verranno salvate. Vuoi tornare indietro?");
+                    builder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            VisualizzaDietaActivity.this.finish();
+                            Intent intent1 = new Intent(VisualizzaDietaActivity.this, ElencoDieteActivity.class);
+                            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            VisualizzaDietaActivity.this.startActivity(intent1);
+                        }
+                    });
+                    builder1.setNegativeButton("Annulla", null);
+
+                    final AlertDialog dialog1 = builder1.create();
+                    dialog1.show();
+                } else {
+                    VisualizzaDietaActivity.this.finish();
+                    Intent intent1 = new Intent(VisualizzaDietaActivity.this, ElencoDieteActivity.class);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    VisualizzaDietaActivity.this.startActivity(intent1);
+                }*/
+                VisualizzaAllenamentoActivity.this.finish();
+                Intent intent1 = new Intent(VisualizzaAllenamentoActivity.this, ElencoAllenamentiActivity.class);
+                intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                VisualizzaAllenamentoActivity.this.startActivity(intent1);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void initView(){
+        txtAllSel = findViewById(R.id.txtAllSel);
+        txtElemSelA = findViewById(R.id.txtElemSelA);
+        txtEmptyAllenamento = findViewById(R.id.txtEmptyAllenamento);
+        esAllRecView = findViewById(R.id.esAllRecView);
+
+        adapter = new EsAllenamentoRecViewAdapter(this);
+
+        esAllRecView.setAdapter(adapter);
+        esAllRecView.setLayoutManager(new LinearLayoutManager(this));
+    }
+}

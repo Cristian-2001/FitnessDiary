@@ -1,154 +1,211 @@
 package com.example.applicazione.allenamento;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.applicazione.R;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.applicazione.dieta.AggiungiDietaActivity;
+import com.example.applicazione.dieta.DataBaseCibo;
+import com.example.applicazione.dieta.DataBaseDieta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AggiungiAllenamentoActivity extends AppCompatActivity {
     private static final String TAG = "AggiungiAllenamActivity";    //TAG per i log
+    public static final String ALLENAMENTO_NOME = "allenamentoNome";
+    public static final String ELENCO_ALL = "elencoAllenamenti";
 
-    private Spinner spnEsercizio1;
+    public static final String ES_NOME_KEY = "nomeEs";
+    public static final String ES_GRUPPOMUSC_KEY = "gruppoMuscEs";
+    public static final String ES_DIFF_KEY = "diffEs";
+    public static final String ES_PARTECORPO_KEY = "parteCorpoEs";
+    public static final String ES_TIPO_KEY = "tipoEs";
+    public static final String ES_MOD_KEY = "modEs";
 
-    private EditText edtTxtSerie1;
-    private EditText edtTxtRep1;
-    private EditText edtTxtTSer1;
-    private EditText edtTxtRec1;
+    //id dell'allenamento da modificare
+    private static int allenamentoId;
 
-    private TextView txtWarnSerie1;
-    private TextView txtWarnRep1;
-    private TextView txtWarnTSer1;
-    private TextView txtWarnRec1;
+    private static Allenamento allenamento = null;
+    private static String nomeAll;
+    private String nome, gruppoMusc, difficolta, parteCorpo, tipologia, modalita;
+    private List<Esercizio> esercizi = new ArrayList<>();
 
-    private Button btnSalva;
-    private ConstraintLayout parent;
+    private DataBaseAllenamento dataBaseAllenamento;
+    private DataBaseEsercizio dataBaseEsercizio;
+
+    private TextView txtNumEs, txtEmptyEs;
+    private Button btnFiltra, btnSalvaALl;
+
+    private RecyclerView esRecView;
+    private EserciziRecViewAdapter adapter;
+
+    private static List<Integer> eserciziId = new ArrayList<>();
+    private static List<Integer> eserciziSerie = new ArrayList<>();
+    private static List<Integer> eserciziReps = new ArrayList<>();
+    private static List<Integer> eserciziTRec = new ArrayList<>();
+    private static int numElem = 0;
+
+    //TODO finire questa activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aggiungi_allenamento);
 
+        //chiamo l'action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        //mostro il back button
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         initView();
 
-        btnSalva.setOnClickListener(new View.OnClickListener() {
+        dataBaseAllenamento = new DataBaseAllenamento(AggiungiAllenamentoActivity.this);
+        dataBaseEsercizio = new DataBaseEsercizio(AggiungiAllenamentoActivity.this);
+        esercizi = dataBaseEsercizio.getAllEsercizi();
+        adapter.setEsercizi(esercizi);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            if (intent.getIntExtra(ELENCO_ALL, -1) == 1) {
+                //sono arrivato dall'elenco degli allenamenti quindi resetto tutto
+                nomeAll = intent.getStringExtra(ALLENAMENTO_NOME);
+                eserciziId.clear();
+                eserciziSerie.clear();
+                eserciziReps.clear();
+                eserciziTRec.clear();
+                numElem = 0;
+            } else if (intent.getIntExtra(ELENCO_ALL, -1) == 2) {
+                //sono arrivato dai filtri quindi li applico
+                nome = intent.getStringExtra(ES_NOME_KEY);
+                gruppoMusc = intent.getStringExtra(ES_GRUPPOMUSC_KEY);
+                difficolta = intent.getStringExtra(ES_DIFF_KEY);
+                parteCorpo = intent.getStringExtra(ES_PARTECORPO_KEY);
+                tipologia = intent.getStringExtra(ES_TIPO_KEY);
+                modalita = intent.getStringExtra(ES_MOD_KEY);
+
+                esercizi = dataBaseEsercizio.getEserciziFiltri(nome, gruppoMusc, difficolta, parteCorpo, tipologia, modalita);
+                adapter.setEsercizi(esercizi);
+            }
+        }
+
+        if (adapter.getItemCount() == 0) {
+            txtEmptyEs.setVisibility(View.VISIBLE);
+        } else {
+            txtEmptyEs.setVisibility(View.GONE);
+        }
+
+        if (numElem == 1) {
+            txtNumEs.setText(numElem + " elemento");
+        } else {
+            txtNumEs.setText(numElem + " elementi");
+        }
+
+        btnFiltra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                initRegister();
+                Intent intent = new Intent(AggiungiAllenamentoActivity.this, FiltriAllenamentiActivity.class);
+                AggiungiAllenamentoActivity.this.startActivity(intent);
+            }
+        });
+
+        btnSalvaALl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (numElem == 0) {
+                    Toast.makeText(AggiungiAllenamentoActivity.this, "Inserire almeno un elemento", Toast.LENGTH_SHORT).show();
+                } else {
+                    allenamento = new Allenamento(nomeAll, eserciziId, eserciziSerie, eserciziReps, eserciziTRec, numElem);
+
+                    dataBaseAllenamento.addOne(allenamento);
+                }
+
+                Intent intent1 = new Intent(AggiungiAllenamentoActivity.this, ElencoAllenamentiActivity.class);
+                //intent1.putExtra(ALL_ID_KEY, allenamento.getId());
+                AggiungiAllenamentoActivity.this.startActivity(intent1);
             }
         });
     }
 
     private void initView() {
         /* inizializzo gli elementi dell'activity */
-        spnEsercizio1 = findViewById(R.id.spnEsercizio1);
+        txtNumEs = findViewById(R.id.txtNumEs);
+        txtEmptyEs = findViewById(R.id.txtEmptyEs);
+        btnFiltra = findViewById(R.id.btnFiltra);
+        btnSalvaALl = findViewById(R.id.btnSalvaAll);
 
-        edtTxtSerie1 = findViewById(R.id.edtTxtSerie1);
-        edtTxtRep1 = findViewById(R.id.edtTxtRep1);
-        edtTxtTSer1 = findViewById(R.id.edtTxtTSer1);
-        edtTxtRec1 = findViewById(R.id.edtTxtRec1);
-
-        btnSalva = findViewById(R.id.btnSalva);
-
-        parent = findViewById(R.id.parent);
-
-        txtWarnSerie1 = findViewById(R.id.txtWarnSerie1);
-        txtWarnRep1 = findViewById(R.id.txtWarnRep1);
-        txtWarnTSer1 = findViewById(R.id.txtWarnTSer1);
-        txtWarnRec1 = findViewById(R.id.txtWarnRec1);
+        adapter = new EserciziRecViewAdapter(this);
+        esRecView = findViewById(R.id.esRecView);
+        esRecView.setAdapter(adapter);
+        esRecView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     //metodo per salvare i dati
-    public void initRegister() {
-        //TODO: Salvare l'allenamento in un database
+    public static void modificaAllenamento(int esId, int serie, int reps, int rec) {
+        eserciziId.add(esId);
+        eserciziSerie.add(serie);
+        eserciziReps.add(reps);
+        eserciziTRec.add(rec);
+        numElem++;
+    }
 
-        if (validateData()) {
-            showSnackBar();
-        } else {
-            Toast.makeText(AggiungiAllenamentoActivity.this, "Errore nell'inserimento dei dati", Toast.LENGTH_SHORT).show();
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiAllenamentoActivity.this);
+                builder.setMessage("L'allenamento corrente non verrà salvato. Vuoi tornare indietro?");
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        AggiungiAllenamentoActivity.this.finish();
+                        Intent intent = new Intent(AggiungiAllenamentoActivity.this, ElencoAllenamentiActivity.class);
+                        AggiungiAllenamentoActivity.this.startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("Annulla", null);
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
-    //metodo per controllare la correttezza dei dati inseriti
-    public boolean validateData() {
-        Log.d(TAG, "validateData: Started");
-        if (edtTxtSerie1.getText().toString().equals("") ||
-                Integer.parseInt(edtTxtSerie1.getText().toString()) <= 0) {
-            txtWarnSerie1.setVisibility(View.VISIBLE);
-            return false;
-        } else {
-            txtWarnSerie1.setVisibility(View.GONE);
-        }
-
-        if (edtTxtRep1.getText().toString().equals("") ||
-                Integer.parseInt(edtTxtRep1.getText().toString()) <= 0) {
-            txtWarnRep1.setVisibility(View.VISIBLE);
-            return false;
-        } else {
-            txtWarnRep1.setVisibility(View.GONE);
-        }
-
-        if (edtTxtTSer1.getText().toString().equals("") ||
-                Integer.parseInt(edtTxtTSer1.getText().toString()) <= 0) {
-            txtWarnTSer1.setVisibility(View.VISIBLE);
-            return false;
-        } else {
-            txtWarnTSer1.setVisibility(View.GONE);
-        }
-
-        if (edtTxtRec1.getText().toString().equals("") ||
-                Integer.parseInt(edtTxtRec1.getText().toString()) <= 0) {
-            txtWarnRec1.setVisibility(View.VISIBLE);
-            return false;
-        } else {
-            txtWarnRec1.setVisibility(View.GONE);
-        }
-
-        return true;
-    }
-
-    public void showSnackBar() {
-        /* Per ora mostro l'allenamento inserito in una snackbar.
-        Quando potremo, lo inseriremo direttamente nel database.
-        Per vedere tutto il testo della snackbar e controllare che sia giusto, controlla nei log.
-         */
-        Log.d(TAG, "showSnackBar: Started");
-        txtWarnSerie1.setVisibility(View.GONE);
-        txtWarnRep1.setVisibility(View.GONE);
-        txtWarnTSer1.setVisibility(View.GONE);
-        txtWarnRec1.setVisibility(View.GONE);
-
-        String esercizio = spnEsercizio1.getSelectedItem().toString();
-        String serie = edtTxtSerie1.getText().toString();
-        String rep = edtTxtRep1.getText().toString();
-        String tser = edtTxtTSer1.getText().toString();
-        String rec = edtTxtRec1.getText().toString();
-
-        String snackText = "Esercizio: " + esercizio + "\n" +
-                serie + " serie da " + rep + " ripetizioni ciascuna" + "\n" +
-                "Tempo di esecuzione di una serie: " + tser + " secondi" + "\n" +
-                "Tempo di recupero tra una serie e l'altra: " + rec + " secondi";
-
-        Log.d(TAG, "showSnackBar: Snack Bar Text: " + snackText);
-
-        Snackbar.make(parent, snackText, BaseTransientBottomBar.LENGTH_INDEFINITE).setAction("Dismiss", new View.OnClickListener() {
+    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiAllenamentoActivity.this);
+        builder.setMessage("L'allenamento corrente non verrà salvato. Vuoi tornare indietro?");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                edtTxtSerie1.setText("0");
-                edtTxtRep1.setText("0");
-                edtTxtTSer1.setText("0");
-                edtTxtRec1.setText("0");
+            public void onClick(DialogInterface dialogInterface, int i) {
+                AggiungiAllenamentoActivity.this.finish();
+                Intent intent = new Intent(AggiungiAllenamentoActivity.this, ElencoAllenamentiActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
-        }).show();
+        });
+        builder.setNegativeButton("Annulla", null);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

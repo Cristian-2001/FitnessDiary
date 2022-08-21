@@ -7,196 +7,67 @@
     android:layout_height="match_parent"
     tools:context=".allenamento.AggiungiAllenamentoActivity">
 
-    <TextView
-        android:id="@+id/txtTitolo"
+    <Button
+        android:id="@+id/btnFiltra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:text="Inserisci gli esercizi:"
-        android:textSize="20sp"
-        android:textStyle="italic|bold"
+        android:layout_marginTop="16dp"
+        android:text="Filtra"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="686dp"
-        android:layout_marginStart="8dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/esRecView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFiltra" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/txtNumEs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Num elementi"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnSalvaAll"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnSalvaAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="97dp"
+            android:text="Salva"
+            app:layout_constraintBottom_toBottomOf="@+id/txtNumEs"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txtNumEs"
+            app:layout_constraintTop_toTopOf="@+id/txtNumEs" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/txtEmptyEs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nessun allenamento trovato"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitolo"
-        app:layout_constraintVertical_bias="0.0">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="16dp"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="179dp" />
-
-            <TextView
-                android:id="@+id/txtEs1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Esercizio"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txtSerie1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Numero serie"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/txtWarnSerie1" />
-
-            <TextView
-                android:id="@+id/txtRep1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Numero ripetizioni"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/txtWarnRep1" />
-
-            <TextView
-                android:id="@+id/txtTSerie1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="Tempo di una serie"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/txtWarnTSer1" />
-
-            <TextView
-                android:id="@+id/txtRec1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="Tempo di recupero"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/txtWarnRec1" />
-
-            <Spinner
-                android:id="@+id/spnEsercizio1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/NomeEsercizi"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/txtEs1" />
-
-            <EditText
-                android:id="@+id/edtTxtSerie1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="0"
-                android:inputType="numberDecimal"
-                android:text="0"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/txtSerie1" />
-
-            <EditText
-                android:id="@+id/edtTxtRep1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="0"
-                android:inputType="numberDecimal"
-                android:text="0"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/txtRep1" />
-
-            <EditText
-                android:id="@+id/edtTxtTSer1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="0"
-                android:inputType="numberDecimal"
-                android:text="0"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/txtTSerie1" />
-
-            <EditText
-                android:id="@+id/edtTxtRec1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="0"
-                android:inputType="numberDecimal"
-                android:text="0"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/txtRec1" />
-
-            <TextView
-                android:id="@+id/txtWarnSerie1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Valore non valido"
-                android:textColor="#FF0000"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txtWarnRep1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Valore non valido"
-                android:textColor="#FF0000"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/edtTxtSerie1" />
-
-            <TextView
-                android:id="@+id/txtWarnTSer1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Valore non valido"
-                android:textColor="#FF0000"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/edtTxtRep1" />
-
-            <TextView
-                android:id="@+id/txtWarnRec1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Valore non valido"
-                android:textColor="#FF0000"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/edtTxtTSer1" />
-
-            <Button
-                android:id="@+id/btnSalva"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Salva allenamento"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtTxtRec1" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

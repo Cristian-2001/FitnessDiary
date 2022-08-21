@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="70dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="20dp"
     android:id="@+id/parent"
     app:cardCornerRadius="7dp"
-    app:cardElevation="7dp"
-    android:layout_margin="5dp">
+    app:cardElevation="7dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
-        <ImageView
-            android:layout_width="130dp"
-            android:layout_height="150dp"
-            android:id="@+id/imgAllenamento"
-            android:src="@mipmap/ic_launcher"
-            android:layout_centerHorizontal="true"/>
 
         <TextView
+            android:id="@+id/txtNomeALl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtAllenamento"
-            android:text="All_nome"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_below="@+id/imgAllenamento"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="7dp"/>
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:text="Nome allenamento"
+            android:textSize="20dp"
+            android:textStyle="italic|bold" />
+
+        <TextView
+            android:id="@+id/txtNumElemAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/txtNomeALl"
+            android:text="@string/numero_elementi"
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

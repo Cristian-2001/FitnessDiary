@@ -1,7 +1,10 @@
 package com.example.applicazione.allenamento;
 
+import static com.example.applicazione.allenamento.VisualizzaAllenamentoActivity.ALLENAMENTO_ID_KEY;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +36,10 @@ public class AllenamentiRecViewAdapter extends RecyclerView.Adapter<AllenamentiR
         this.mContext = mContext;
     }
 
+    public void setAllenamenti(List<Allenamento> allenamenti) {
+        this.allenamenti = allenamenti;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,16 +50,19 @@ public class AllenamentiRecViewAdapter extends RecyclerView.Adapter<AllenamentiR
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Log.d(TAG, "onBindViewHolder: Called");
-        holder.txtAllenamento.setText(allenamenti.get(position).getNome());
-        Glide.with(mContext)
-                .asBitmap()
-                .load(allenamenti.get(position).getImageUrl)
-                .into(holder.imgAllenamento);
+        holder.txtNomeAll.setText(allenamenti.get(position).getNome());
+        if (allenamenti.get(position).getNumElem() == 1) {
+            holder.txtNumElemAll.setText(allenamenti.get(position).getNumElem().toString() + " elemento");
+        } else {
+            holder.txtNumElemAll.setText(allenamenti.get(position).getNumElem().toString() + " elementi");
+        }
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, allenamenti.get(position).getNome() + " Selected", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, VisualizzaAllenamentoActivity.class);
+                intent.putExtra(ALLENAMENTO_ID_KEY, allenamenti.get(position).getId());
+                mContext.startActivity(intent);
             }
         });
     }
@@ -62,24 +72,16 @@ public class AllenamentiRecViewAdapter extends RecyclerView.Adapter<AllenamentiR
         return allenamenti.size();
     }
 
-    public void setAllenamenti(List<Allenamento> allenamenti) {
-        this.allenamenti = allenamenti;
-
-        //notifico quando ci sono dei cambiamenti all'array
-        notifyDataSetChanged();
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView parent;
-        private ImageView imgAllenamento;
-        private TextView txtAllenamento;
+        private TextView txtNomeAll, txtNumElemAll;
 
         //constructor
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             parent = itemView.findViewById(R.id.parent);
-            imgAllenamento = itemView.findViewById(R.id.imgAllenamento);
-            txtAllenamento = itemView.findViewById(R.id.txtAllenamento);
+            txtNomeAll = itemView.findViewById(R.id.txtNomeALl);
+            txtNumElemAll = itemView.findViewById(R.id.txtNumElemAll);
         }
     }
 }

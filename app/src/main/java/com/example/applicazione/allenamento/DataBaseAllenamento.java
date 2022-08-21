@@ -20,6 +20,11 @@ public class DataBaseAllenamento extends SQLiteOpenHelper {
         super(context, "allenamenti.db", factory, version);
     }
 
+    //TODO siamo sicuri vada bene?
+    public DataBaseAllenamento(@Nullable Context context) {
+        super(context, "allenamenti.db", null, 3);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 

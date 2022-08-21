@@ -5,6 +5,8 @@
     <string name="salva">Salva</string>
     <string name="elimina">Elimina</string>
     <string name="aggiungi_cibi">Aggiungi degli elementi</string>
+    <string name="nome_dieta">Nome dieta</string>
+    <string name="numero_elementi">Numero di elementi</string>
 
     <string-array name="categorie">
         <item>Tutte</item>
@@ -30,5 +32,50 @@
         <item>Torte salate</item>
         <item>Uova e latticini</item>
         <item>Verdure</item>
+    </string-array>
+
+    <string-array name="gruppo_musc">
+        <item>Qualsiasi</item>
+        <item>Addominali</item>
+        <item>Addominali alti</item>
+        <item>Addominali bassi</item>
+        <item>Addominali obliqui</item>
+        <item>Bicipiti</item>
+        <item>Legs - Gambe posteriori</item>
+        <item>Pettorali</item>
+        <item>Polpacci</item>
+        <item>Quadricipiti</item>
+        <item>Schiena bassa</item>
+        <item>Schiena dorsale</item>
+        <item>Spalle</item>
+        <item>Tricipiti</item>
+    </string-array>
+
+    <string-array name="difficolta">
+        <item>Qualsiasi</item>
+        <item>Principiante</item>
+        <item>Intermedio</item>
+        <item>Avanzato</item>
+    </string-array>
+
+    <string-array name="parte_corpo">
+        <item>Qualsiasi</item>
+        <item>Alta</item>
+        <item>Bassa</item>
+        <item>Core</item>
+    </string-array>
+
+    <string-array name="tipologia">
+        <item>Qualsiasi</item>
+        <item>Spinta</item>
+        <item>Statico</item>
+        <item>Tirata</item>
+    </string-array>
+
+    <string-array name="modalita">
+        <item>Qualsiasi</item>
+        <item>Cavi</item>
+        <item>Corpo libero</item>
+        <item>Macchinario</item>
     </string-array>
 </resources>

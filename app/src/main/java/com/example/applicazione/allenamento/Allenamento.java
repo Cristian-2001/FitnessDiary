@@ -8,8 +8,6 @@ public class Allenamento {
     public static Object allenamento;
     private int id;
     private String nome;
-    private double kcal;
-    public String getImageUrl;
     List<Integer> eserciziId;
     List<Integer> eserciziSerie;
     List<Integer> eserciziReps;
@@ -22,11 +20,8 @@ public class Allenamento {
         this.numElem = numElem;
     }
 
-    public Allenamento(int id, String nome, double kcal, String getImageUrl, List<Integer> eserciziId, List<Integer> eserciziSerie, List<Integer> eserciziReps, List<Integer> eserciziTrec, Integer numElem) {
-        this.id = id;
+    public Allenamento(String nome, List<Integer> eserciziId, List<Integer> eserciziSerie, List<Integer> eserciziReps, List<Integer> eserciziTrec, Integer numElem) {
         this.nome = nome;
-        this.kcal = kcal;
-        this.getImageUrl = getImageUrl;
         this.eserciziId = eserciziId;
         this.eserciziSerie = eserciziSerie;
         this.eserciziReps = eserciziReps;
@@ -56,22 +51,6 @@ public class Allenamento {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public double getKcal() {
-        return kcal;
-    }
-
-    public void setKcal(double kcal) {
-        this.kcal = kcal;
-    }
-
-    public String getGetImageUrl() {
-        return getImageUrl;
-    }
-
-    public void setGetImageUrl(String getImageUrl) {
-        this.getImageUrl = getImageUrl;
     }
 
     public List<Integer> getEserciziId() {
@@ -119,8 +98,6 @@ public class Allenamento {
         return "Allenamento{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", kcal=" + kcal +
-                ", getImageUrl='" + getImageUrl + '\'' +
                 ", eserciziId=" + eserciziId +
                 ", eserciziSerie=" + eserciziSerie +
                 ", eserciziReps=" + eserciziReps +
@@ -128,7 +105,6 @@ public class Allenamento {
                 ", numElem=" + numElem +
                 '}';
     }
-
 
     public String IdToString(){
 
@@ -199,6 +175,4 @@ public class Allenamento {
     public void incrementNum(){
         numElem++;
     }
-
-
 }

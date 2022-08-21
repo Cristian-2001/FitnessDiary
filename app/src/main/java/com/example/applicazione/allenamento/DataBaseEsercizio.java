@@ -16,13 +16,13 @@ import java.util.List;
 public class DataBaseEsercizio extends SQLiteOpenHelper {
 
     public DataBaseEsercizio(@Nullable Context context) {
-        super(context, "Esercizi.db", null, 1);
+        super(context, "Esercizii.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String createTableStatement = "CREATE TABLE Esercizi (ID REAL," +
+        /*String createTableStatement = "CREATE TABLE Esercizi (ID REAL," +
                 "Nome VARCHAR(255)," +
                 "Gruppo_muscolare VARCHAR(255)," +
                 "Difficoltà VARCHAR(255)," +
@@ -30,7 +30,7 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
                 "Tipologia VARCHAR(255)," +
                 "Modalita VARCHAR(255))";
 
-        db.execSQL(createTableStatement);
+        db.execSQL(createTableStatement);*/
 
     }
 
@@ -58,14 +58,11 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
         cv.put("Modalita", esercizio.getModalita());
 
 
-
         long insert = db.insert("Esercizi", null, cv);
 
         return insert != -1;
 
     }
-
-
 
 
     //ritorna l'esercizio con l'id dato
@@ -78,7 +75,7 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(queryString, null);
 
-       Esercizio esercizio = null;
+        Esercizio esercizio = null;
 
         if (cursor.moveToFirst()) {
             String nome = cursor.getString(1);
@@ -88,7 +85,7 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
             String tipologia = cursor.getString(5);
             String modalita = cursor.getString(6);
 
-            esercizio = new Esercizio(id,nome,gruppoMuscolare,difficolta,parteDelCorpo,tipologia,modalita);
+            esercizio = new Esercizio(id, nome, gruppoMuscolare, difficolta, parteDelCorpo, tipologia, modalita);
         }
 
         cursor.close();
@@ -118,7 +115,7 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
                 String tipologia = cursor.getString(5);
                 String modalita = cursor.getString(6);
 
-                returnList.add(new Esercizio(id,nome,gruppoMuscolare,difficolta,parteDelCorpo,tipologia,modalita));
+                returnList.add(new Esercizio(id, nome, gruppoMuscolare, difficolta, parteDelCorpo, tipologia, modalita));
             } while (cursor.moveToNext());
         }
 
@@ -127,4 +124,61 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
         return returnList;
     }
 
+    public List<Esercizio> getEserciziFiltri(String nome, String gruppoMusc, String diff, String parteCorpo,
+                                             String tipologia, String modalita) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        if (nome.equals("")) {
+            nome = "%";
+        }
+
+        if (gruppoMusc.equals("Qualsiasi")) {
+            gruppoMusc = "%";
+        }
+
+        if (diff.equals("Qualsiasi")) {
+            diff = "%";
+        }
+
+        if (parteCorpo.equals("Qualsiasi")) {
+            parteCorpo = "%";
+        }
+
+        if (tipologia.equals("Qualsiasi")) {
+            tipologia = "%";
+        }
+
+        if (modalita.equals("Qualsiasi")) {
+            modalita = "%";
+        }
+
+        String queryString = "SELECT * FROM Esercizi WHERE Nome like '%" + nome
+                + "%' AND Gruppo_muscolare LIKE '" + gruppoMusc
+                + "' AND Difficoltà LIKE '" + diff
+                + "' AND Parte_del_corpo LIKE '" + parteCorpo
+                + "' AND Tipologia LIKE '" + tipologia
+                + "' AND Modalita LIKE '" + modalita + "'";
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        List<Esercizio> returnList = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String nome2 = cursor.getString(1);
+                String gruppoMuscolare2 = cursor.getString(2);
+                String difficolta2 = cursor.getString(3);
+                String parteDelCorpo2 = cursor.getString(4);
+                String tipologia2 = cursor.getString(5);
+                String modalita2 = cursor.getString(6);
+
+                returnList.add(new Esercizio(id, nome2, gruppoMuscolare2, difficolta2, parteDelCorpo2, tipologia2, modalita2));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
+    }
 }

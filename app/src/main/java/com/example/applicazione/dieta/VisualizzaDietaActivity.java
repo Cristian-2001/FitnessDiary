@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,7 +39,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
     private FloatingActionButton fltABAddCibo;
 
     private RecyclerView cibiDietaRecView;
-    private CibiDietaRecViewAdapter adapter = new CibiDietaRecViewAdapter(VisualizzaDietaActivity.this);
+    private CibiDietaRecViewAdapter adapter;
 
     //boolean per controllare se ci sono state delle modifiche non salvate
     private static boolean modificato = false;
@@ -55,13 +53,13 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
     //numero di elementi della dieta
     private int numElem;
 
-    //ArrayList degli id dei cibi
+    //List degli id dei cibi
     private List<Integer> cibiId;
 
-    //ArrayList delle quantità dei cibi
+    //List delle quantità dei cibi
     private List<Double> cibiQta;
 
-    //ArrayList dei cibi
+    //List dei cibi
     private List<Cibo> cibi = new ArrayList<>();
 
     //nome della dieta
@@ -87,7 +85,9 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         //mostro il back button
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         dataBaseDieta = new DataBaseDieta(VisualizzaDietaActivity.this);
         dataBaseCibo = new DataBaseCibo(VisualizzaDietaActivity.this);
@@ -151,7 +151,12 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: NOME: " + dataBaseDieta.getDietaById(dietaId).getNome());
         Log.d(TAG, "onCreate: NUM: " + dataBaseDieta.getDietaById(dietaId).getNumElem());
         txtDietaSel.setText(dataBaseDieta.getDietaById(dietaId).getNome());
-        txtElemSel.setText(numElem + " elementi");
+
+        if (numElem == 1) {
+            txtElemSel.setText(numElem + " elemento");
+        } else {
+            txtElemSel.setText(numElem + " elementi");
+        }
 
         btnValoriTot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +183,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.visualizza_dieta_menu, menu);
+        inflater.inflate(R.menu.visualizza_elenco_menu, menu);
         return true;
     }
 
@@ -309,11 +314,11 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        txtDietaSel = findViewById(R.id.txtDietaSel);
-        txtElemSel = findViewById(R.id.txtElemSel);
-        txtEmptyDieta = findViewById(R.id.txtEmptyDieta);
+        txtDietaSel = findViewById(R.id.txtAllSel);
+        txtElemSel = findViewById(R.id.txtElemSelA);
+        txtEmptyDieta = findViewById(R.id.txtEmptyAllenamento);
         btnValoriTot = findViewById(R.id.btnValoriTot);
-        cibiDietaRecView = findViewById(R.id.cibiDietaRecView);
+        cibiDietaRecView = findViewById(R.id.esAllRecView);
         fltABAddCibo = findViewById(R.id.fltABAddCibo);
 
         adapter = new CibiDietaRecViewAdapter(this);
