@@ -126,6 +126,9 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
 
         //setto l'adapter
         adapter.setEsercizi(esercizi);
+        adapter.setSerie(eserciziSerie);
+        adapter.setReps(eserciziReps);
+        adapter.settRec(eserciziTRec);
 
         txtAllSel.setText(nomeAllenamento);
 

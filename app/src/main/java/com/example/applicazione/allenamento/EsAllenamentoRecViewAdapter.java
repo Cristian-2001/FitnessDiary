@@ -26,6 +26,15 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
     //elenco degli esercizi da visualizzare
     private List<Esercizio> esercizi = new ArrayList<>();
 
+    //elenco delle serie
+    private List<Integer> serie = new ArrayList<>();
+
+    //elenco delle ripetizioni
+    private List<Integer> reps = new ArrayList<>();
+
+    //elenco dei tempi di recupero
+    private List<Integer> tRec = new ArrayList<>();
+
     //contesto
     private Context mContext;
 
@@ -35,6 +44,18 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
 
     public void setEsercizi(List<Esercizio> esercizi) {
         this.esercizi = esercizi;
+    }
+
+    public void setSerie(List<Integer> serie) {
+        this.serie = serie;
+    }
+
+    public void setReps(List<Integer> reps) {
+        this.reps = reps;
+    }
+
+    public void settRec(List<Integer> tRec) {
+        this.tRec = tRec;
     }
 
     @NonNull
@@ -49,11 +70,15 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
         Log.d(TAG, "onBindViewHolder: Called");
 
         holder.txtNomeEser.setText(esercizi.get(position).getNome());
+        holder.txtSerieReps.setText(serie.get(position).toString() + " serie da " + reps.get(position).toString() + " ripetizioni ciascuna");
+        holder.txtTRec.setText("Tempo di recupero: " + tRec.get(position).toString() + " secondi");
         holder.txtGruppoMuscEser.setText("Gruppo muscolare: " + esercizi.get(position).getGruppoMuscolare());
-        holder.txtDiffEser.setText("Difficoltà: " + esercizi.get(position).getDifficolta());
         holder.txtParteCorpoEser.setText("Parte del corpo: " + esercizi.get(position).getParteDelCorpo());
-        holder.txtTipoEser.setText("Tipologia: " + esercizi.get(position).getTipologia());
         holder.txtModEser.setText("Modalità: " + esercizi.get(position).getModalita());
+
+        //nascondo gli elementi da non visualizzare
+        holder.txtDiffEser.setVisibility(View.GONE);
+        holder.txtTipoEser.setVisibility(View.GONE);
     }
 
     @Override
@@ -64,7 +89,8 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private CardView parent;
-        private TextView txtNomeEser, txtGruppoMuscEser, txtDiffEser, txtParteCorpoEser, txtTipoEser, txtModEser;
+        private TextView txtNomeEser, txtGruppoMuscEser, txtDiffEser, txtParteCorpoEser, txtTipoEser, txtModEser,
+                txtSerieReps, txtTRec;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -76,6 +102,9 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
             txtParteCorpoEser = itemView.findViewById(R.id.txtParteCorpoEser);
             txtTipoEser = itemView.findViewById(R.id.txtTipoEser);
             txtModEser = itemView.findViewById(R.id.txtModEser);
+
+            txtSerieReps = itemView.findViewById(R.id.txtSerieReps);
+            txtTRec = itemView.findViewById(R.id.txtTRec);
         }
     }
 }

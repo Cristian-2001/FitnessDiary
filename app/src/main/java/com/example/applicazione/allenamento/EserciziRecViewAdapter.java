@@ -56,6 +56,10 @@ public class EserciziRecViewAdapter extends RecyclerView.Adapter<EserciziRecView
         holder.txtTipoEser.setText("Tipologia: " + esercizi.get(position).getTipologia());
         holder.txtModEser.setText("Modalità: " + esercizi.get(position).getModalita());
 
+        //nascondo gli elementi da non visualizzare
+        holder.txtSerieReps.setVisibility(View.GONE);
+        holder.txtTRec.setVisibility(View.GONE);
+
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +77,8 @@ public class EserciziRecViewAdapter extends RecyclerView.Adapter<EserciziRecView
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private CardView parent;
-        private TextView txtNomeEser, txtGruppoMuscEser, txtDiffEser, txtParteCorpoEser, txtTipoEser, txtModEser;
+        private TextView txtNomeEser, txtGruppoMuscEser, txtDiffEser, txtParteCorpoEser, txtTipoEser, txtModEser,
+                txtSerieReps, txtTRec;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -85,6 +90,9 @@ public class EserciziRecViewAdapter extends RecyclerView.Adapter<EserciziRecView
             txtParteCorpoEser = itemView.findViewById(R.id.txtParteCorpoEser);
             txtTipoEser = itemView.findViewById(R.id.txtTipoEser);
             txtModEser = itemView.findViewById(R.id.txtModEser);
+
+            txtSerieReps = itemView.findViewById(R.id.txtSerieReps);
+            txtTRec = itemView.findViewById(R.id.txtTRec);
         }
     }
 }

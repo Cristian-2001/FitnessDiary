@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/parent"
     android:layout_margin="22dp"
     android:layout_marginStart="32dp"
     android:layout_marginTop="32dp"
@@ -30,22 +30,46 @@
             android:textStyle="bold|italic" />
 
         <TextView
+            android:id="@+id/txtSerieReps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtGruppoMuscEser"
             android:layout_below="@+id/txtNomeEser"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="7dp"
+            android:text="x serie da x ripetizioni"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtTRec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtSerieReps"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="7dp"
+            android:text="Tempo di recupero"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtGruppoMuscEser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTRec"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="7dp"
             android:gravity="center"
             android:text="Gruppo muscolare"
-            android:textSize="18sp"/>
+            android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/txtDiffEser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtDiffEser"
             android:layout_below="@+id/txtGruppoMuscEser"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="7dp"
@@ -53,12 +77,12 @@
             android:layout_marginRight="7dp"
             android:gravity="center"
             android:text="Difficoltà"
-            android:textSize="18sp"/>
+            android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/txtParteCorpoEser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtParteCorpoEser"
             android:layout_below="@+id/txtDiffEser"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="7dp"
@@ -66,12 +90,12 @@
             android:layout_marginRight="7dp"
             android:gravity="center"
             android:text="Parte del corpo"
-            android:textSize="18sp"/>
+            android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/txtTipoEser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtTipoEser"
             android:layout_below="@+id/txtParteCorpoEser"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="7dp"
@@ -79,7 +103,7 @@
             android:layout_marginRight="7dp"
             android:gravity="center"
             android:text="Tipologia"
-            android:textSize="18sp"/>
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/txtModEser"
@@ -90,10 +114,10 @@
             android:layout_marginLeft="7dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="7dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="Modalità"
-            android:textSize="18sp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="15sp" />
 
     </RelativeLayout>
 
