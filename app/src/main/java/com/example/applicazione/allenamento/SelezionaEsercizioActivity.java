@@ -1,8 +1,7 @@
 package com.example.applicazione.allenamento;
 
 import static com.example.applicazione.allenamento.AggiungiAllenamentoActivity.ELENCO_ALL;
-import static com.example.applicazione.dieta.AggiungiDietaActivity.ELENCO_DIETE;
-import static com.example.applicazione.dieta.VisualizzaDietaActivity.DIETA_ID_KEY;
+import static com.example.applicazione.allenamento.VisualizzaAllenamentoActivity.ALLENAMENTO_ID_KEY;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -85,7 +84,7 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
             }
 
             //TODO aggiustare qui
-            //dietaId = intent.getIntExtra(DIETA_ID_KEY, -1);
+            allenamentoId = intent.getIntExtra(ALLENAMENTO_ID_KEY, -1);
         }
 
         btnAnnullaEs.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +122,7 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
 
                             Intent intent1 = new Intent(SelezionaEsercizioActivity.this, AggiungiAllenamentoActivity.class);
                             intent1.putExtra(ELENCO_ALL, -1);
-                            //intent1.putExtra(ALLENAMENTO_ID, allenamentoId);
+                            intent1.putExtra(ALLENAMENTO_ID_KEY, allenamentoId);
                             SelezionaEsercizioActivity.this.startActivity(intent1);
                         }
                     }

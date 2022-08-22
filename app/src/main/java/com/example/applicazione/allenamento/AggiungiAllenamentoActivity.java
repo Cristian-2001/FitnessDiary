@@ -1,5 +1,7 @@
 package com.example.applicazione.allenamento;
 
+import static com.example.applicazione.allenamento.VisualizzaAllenamentoActivity.ALLENAMENTO_ID_KEY;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -90,7 +93,7 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
                 eserciziReps.clear();
                 eserciziTRec.clear();
                 numElem = 0;
-            } else if (intent.getIntExtra(ELENCO_ALL, -1) == 2) {
+            }else if (intent.getIntExtra(ELENCO_ALL, -1) == 2) {
                 //sono arrivato dai filtri quindi li applico
                 nome = intent.getStringExtra(ES_NOME_KEY);
                 gruppoMusc = intent.getStringExtra(ES_GRUPPOMUSC_KEY);
@@ -102,6 +105,19 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
                 esercizi = dataBaseEsercizio.getEserciziFiltri(nome, gruppoMusc, difficolta, parteCorpo, tipologia, modalita);
                 adapter.setEsercizi(esercizi);
             }
+
+            if (intent.getIntExtra(ALLENAMENTO_ID_KEY, -1) > -1) {
+                allenamentoId = intent.getIntExtra(ALLENAMENTO_ID_KEY, -1);
+                nomeAll = dataBaseAllenamento.getAllenamentoById(allenamentoId).getNome();
+                eserciziId = dataBaseAllenamento.getAllenamentoById(allenamentoId).getEserciziId();
+                eserciziSerie = dataBaseAllenamento.getAllenamentoById(allenamentoId).getEserciziSerie();
+                eserciziReps = dataBaseAllenamento.getAllenamentoById(allenamentoId).getEserciziReps();
+                eserciziTRec = dataBaseAllenamento.getAllenamentoById(allenamentoId).getEserciziTrec();
+                numElem = dataBaseAllenamento.getAllenamentoById(allenamentoId).getNumElem();
+            }
+
+
+
         }
 
         if (adapter.getItemCount() == 0) {
@@ -130,13 +146,21 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
                 if (numElem == 0) {
                     Toast.makeText(AggiungiAllenamentoActivity.this, "Inserire almeno un elemento", Toast.LENGTH_SHORT).show();
                 } else {
+
                     allenamento = new Allenamento(nomeAll, eserciziId, eserciziSerie, eserciziReps, eserciziTRec, numElem);
 
-                    dataBaseAllenamento.addOne(allenamento);
+                    if (allenamentoId > -1) {
+                        Log.d(TAG, "onClick: ECCOMI");
+                        dataBaseAllenamento.modificaAllenamento(allenamentoId, allenamento);
+                    } else {
+                        Log.d(TAG, "onClick: SONO QUI");
+                        dataBaseAllenamento.addOne(allenamento);
+                    }
+
                 }
 
                 Intent intent1 = new Intent(AggiungiAllenamentoActivity.this, ElencoAllenamentiActivity.class);
-                //intent1.putExtra(ALL_ID_KEY, allenamento.getId());
+                intent1.putExtra(ALLENAMENTO_ID_KEY, allenamento.getId());
                 AggiungiAllenamentoActivity.this.startActivity(intent1);
             }
         });

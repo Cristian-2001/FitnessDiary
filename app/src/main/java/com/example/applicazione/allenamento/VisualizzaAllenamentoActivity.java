@@ -23,9 +23,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.applicazione.R;
+import com.example.applicazione.dieta.AggiungiDietaActivity;
 import com.example.applicazione.dieta.Dieta;
 import com.example.applicazione.dieta.ElencoDieteActivity;
 import com.example.applicazione.dieta.VisualizzaDietaActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,7 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
     private TextView txtAllSel, txtElemSelA, txtEmptyAllenamento;
     private RecyclerView esAllRecView;
     private EsAllenamentoRecViewAdapter adapter;
+    private FloatingActionButton fltABAddAllenamento;
 
     //id dell'allenamento ricevuto dall'activity ElencoAllenamenti
     private int allenamentoId;
@@ -137,6 +140,18 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
         }else{
             txtElemSelA.setText(numElem + " elementi");
         }
+
+        /**/
+        fltABAddAllenamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(VisualizzaAllenamentoActivity.this, AggiungiAllenamentoActivity.class);
+                intent2.putExtra(ALLENAMENTO_ID_KEY, allenamentoId);
+                VisualizzaAllenamentoActivity.this.startActivity(intent2);
+            }
+        });
+
+
     }
 
     @Override
@@ -283,6 +298,7 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
         txtElemSelA = findViewById(R.id.txtElemSelA);
         txtEmptyAllenamento = findViewById(R.id.txtEmptyAllenamento);
         esAllRecView = findViewById(R.id.esAllRecView);
+        fltABAddAllenamento = findViewById(R.id.fltABAddAllenamento);
 
         adapter = new EsAllenamentoRecViewAdapter(this);
 
