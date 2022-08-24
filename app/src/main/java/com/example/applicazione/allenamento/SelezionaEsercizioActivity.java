@@ -83,7 +83,7 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
                 dialog.show();
             }
 
-            //TODO aggiustare qui
+
             allenamentoId = intent.getIntExtra(ALLENAMENTO_ID_KEY, -1);
         }
 
