@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="364dp"
         android:elevation="7dp"
-        app:cardBackgroundColor="#3F51B5"
+        app:cardBackgroundColor="#F44336"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">>
@@ -25,7 +25,7 @@
                 android:id="@+id/immPalestra"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:src="@mipmap/ic_launcher_round" />
+                android:src="@mipmap/ic_manubrio" />
 
             <TextView
                 android:id="@+id/txtPalestra"
@@ -45,7 +45,7 @@
         android:layout_height="364dp"
         android:layout_marginTop="2dp"
         android:elevation="7dp"
-        app:cardBackgroundColor="#F44336"
+        app:cardBackgroundColor="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -61,16 +61,17 @@
                 android:id="@+id/immDieta"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:src="@android:drawable/arrow_up_float" />
+                android:src="@mipmap/ic_panino" />
 
             <TextView
                 android:id="@+id/txtDieta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/immDieta"
+                android:layout_marginTop="-3dp"
                 android:text="@string/dieta"
                 android:textSize="70sp"
-                android:textStyle="italic|bold"/>
+                android:textStyle="italic|bold" />
         </RelativeLayout>
 
 
