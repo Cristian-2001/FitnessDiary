@@ -29,6 +29,16 @@ public class Allenamento {
         this.numElem = numElem;
     }
 
+    public Allenamento(int id, String nome, List<Integer> eserciziId, List<Integer> eserciziSerie, List<Integer> eserciziReps, List<Integer> eserciziTrec, Integer numElem) {
+        this.id = id;
+        this.nome = nome;
+        this.eserciziId = eserciziId;
+        this.eserciziSerie = eserciziSerie;
+        this.eserciziReps = eserciziReps;
+        this.eserciziTrec = eserciziTrec;
+        this.numElem = numElem;
+    }
+
     public static Object getAllenamento() {
         return allenamento;
     }

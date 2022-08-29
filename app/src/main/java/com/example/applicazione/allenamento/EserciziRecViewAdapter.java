@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,6 +58,10 @@ public class EserciziRecViewAdapter extends RecyclerView.Adapter<EserciziRecView
         holder.txtModEser.setText("Modalità: " + esercizi.get(position).getModalita());
 
         //nascondo gli elementi da non visualizzare
+        holder.btnEdit.setVisibility(View.GONE);
+        holder.btnDelete.setVisibility(View.GONE);
+
+        //nascondo gli elementi da non visualizzare
         holder.txtSerieReps.setVisibility(View.GONE);
         holder.txtTRec.setVisibility(View.GONE);
 
@@ -80,6 +85,9 @@ public class EserciziRecViewAdapter extends RecyclerView.Adapter<EserciziRecView
         private TextView txtNomeEser, txtGruppoMuscEser, txtDiffEser, txtParteCorpoEser, txtTipoEser, txtModEser,
                 txtSerieReps, txtTRec;
 
+        //elementi da nascondere
+        private ImageView btnEdit, btnDelete;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,6 +101,9 @@ public class EserciziRecViewAdapter extends RecyclerView.Adapter<EserciziRecView
 
             txtSerieReps = itemView.findViewById(R.id.txtSerieReps);
             txtTRec = itemView.findViewById(R.id.txtTRec);
+
+            btnEdit = itemView.findViewById(R.id.btnEdit);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
     }
 }

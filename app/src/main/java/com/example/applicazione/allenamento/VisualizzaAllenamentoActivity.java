@@ -64,8 +64,22 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
     //nome dell'allenamento
     String nomeAllenamento;
 
+    //boolean per controllare se ci sono state delle modifiche non salvate
+    private static boolean modificato = false;
+
+    //boolean per controllare se ho eliminato l'ultimo elemento di un allenamento
+    private static boolean last_item = false;
+
     private DataBaseAllenamento dataBaseAllenamento;
     private DataBaseEsercizio dataBaseEsercizio;
+
+    public static void setModificato() {
+        VisualizzaAllenamentoActivity.modificato = true;
+    }
+
+    public static void setLast_item() {
+        VisualizzaAllenamentoActivity.last_item = true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +98,8 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
         dataBaseEsercizio = new DataBaseEsercizio(VisualizzaAllenamentoActivity.this);
 
         initView();
+        modificato = false;
+        last_item = false;
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -128,10 +144,12 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
         }
 
         //setto l'adapter
+        adapter.setEserciziId(eserciziId);
         adapter.setEsercizi(esercizi);
         adapter.setSerie(eserciziSerie);
         adapter.setReps(eserciziReps);
         adapter.settRec(eserciziTRec);
+        adapter.setNumElem(numElem);
 
         txtAllSel.setText(nomeAllenamento);
 
@@ -141,7 +159,7 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
             txtElemSelA.setText(numElem + " elementi");
         }
 
-        /**/
+
         fltABAddAllenamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -205,22 +223,19 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
 
             case R.id.salva_menu:
                 //TODO aggiungi le modifiche all'allenamento poi metti a posto il salvataggio
-                /*modificato = false;
-
-                Log.d(TAG, "onOptionsItemSelected: LAST: " + last_item);
+                modificato = false;
 
                 //se ho eliminato l'ultimo elemento
                 if (last_item) {
-                    //avviso che la dieta è rimasta vuota e verrà eliminata
-                    AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaDietaActivity.this);
-                    builder.setMessage("La dieta è vuota e verrà eliminata. Continuare?");
+                    //avviso che l'allenamento è rimasto vuoto e verrà eliminato
+                    AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaAllenamentoActivity.this);
+                    builder.setMessage("L'allenamento è vuoto e verrà eliminato. Continuare?");
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            dataBaseDieta.eliminaDieta(dietaId);
-                            overridePendingTransition(0, 0);
-                            startActivity(getIntent());
-                            overridePendingTransition(0, 0);
+                            dataBaseAllenamento.eliminaAllenamento(allenamentoId);
+                            Intent intent = new Intent(VisualizzaAllenamentoActivity.this, ElencoAllenamentiActivity.class);
+                            VisualizzaAllenamentoActivity.this.startActivity(intent);
                         }
                     });
                     builder.setNegativeButton("Annulla", null);
@@ -228,14 +243,14 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
                     final AlertDialog dialog = builder.create();
                     dialog.show();
                 } else {
-                    //altrimenti salvo la nuova dieta
-                    Dieta dieta = new Dieta(dietaId, nomeDieta,
-                            cibiId, cibiQta, adapter.getItemCount());
-                    dataBaseDieta.modificaDieta(dietaId, dieta);
+                    //altrimenti salvo il nuovo allenamento
+                    Allenamento allenamento = new Allenamento(allenamentoId, nomeAllenamento, eserciziId,
+                            eserciziSerie, eserciziReps, eserciziTRec, adapter.getItemCount());
+                    dataBaseAllenamento.modificaAllenamento(allenamentoId, allenamento);
                     overridePendingTransition(0, 0);
                     startActivity(getIntent());
                     overridePendingTransition(0, 0);
-                }*/
+                }
                 return true;
 
             case R.id.elimina_menu:
@@ -260,16 +275,16 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
                 //TODO Aggiungi le modifiche all'allenamento poi metti a posto pure qui
                 //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
                 //controllo anche che non ci siano modifiche non salvate, altrimenti lo segnalo
-                /*if (modificato) {
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(VisualizzaDietaActivity.this);
+                if (modificato) {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(VisualizzaAllenamentoActivity.this);
                     builder1.setMessage("Le modifiche non verranno salvate. Vuoi tornare indietro?");
                     builder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            VisualizzaDietaActivity.this.finish();
-                            Intent intent1 = new Intent(VisualizzaDietaActivity.this, ElencoDieteActivity.class);
+                            VisualizzaAllenamentoActivity.this.finish();
+                            Intent intent1 = new Intent(VisualizzaAllenamentoActivity.this, ElencoAllenamentiActivity.class);
                             intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            VisualizzaDietaActivity.this.startActivity(intent1);
+                            VisualizzaAllenamentoActivity.this.startActivity(intent1);
                         }
                     });
                     builder1.setNegativeButton("Annulla", null);
@@ -277,19 +292,43 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
                     final AlertDialog dialog1 = builder1.create();
                     dialog1.show();
                 } else {
-                    VisualizzaDietaActivity.this.finish();
-                    Intent intent1 = new Intent(VisualizzaDietaActivity.this, ElencoDieteActivity.class);
+                    VisualizzaAllenamentoActivity.this.finish();
+                    Intent intent1 = new Intent(VisualizzaAllenamentoActivity.this, ElencoAllenamentiActivity.class);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    VisualizzaDietaActivity.this.startActivity(intent1);
-                }*/
-                VisualizzaAllenamentoActivity.this.finish();
-                Intent intent1 = new Intent(VisualizzaAllenamentoActivity.this, ElencoAllenamentiActivity.class);
-                intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                VisualizzaAllenamentoActivity.this.startActivity(intent1);
+                    VisualizzaAllenamentoActivity.this.startActivity(intent1);
+                }
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+    //controllo anche che non ci siano modifiche non salvate, altrimenti lo segnalo
+    @Override
+    public void onBackPressed() {
+        if (modificato) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaAllenamentoActivity.this);
+            builder.setMessage("Le modifiche non verranno salvate. Vuoi tornare indietro?");
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    VisualizzaAllenamentoActivity.this.finish();
+                    Intent intent1 = new Intent(VisualizzaAllenamentoActivity.this, ElencoAllenamentiActivity.class);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    VisualizzaAllenamentoActivity.this.startActivity(intent1);
+                }
+            });
+            builder.setNegativeButton("Annulla", null);
+
+            final AlertDialog dialog1 = builder.create();
+            dialog1.show();
+        } else {
+            VisualizzaAllenamentoActivity.this.finish();
+            Intent intent1 = new Intent(VisualizzaAllenamentoActivity.this, ElencoAllenamentiActivity.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            VisualizzaAllenamentoActivity.this.startActivity(intent1);
         }
     }
 

@@ -161,12 +161,14 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
         btnValoriTot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String valori = calcolaValori(cibi, cibiQta);
-                AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaDietaActivity.this);
-                builder.setMessage(valori);
-                builder.setNegativeButton("Ok", null);
-                final AlertDialog dialog = builder.create();
-                dialog.show();
+                if(!last_item) {
+                    String valori = calcolaValori(cibi, cibiQta);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaDietaActivity.this);
+                    builder.setMessage(valori);
+                    builder.setNegativeButton("Ok", null);
+                    final AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
             }
         });
 
@@ -243,9 +245,8 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dataBaseDieta.eliminaDieta(dietaId);
-                            overridePendingTransition(0, 0);
-                            startActivity(getIntent());
-                            overridePendingTransition(0, 0);
+                            Intent intent = new Intent(VisualizzaDietaActivity.this, ElencoDieteActivity.class);
+                            VisualizzaDietaActivity.this.startActivity(intent);
                         }
                     });
                     builder.setNegativeButton("Annulla", null);

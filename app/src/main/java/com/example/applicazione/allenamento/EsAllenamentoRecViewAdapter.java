@@ -4,24 +4,36 @@ import static com.example.applicazione.allenamento.SelezionaEsercizioActivity.ES
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.applicazione.R;
+import com.example.applicazione.dieta.VisualizzaDietaActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllenamentoRecViewAdapter.ViewHolder> {
     private static final String TAG = "EserciziRecViewAdapter";
+
+    //elenco degli ID degli esercizi da visualizzare
+    private List<Integer> eserciziId = new ArrayList<>();
 
     //elenco degli esercizi da visualizzare
     private List<Esercizio> esercizi = new ArrayList<>();
@@ -35,11 +47,18 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
     //elenco dei tempi di recupero
     private List<Integer> tRec = new ArrayList<>();
 
+    //numero di elementi
+    private int numElem;
+
     //contesto
     private Context mContext;
 
     public EsAllenamentoRecViewAdapter(Context mContext) {
         this.mContext = mContext;
+    }
+
+    public void setEserciziId(List<Integer> eserciziId) {
+        this.eserciziId = eserciziId;
     }
 
     public void setEsercizi(List<Esercizio> esercizi) {
@@ -56,6 +75,10 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
 
     public void settRec(List<Integer> tRec) {
         this.tRec = tRec;
+    }
+
+    public void setNumElem(int numElem) {
+        this.numElem = numElem;
     }
 
     @NonNull
@@ -83,14 +106,15 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
 
     @Override
     public int getItemCount() {
-        return esercizi.size();
+        return numElem;
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView parent;
         private TextView txtNomeEser, txtGruppoMuscEser, txtDiffEser, txtParteCorpoEser, txtTipoEser, txtModEser,
                 txtSerieReps, txtTRec;
+        private ImageView btnEdit, btnDelete;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -103,8 +127,126 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
             txtTipoEser = itemView.findViewById(R.id.txtTipoEser);
             txtModEser = itemView.findViewById(R.id.txtModEser);
 
+            btnEdit = itemView.findViewById(R.id.btnEdit);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
+
             txtSerieReps = itemView.findViewById(R.id.txtSerieReps);
             txtTRec = itemView.findViewById(R.id.txtTRec);
+
+            btnEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+
+                    //creo il layout per gli EditText e li aggiungo con i rispettivi commenti
+                    LinearLayout layout = new LinearLayout(mContext);
+                    layout.setOrientation(LinearLayout.VERTICAL);
+
+                    final TextView txtSerie = new TextView(mContext);
+                    txtSerie.setText("Inserisci il numero di serie: ");
+                    layout.addView(txtSerie);
+                    final EditText edtSerie = new EditText(mContext);
+                    edtSerie.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    edtSerie.setRawInputType(Configuration.KEYBOARD_12KEY);
+                    layout.addView(edtSerie);
+
+                    final TextView txtReps = new TextView(mContext);
+                    txtSerie.setText("Inserisci il numero di ripetizioni: ");
+                    layout.addView(txtReps);
+                    final EditText edtReps = new EditText(mContext);
+                    edtReps.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    edtReps.setRawInputType(Configuration.KEYBOARD_12KEY);
+                    layout.addView(edtReps);
+
+                    final TextView txtTRec = new TextView(mContext);
+                    txtSerie.setText("Inserisci il tempo di recupero in secondi: ");
+                    layout.addView(txtTRec);
+                    final EditText edtTRec = new EditText(mContext);
+                    edtTRec.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    edtTRec.setRawInputType(Configuration.KEYBOARD_12KEY);
+                    layout.addView(edtTRec);
+
+                    builder.setView(layout);
+
+                    builder.setPositiveButton("Modifica", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //non faccio nulla perché faccio l'override più avanti
+                        }
+                    });
+
+                    builder.setNegativeButton("Annulla", null);
+
+                    final AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                    dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            int newSerie, newReps, newTRec;
+                            if (edtSerie.getText().toString().equals("")) {
+                                newSerie = serie.get(getAdapterPosition());
+                            } else {
+                                newSerie = Integer.parseInt(edtSerie.getText().toString());
+                            }
+
+                            if (edtReps.getText().toString().equals("")) {
+                                newReps = reps.get(getAdapterPosition());
+                            } else {
+                                newReps = Integer.parseInt(edtReps.getText().toString());
+                            }
+
+                            if(edtTRec.getText().toString().equals("")){
+                                newTRec=tRec.get(getAdapterPosition());
+                            }else{
+                                newTRec=Integer.parseInt(edtTRec.getText().toString());
+                            }
+
+                            serie.set(getAdapterPosition(), newSerie);
+                            reps.set(getAdapterPosition(), newReps);
+                            tRec.set(getAdapterPosition(), newTRec);
+                            dialog.dismiss();
+                            notifyItemChanged(getAdapterPosition());
+                            VisualizzaAllenamentoActivity.setModificato();
+                        }
+                    });
+                }
+            });
+
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setMessage("Eliminare " + esercizi.get(getAdapterPosition()).getNome() + " dall'allenamento'?");
+
+                    builder.setPositiveButton("Elimina", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            removeAt(getAdapterPosition());
+                        }
+                    });
+
+                    builder.setNegativeButton("Annulla", null);
+                    final AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            });
+        }
+    }
+
+    private void removeAt(int position) {
+        eserciziId.remove(position);
+        esercizi.remove(position);
+        serie.remove(position);
+        reps.remove(position);
+        tRec.remove(position);
+        numElem--;
+
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, numElem);
+        VisualizzaAllenamentoActivity.setModificato();
+        if (numElem == 0) {
+            VisualizzaAllenamentoActivity.setLast_item();
         }
     }
 }

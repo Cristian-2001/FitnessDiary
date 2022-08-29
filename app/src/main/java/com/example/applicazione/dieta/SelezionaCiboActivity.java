@@ -135,6 +135,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
                     //Toast.makeText(SelezionaCiboActivity.this, "Inserire la quantità", Toast.LENGTH_SHORT).show();
                     txtInsMsg.setTextColor(getResources().getColor(R.color.red));
                 } else {
+                    qta = Double.valueOf(edtTxtQta.getText().toString());
                     AggiungiDietaActivity.modificaDieta(ciboId, qta);
 
                     Toast.makeText(SelezionaCiboActivity.this, dataBaseCibo.getCiboById(ciboId).getNome() + " inserito",
