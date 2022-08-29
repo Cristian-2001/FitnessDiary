@@ -218,7 +218,7 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setMessage("Eliminare " + esercizi.get(getAdapterPosition()).getNome() + " dall'allenamento'?");
+                    builder.setMessage("Eliminare " + esercizi.get(getAdapterPosition()).getNome() + " dall'allenamento?");
 
                     builder.setPositiveButton("Elimina", new DialogInterface.OnClickListener() {
                         @Override
