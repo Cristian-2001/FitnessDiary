@@ -41,7 +41,7 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
     public static final String ES_MOD_KEY = "modEs";
 
     //id dell'allenamento da modificare
-    private static int allenamentoId;
+    private static int allenamentoId = -2;
 
     private static Allenamento allenamento = null;
     private static String nomeAll;
@@ -108,6 +108,7 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
 
             if (intent.getIntExtra(ALLENAMENTO_ID_KEY, -1) > -1) {
                 allenamentoId = intent.getIntExtra(ALLENAMENTO_ID_KEY, -1);
+                Log.d(TAG, "onCreate: ID: " + allenamentoId);
                 nomeAll = dataBaseAllenamento.getAllenamentoById(allenamentoId).getNome();
                 eserciziId = dataBaseAllenamento.getAllenamentoById(allenamentoId).getEserciziId();
                 eserciziSerie = dataBaseAllenamento.getAllenamentoById(allenamentoId).getEserciziSerie();
