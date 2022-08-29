@@ -1,9 +1,13 @@
 package com.example.applicazione.allenamento;
 
+import static com.example.applicazione.allenamento.SvolgiEsercizioActivity.NUMERO_ES;
+import static com.example.applicazione.allenamento.SvolgiEsercizioActivity.NUMERO_SERIE;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -38,7 +43,8 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
     private TextView txtAllSel, txtElemSelA, txtEmptyAllenamento;
     private RecyclerView esAllRecView;
     private EsAllenamentoRecViewAdapter adapter;
-    private FloatingActionButton fltABAddAllenamento;
+    private FloatingActionButton fltABAddAllenamento, fltABAvviaAllenamento, fltABOptions;
+    private ConstraintLayout layout;
 
     //id dell'allenamento ricevuto dall'activity ElencoAllenamenti
     private int allenamentoId;
@@ -81,6 +87,7 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
         VisualizzaAllenamentoActivity.last_item = true;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,7 +146,7 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
             dialog.show();
         }
 
-        for(int id : eserciziId){
+        for (int id : eserciziId) {
             esercizi.add(dataBaseEsercizio.getEsercizioById(id));
         }
 
@@ -153,12 +160,27 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
 
         txtAllSel.setText(nomeAllenamento);
 
-        if(numElem == 1){
+        if (numElem == 1) {
             txtElemSelA.setText(numElem + " elemento");
-        }else{
+        } else {
             txtElemSelA.setText(numElem + " elementi");
         }
 
+        fltABOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fltABOptions.setVisibility(View.GONE);
+                fltABAddAllenamento.setVisibility(View.VISIBLE);
+                fltABAvviaAllenamento.setVisibility(View.VISIBLE);
+            }
+        });
+
+        layout.setOnTouchListener((view, motionEvent) -> {
+            fltABOptions.setVisibility(View.VISIBLE);
+            fltABAddAllenamento.setVisibility(View.GONE);
+            fltABAvviaAllenamento.setVisibility(View.GONE);
+            return false;
+        });
 
         fltABAddAllenamento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,7 +191,24 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
             }
         });
 
-
+        fltABAvviaAllenamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (modificato) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaAllenamentoActivity.this);
+                    builder.setMessage("Impossibile avviare l'allenamento: ci sono modifiche non salvate.");
+                    builder.setNegativeButton("Ok", null);
+                    final AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else {
+                    Intent intent3 = new Intent(VisualizzaAllenamentoActivity.this, SvolgiEsercizioActivity.class);
+                    intent3.putExtra(ALLENAMENTO_ID_KEY, allenamentoId);
+                    intent3.putExtra(NUMERO_SERIE, 1);
+                    intent3.putExtra(NUMERO_ES, 0);
+                    VisualizzaAllenamentoActivity.this.startActivity(intent3);
+                }
+            }
+        });
     }
 
     @Override
@@ -332,12 +371,15 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
         }
     }
 
-    private void initView(){
+    private void initView() {
         txtAllSel = findViewById(R.id.txtAllSel);
         txtElemSelA = findViewById(R.id.txtElemSelA);
         txtEmptyAllenamento = findViewById(R.id.txtEmptyAllenamento);
         esAllRecView = findViewById(R.id.esAllRecView);
         fltABAddAllenamento = findViewById(R.id.fltABAddAllenamento);
+        fltABAvviaAllenamento = findViewById(R.id.fltABAvviaAllenamento);
+        fltABOptions = findViewById(R.id.fltABOptions);
+        layout = findViewById(R.id.layout);
 
         adapter = new EsAllenamentoRecViewAdapter(this);
 

@@ -84,7 +84,7 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <Button
-        android:id="@+id/btnInsEs"
+        android:id="@+id/btnInsModifiche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Inserisci"
@@ -101,7 +101,7 @@
         android:layout_marginBottom="75dp"
         android:text="Annulla"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnInsEs"
+        app:layout_constraintEnd_toStartOf="@+id/btnInsModifiche"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 

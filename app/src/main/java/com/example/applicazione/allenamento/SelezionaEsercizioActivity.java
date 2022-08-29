@@ -21,9 +21,6 @@ import android.widget.Toast;
 
 import com.example.applicazione.R;
 import com.example.applicazione.dieta.AggiungiDietaActivity;
-import com.example.applicazione.dieta.SelezionaCiboActivity;
-
-import org.w3c.dom.Text;
 
 public class SelezionaEsercizioActivity extends AppCompatActivity {
     //chiave per l'id dell'esercizio selezionato
@@ -141,7 +138,7 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
         edtTxtReps=findViewById(R.id.edtTxtReps);
         edtTxtRec= findViewById(R.id.edtTxtRec);
 
-        btnInsEs = findViewById(R.id.btnInsEs);
+        btnInsEs = findViewById(R.id.btnInsModifiche);
         btnAnnullaEs = findViewById(R.id.btnAnnullaEs);
 
         oldColors = txtInsSerie.getTextColors();

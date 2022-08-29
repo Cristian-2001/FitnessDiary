@@ -137,6 +137,7 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    //builder.setMessage("Inserire numero di serie, numero di ripetizioni e tempo di recupero in secondi: ");
 
                     //creo il layout per gli EditText e li aggiungo con i rispettivi commenti
                     LinearLayout layout = new LinearLayout(mContext);
@@ -151,7 +152,7 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                     layout.addView(edtSerie);
 
                     final TextView txtReps = new TextView(mContext);
-                    txtSerie.setText("Inserisci il numero di ripetizioni: ");
+                    txtReps.setText("Inserisci il numero di ripetizioni: ");
                     layout.addView(txtReps);
                     final EditText edtReps = new EditText(mContext);
                     edtReps.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -159,7 +160,7 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                     layout.addView(edtReps);
 
                     final TextView txtTRec = new TextView(mContext);
-                    txtSerie.setText("Inserisci il tempo di recupero in secondi: ");
+                    txtTRec.setText("Inserisci il tempo di recupero in secondi: ");
                     layout.addView(txtTRec);
                     final EditText edtTRec = new EditText(mContext);
                     edtTRec.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
