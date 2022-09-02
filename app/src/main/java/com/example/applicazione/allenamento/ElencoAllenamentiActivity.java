@@ -3,9 +3,6 @@ package com.example.applicazione.allenamento;
 import static com.example.applicazione.allenamento.AggiungiAllenamentoActivity.ALLENAMENTO_NOME;
 import static com.example.applicazione.allenamento.AggiungiAllenamentoActivity.ELENCO_ALL;
 import static com.example.applicazione.allenamento.VisualizzaAllenamentoActivity.ALLENAMENTO_ID_KEY;
-import static com.example.applicazione.dieta.AggiungiDietaActivity.DIETA_NOME;
-import static com.example.applicazione.dieta.AggiungiDietaActivity.ELENCO_DIETE;
-import static com.example.applicazione.dieta.VisualizzaDietaActivity.DIETA_ID_KEY;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,8 +24,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.applicazione.MainActivity;
 import com.example.applicazione.R;
-import com.example.applicazione.dieta.AggiungiDietaActivity;
-import com.example.applicazione.dieta.ElencoDieteActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;

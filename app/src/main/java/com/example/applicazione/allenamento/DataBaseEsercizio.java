@@ -8,15 +8,26 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.applicazione.dieta.Cibo;
-
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseEsercizio extends SQLiteOpenHelper {
+    private Context myContext;
 
     public DataBaseEsercizio(@Nullable Context context) {
         super(context, "Esercizii.db", null, 1);
+        myContext = context;
+        this.getReadableDatabase();
+        try {
+            copyDataBase("Esercizii.db");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -42,6 +53,30 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onDowngrade(db, oldVersion, newVersion);
+    }
+
+    /**
+     * Copies your database from your local assets-folder to the just created
+     * empty database in the system folder, from where it can be accessed and
+     * handled. This is done by transfering bytestream.
+     */
+    private void copyDataBase(String dbname) throws IOException {
+        // Open your local db as the input stream
+        InputStream myInput = myContext.getAssets().open(dbname);
+        // Path to the just created empty db
+        File outFileName = myContext.getDatabasePath(dbname);
+        // Open the empty db as the output stream
+        OutputStream myOutput = new FileOutputStream(outFileName);
+        // transfer bytes from the inputfile to the outputfile
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = myInput.read(buffer)) > 0) {
+            myOutput.write(buffer, 0, length);
+        }
+        // Close the streams
+        myOutput.flush();
+        myOutput.close();
+        myInput.close();
     }
 
     public boolean addOne(Esercizio esercizio) {

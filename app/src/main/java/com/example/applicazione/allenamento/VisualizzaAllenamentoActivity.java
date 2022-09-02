@@ -261,7 +261,6 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
                 return true;
 
             case R.id.salva_menu:
-                //TODO aggiungi le modifiche all'allenamento poi metti a posto il salvataggio
                 modificato = false;
 
                 //se ho eliminato l'ultimo elemento
@@ -311,7 +310,6 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
                 return true;
 
             case android.R.id.home:
-                //TODO Aggiungi le modifiche all'allenamento poi metti a posto pure qui
                 //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
                 //controllo anche che non ci siano modifiche non salvate, altrimenti lo segnalo
                 if (modificato) {

@@ -52,7 +52,7 @@
         android:id="@+id/txtInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Tutti i valori sono riferiti a 100g di prodotto"
         app:layout_constraintStart_toStartOf="parent"

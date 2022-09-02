@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Applicazione</string>
+    <string name="app_name">Fitness Diary</string>
     <string name="palestra">Palestra</string>
     <string name="dieta">Dieta</string>
     <string name="salva">Salva</string>
@@ -7,6 +7,7 @@
     <string name="aggiungi_cibi">Aggiungi degli elementi</string>
     <string name="nome_dieta">Nome dieta</string>
     <string name="numero_elementi">Numero di elementi</string>
+    <string name="about">MADE BY:\nCasali Cristian\nFlotta Aldo\n\nSOURCES:\nBanca dati svizzera dei valori nutritivi\nSito della provincia della Manitoba (Canada)</string>
 
     <string-array name="categorie">
         <item>Tutte</item>

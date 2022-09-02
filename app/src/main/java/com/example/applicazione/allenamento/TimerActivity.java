@@ -92,10 +92,11 @@ public class TimerActivity extends AppCompatActivity {
         CountDownTimer countDownTimer = new CountDownTimer(TimeUnit.SECONDS.toMillis(time), 1000) {
 
             public void onTick(long millisUntilFinished) {
-                txtTimer.setText(String.valueOf(millisUntilFinished / 1000));
+                txtTimer.setText(String.valueOf((millisUntilFinished / 1000) + 1));
             }
 
             public void onFinish() {
+                txtTimer.setText("0");
                 Uri alarm = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
                 Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), alarm);
                 r.play();

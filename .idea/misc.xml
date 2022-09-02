@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/drawable-anydpi/ic_add.xml" value="0.1515" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/drawable/ic_prova.xml" value="0.1515" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_aggiungi_allenamento.xml" value="0.25" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_aggiungi_cibo.xml" value="0.25" />
@@ -27,7 +28,9 @@
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/list_item_cibodieta.xml" value="0.25" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/list_item_dieta.xml" value="0.25" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/list_item_esercizio.xml" value="0.25" />
+        <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/menu/about_menu.xml" value="0.25" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/menu/visualizza_dieta_menu.xml" value="0.25" />
+        <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/menu/visualizza_elenco_menu.xml" value="0.25" />
         <entry key="..\:/Users/flott/Desktop/ProgettoPalestra/NomeProvvisorio/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1595" />
         <entry key="..\:/Users/flott/Desktop/ProgettoPalestra/NomeProvvisorio/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1595" />
         <entry key="..\:/Users/flott/Desktop/ProgettoPalestra/NomeProvvisorio/app/src/main/res/drawable/ic_manubrio_background.xml" value="0.1595" />

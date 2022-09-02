@@ -18,7 +18,6 @@ public class DataBaseDieta extends SQLiteOpenHelper {
         super(context, "diete.db", factory, version);
     }
 
-    //TODO siamo sicuri vada bene?
     public DataBaseDieta(@Nullable Context context) {
         super(context, "diete.db", null, 3);
     }
