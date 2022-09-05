@@ -19,10 +19,7 @@ import android.widget.Spinner;
 
 import com.example.applicazione.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class FiltriAllenamentiActivity extends AppCompatActivity {
+public class FiltriEserciziActivity extends AppCompatActivity {
     private EditText edtTxtNomeA;
     private Spinner spnGruppoMusc;
     private Spinner spnDifficolta;
@@ -36,7 +33,7 @@ public class FiltriAllenamentiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filtri_allenamenti);
+        setContentView(R.layout.activity_filtri_esercizi);
 
         initView();
 
@@ -57,7 +54,7 @@ public class FiltriAllenamentiActivity extends AppCompatActivity {
                 tipologia = spnTipologia.getSelectedItem().toString();
                 modalita = spnModalita.getSelectedItem().toString();
 
-                Intent intent = new Intent(FiltriAllenamentiActivity.this, AggiungiAllenamentoActivity.class);
+                Intent intent = new Intent(FiltriEserciziActivity.this, AggiungiAllenamentoActivity.class);
                 intent.putExtra(ES_NOME_KEY, nome);
                 intent.putExtra(ES_GRUPPOMUSC_KEY, gruppoMusc);
                 intent.putExtra(ES_DIFF_KEY, difficolta);
@@ -67,7 +64,7 @@ public class FiltriAllenamentiActivity extends AppCompatActivity {
 
                 //metto l'extra ELENCO_ALL uguale a 2 così so che devo applicare dei filtri
                 intent.putExtra(ELENCO_ALL, 2);
-                FiltriAllenamentiActivity.this.startActivity(intent);
+                FiltriEserciziActivity.this.startActivity(intent);
             }
         });
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".allenamento.FiltriAllenamentiActivity">
+    tools:context=".allenamento.FiltriEserciziActivity">
 
     <TextView
         android:id="@+id/txtNomeA"
@@ -45,8 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:entries="@array/gruppo_musc"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtNomeA" />
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/txtGruppoMusc" />
 
     <TextView
         android:id="@+id/txtDifficolta"
@@ -55,7 +55,7 @@
         android:layout_marginTop="24dp"
         android:text="Difficoltà:"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/txtGruppoMusc" />
+        app:layout_constraintTop_toBottomOf="@+id/spnGruppoMusc" />
 
     <Spinner
         android:id="@+id/spnDifficolta"
@@ -156,4 +156,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="148dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="119dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
