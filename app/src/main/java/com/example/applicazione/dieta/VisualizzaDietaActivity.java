@@ -355,16 +355,17 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
             saleTot += cibi.get(i).getSale() * qta / 100;
         }
 
-        String ret = "Valori nutrizionali complessivi:\n\n"
-                + "Calorie: " + enerTot + " kcal\n"
-                + "Lipidi: " + lipTot + " g\n"
-                + "Acidi grassi: " + acidiTot + " g\n"
-                + "Colesterolo: " + colTot + " g\n"
-                + "Carboidrati: " + carboTot + " g\n"
-                + "Zuccheri: " + zuccTot + " g\n"
-                + "Fibre: " + fibreTot + " g\n"
-                + "Proteine: " + protTot + " g\n"
-                + "Sale: " + saleTot + " g\n";
+        String ret = String.format("Valori nutrizionali complessivi:\n\n"
+                + "Calorie: %.2f kcal\n"
+                + "Lipidi: %.2f g\n"
+                + "Acidi grassi: %.2f g\n"
+                + "Colesterolo: %.2f g\n"
+                + "Carboidrati: %.2f g\n"
+                + "Zuccheri: %.2f g\n"
+                + "Fibre: %.2f g\n"
+                + "Proteine: %.2f g\n"
+                + "Sale: %.2f g\n",
+                enerTot, lipTot, acidiTot, colTot, carboTot, zuccTot, fibreTot, protTot, saleTot);
         return ret;
     }
 

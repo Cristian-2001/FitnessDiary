@@ -7,7 +7,8 @@
     <string name="aggiungi_cibi">Aggiungi degli elementi</string>
     <string name="nome_dieta">Nome dieta</string>
     <string name="numero_elementi">Numero di elementi</string>
-    <string name="about">MADE BY:\nCasali Cristian\nFlotta Aldo\n\nSOURCES:\nBanca dati svizzera dei valori nutritivi\nSito della provincia della Manitoba (Canada)</string>
+    <string name="about">MADE BY:\nCasali Cristian\nFlotta Aldo\n\nSOURCES:\nBanca dati svizzera dei valori nutritivi\nDatabase sportivo fornito dal governo di Manitoba (Canada)
+</string>
 
     <string-array name="categorie">
         <item>Tutte</item>

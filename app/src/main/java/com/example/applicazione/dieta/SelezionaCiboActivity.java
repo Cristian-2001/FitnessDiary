@@ -106,15 +106,16 @@ public class SelezionaCiboActivity extends AppCompatActivity {
                     proteine = cibo.getProteine() * qta / 100;
                     sale = cibo.getSale() * qta / 100;
 
-                    txtValori.setText("Calorie: " + energia + " kcal\n"
-                            + "Lipidi: " + lipidi + " g\n"
-                            + "Acidi grassi: " + acidi_grassi + " g\n"
-                            + "Colesterolo: " + colesterolo + " g\n"
-                            + "Carboidrati: " + carboidrati + " g\n"
-                            + "Zuccheri: " + zuccheri + " g\n"
-                            + "Fibre: " + fibre + " g\n"
-                            + "Proteine: " + proteine + " g\n"
-                            + "Sale: " + sale + " g\n");
+                    txtValori.setText(String.format("Calorie: %.2f kcal\n"
+                                    + "Lipidi: %.2f g\n"
+                                    + "Acidi grassi: %.2f g\n"
+                                    + "Colesterolo: %.2f g\n"
+                                    + "Carboidrati: %.2f g\n"
+                                    + "Zuccheri: %.2f g\n"
+                                    + "Fibre: %.2f g\n"
+                                    + "Proteine: %.2f g\n"
+                                    + "Sale: %.2f g\n",
+                            energia, lipidi, acidi_grassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale));
                     txtValori.setVisibility(View.VISIBLE);
                 }
 
