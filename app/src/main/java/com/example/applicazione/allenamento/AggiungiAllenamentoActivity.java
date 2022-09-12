@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,9 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.applicazione.R;
-import com.example.applicazione.dieta.AggiungiDietaActivity;
-import com.example.applicazione.dieta.DataBaseCibo;
-import com.example.applicazione.dieta.DataBaseDieta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,7 +132,7 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
         btnFiltra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AggiungiAllenamentoActivity.this, FiltriAllenamentiActivity.class);
+                Intent intent = new Intent(AggiungiAllenamentoActivity.this, FiltriEserciziActivity.class);
                 AggiungiAllenamentoActivity.this.startActivity(intent);
             }
         });
