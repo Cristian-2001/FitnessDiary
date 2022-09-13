@@ -4,8 +4,10 @@ import static com.example.applicazione.allenamento.SvolgiEsercizioActivity.NUMER
 import static com.example.applicazione.allenamento.SvolgiEsercizioActivity.NUMERO_SERIE;
 import static com.example.applicazione.allenamento.VisualizzaAllenamentoActivity.ALLENAMENTO_ID_KEY;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
@@ -20,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.applicazione.R;
+import com.example.applicazione.dieta.ElencoDieteActivity;
+import com.example.applicazione.dieta.VisualizzaDietaActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -65,12 +69,33 @@ public class TimerActivity extends AppCompatActivity {
             allenamentoid = intent.getIntExtra(ALLENAMENTO_ID_KEY, -1);
             numEs = intent.getIntExtra(NUMERO_ES, -1);
             numSerie = intent.getIntExtra(NUMERO_SERIE, -1);
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
+            builder.setMessage("Si è verificato un errore");
+            builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            });
+            final AlertDialog dialog = builder.create();
+            dialog.show();
         }
 
-        //TODO sistemare i casi di errore (anche nell'intent?)
         if (allenamentoid != -1 && numEs != -1) {
             time = dataBaseAllenamento.getAllenamentoById(allenamentoid).getEserciziTrec().get(numEs);
             startTime = time;
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(TimerActivity.this);
+            builder.setMessage("Si è verificato un errore");
+            builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            });
+            final AlertDialog dialog = builder.create();
+            dialog.show();
         }
 
         CountDownTimer countDownTimer = new CountDownTimer(TimeUnit.SECONDS.toMillis(time), 1000) {
@@ -149,8 +174,6 @@ public class TimerActivity extends AppCompatActivity {
                 TimerActivity.this.startActivity(intent);
             }
         });
-
-
 
 
     }

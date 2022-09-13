@@ -77,7 +77,6 @@ public class SvolgiEsercizioActivity extends AppCompatActivity {
         }
 
         Log.d(TAG, "onCreate: ID: " + allenamentoid);
-        //TODO sistemare i casi di errore
         if (allenamentoid != -1) {
             allenamento = dataBaseAllenamento.getAllenamentoById(allenamentoid);
 
@@ -98,11 +97,22 @@ public class SvolgiEsercizioActivity extends AppCompatActivity {
                     txtEsSucc.setText(dataBaseEsercizio.getEsercizioById(allenamento.getEserciziId().get(numEs + 1)).getNome());
                     txtRepsSucc.setText(allenamento.getEserciziSerie().get(numEs + 1).toString() + " serie da " +
                             allenamento.getEserciziReps().get(numEs + 1).toString() + " ripetizioni ciascuna");
-                }else{
+                } else {
                     txtEsSucc.setText("Allenamento finito");
                     txtRepsSucc.setVisibility(View.GONE);
                 }
             }
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(SvolgiEsercizioActivity.this);
+            builder.setMessage("Si è verificato un errore");
+            builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            });
+            final AlertDialog dialog = builder.create();
+            dialog.show();
         }
 
         btnInterrompi.setOnClickListener(new View.OnClickListener() {

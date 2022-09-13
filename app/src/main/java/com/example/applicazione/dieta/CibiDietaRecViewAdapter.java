@@ -90,15 +90,15 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
         proteine = cibi.get(position).getProteine() * qta / 100;
         sale = cibi.get(position).getSale() * qta / 100;
 
-        holder.txtEnergia.setText("Calorie: " + energia + " kcal");
-        holder.txtLipidi.setText("Lipidi: " + lipidi + " g");
-        holder.txtProteine.setText("Proteine: " + proteine + " g");
-        holder.txtCarboidrati.setText("Carboidrati: " + carboidrati + " g");
-        holder.txtAcidiGrassi.setText("Acidi Grassi: " + acidi_grassi + " g");
-        holder.txtColesterolo.setText("Colesterolo: " + colesterolo + " g");
-        holder.txtZuccheri.setText("Zuccheri: " + zuccheri + " g");
-        holder.txtFibre.setText("Fibre: " + fibre + " g");
-        holder.txtSale.setText("Sale: " + sale + " g");
+        holder.txtEnergia.setText(String.format("Calorie: %.2f kcal", energia));
+        holder.txtLipidi.setText(String.format("Lipidi: %.2f g", lipidi));
+        holder.txtProteine.setText(String.format("Proteine: %.2f g", proteine));
+        holder.txtCarboidrati.setText(String.format("Carboidrati: %.2f g", carboidrati));
+        holder.txtAcidiGrassi.setText(String.format("Acidi Grassi: %.2f g", acidi_grassi));
+        holder.txtColesterolo.setText(String.format("Colesterolo: %.2f g", colesterolo));
+        holder.txtZuccheri.setText(String.format("Zuccheri: %.2f g", zuccheri));
+        holder.txtFibre.setText(String.format("Fibre: %.2f g", fibre));
+        holder.txtSale.setText(String.format("Sale: %.2f g", sale));
 
 
 

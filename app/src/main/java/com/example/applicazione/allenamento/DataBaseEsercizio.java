@@ -50,7 +50,6 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
      * Copia il tuo database locale dalla cartella locale assets nel database vuoto appena creato nella cartella di sistema
      * dalla quale puo essere gestito. Questo è effettuato con un trasferimento di byte
      **/
-
     private void copyDataBase(String dbname) throws IOException {
         InputStream myInput = myContext.getAssets().open(dbname);
 
