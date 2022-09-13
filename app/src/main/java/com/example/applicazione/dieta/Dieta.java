@@ -1,6 +1,5 @@
 package com.example.applicazione.dieta;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,7 +125,6 @@ public class Dieta {
         }
 
         return returnString;
-
     }
 
     public List<Double> QtaToArray(String s){
@@ -140,7 +138,6 @@ public class Dieta {
         }
 
         return returnList;
-
     }
 
     public void incrementNum(){

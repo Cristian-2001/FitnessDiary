@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ElencoDieteActivity extends AppCompatActivity {
-
     private static final String TAG = "ElencoDieteActivity";
 
     private FloatingActionButton fltABAddDieta;
@@ -112,19 +111,6 @@ public class ElencoDieteActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
-
-                /*dataBaseHelper = new DataBaseHelper(ElencoDieteActivity.this);
-
-                Cibo anacardi = new Cibo(1, "Anacardi", "Frutta secca", 10d, 11d, 12d, 13d, 14d, 15d, 16d, 17d, 18d);
-                dataBaseHelper.addOne(anacardi);
-
-                //customerArrayAdapter = new ArrayAdapter<Double>(ElencoDieteActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.getCarbo("Anacardi"));
-                //lv_carbo.setAdapter(customerArrayAdapter);
-
-                Cibo cibo = dataBaseHelper.getCiboById(1);
-                Toast.makeText(ElencoDieteActivity.this, "Cibo: " + cibo.toString(), Toast.LENGTH_SHORT).show();*/
             }
         });
     }

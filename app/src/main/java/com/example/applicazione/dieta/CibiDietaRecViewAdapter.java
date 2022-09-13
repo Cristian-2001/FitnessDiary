@@ -76,7 +76,7 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
         holder.txtNome.setText(cibi.get(position).getNome());
         holder.txtCategoria.setText(cibi.get(position).getCategoria());
 
-        Double energia, lipidi, acidi_grassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale;
+        double energia, lipidi, acidi_grassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale;
         Double qta = quantita.get(position);
         holder.txtQta.setText(qta.toString() + " g");
 

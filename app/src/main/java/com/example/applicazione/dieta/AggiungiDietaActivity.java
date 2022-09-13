@@ -188,14 +188,6 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         Log.d(TAG, "modificaDieta: NUM: " + num);
     }
 
-    public static List<Integer> getDietaCibiId() {
-        return dieta.getCibiId();
-    }
-
-    public static List<Double> getDietaCibiQta() {
-        return dieta.getCibiQta();
-    }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

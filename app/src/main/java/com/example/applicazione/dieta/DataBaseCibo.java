@@ -48,11 +48,6 @@ public class DataBaseCibo extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        /*String createTableStatement = "CREATE TABLE " + TABLE_CIBI + " ( ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NOME + " TEXT, " + COLUMN_CATEGORIA + " TEXT, " + COLUMN_ENERGIA + " INTEGER, " + COLUMN_LIPIDI + " DOUBLE(3,1), " + COLUMN_ACIDI_GRASSI_SATURI + " DOUBLE(3,1), " + COLUMN_COLESTEROLO + " INTEGER, " + COLUMN_CARBOIDRATI + " DOUBLE(3,1), " + COLUMN_ZUCCHERI + " DOUBLE(3,1), " + COLUMN_FIBRE + " DOUBLE(3,1), " + COLUMN_PROTEINE + " DOUBLE(3,1), " + COLUMN_SALE + " DOUBLE(2,1))";
-
-        String test = "CREATE TABLE \"Cibi\" (\"ID\" REAL, \"NOME\" VARCHAR(255), \"CATEGORIA\" VARCHAR(255), \"ENERGIA\" REAL, \"LIPIDI\" VARCHAR(255), \"ACIDI_GRASSI_SATURI\" REAL, \"COLESTEROLO\" REAL, \"CARBOIDRATI\" REAL, \"ZUCCHERI\" REAL, \"FIBRE\" REAL, \"PROTEINE\" REAL, \"SALE\" REAL)";
-        db.execSQL(createTableStatement);*/
-
     }
 
     //chiamato quando cambia la versione del db
@@ -111,32 +106,6 @@ public class DataBaseCibo extends SQLiteOpenHelper {
         long insert = db.insert(TABLE_CIBI, null, cv);
 
         return insert != -1;
-
-    }
-
-    public List<Double> getCarbo(String nome) {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        String queryString = "SELECT " + COLUMN_CARBOIDRATI + " FROM " + TABLE_CIBI + " WHERE " + COLUMN_NOME + " = '" + nome + "'";
-
-        Cursor cursor = db.rawQuery(queryString, null);
-
-        List<Double> returnList = new ArrayList<>();
-
-        if (cursor.moveToFirst()) {
-            do {
-
-                double carbo = cursor.getDouble(0);
-                returnList.add(carbo);
-
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-        return returnList;
-
 
     }
 

@@ -133,7 +133,6 @@ public class SelezionaCiboActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (edtTxtQta.getText().toString().equals("")) {
-                    //Toast.makeText(SelezionaCiboActivity.this, "Inserire la quantità", Toast.LENGTH_SHORT).show();
                     txtInsMsg.setTextColor(getResources().getColor(R.color.red));
                 } else {
                     qta = Double.valueOf(edtTxtQta.getText().toString());
