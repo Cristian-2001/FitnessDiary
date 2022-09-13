@@ -1,6 +1,6 @@
 package com.example.applicazione.allenamento;
 
-import android.app.AlertDialog;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.applicazione.dieta.Dieta;
 
 import java.util.ArrayList;
 import java.util.List;

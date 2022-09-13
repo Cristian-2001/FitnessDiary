@@ -17,7 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.applicazione.R;
-import com.example.applicazione.dieta.CibiRecViewAdapter;
+
 
 import java.util.ArrayList;
 import java.util.List;

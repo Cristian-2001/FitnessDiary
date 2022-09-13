@@ -15,11 +15,9 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -28,10 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.applicazione.R;
-import com.example.applicazione.dieta.AggiungiDietaActivity;
-import com.example.applicazione.dieta.Dieta;
-import com.example.applicazione.dieta.ElencoDieteActivity;
-import com.example.applicazione.dieta.VisualizzaDietaActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;

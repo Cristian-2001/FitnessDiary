@@ -33,15 +33,6 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        /*String createTableStatement = "CREATE TABLE Esercizi (ID REAL," +
-                "Nome VARCHAR(255)," +
-                "Gruppo_muscolare VARCHAR(255)," +
-                "Difficoltà VARCHAR(255)," +
-                "Parte_del_corpo VARCHAR(255)," +
-                "Tipologia VARCHAR(255)," +
-                "Modalita VARCHAR(255))";
-
-        db.execSQL(createTableStatement);*/
 
     }
 
@@ -56,24 +47,23 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
     }
 
     /**
-     * Copies your database from your local assets-folder to the just created
-     * empty database in the system folder, from where it can be accessed and
-     * handled. This is done by transfering bytestream.
-     */
+     * Copia il tuo database locale dalla cartella locale assets nel database vuoto appena creato nella cartella di sistema
+     * dalla quale puo essere gestito. Questo è effettuato con un trasferimento di byte
+     **/
+
     private void copyDataBase(String dbname) throws IOException {
-        // Open your local db as the input stream
         InputStream myInput = myContext.getAssets().open(dbname);
-        // Path to the just created empty db
+
         File outFileName = myContext.getDatabasePath(dbname);
-        // Open the empty db as the output stream
+
         OutputStream myOutput = new FileOutputStream(outFileName);
-        // transfer bytes from the inputfile to the outputfile
+
         byte[] buffer = new byte[1024];
         int length;
         while ((length = myInput.read(buffer)) > 0) {
             myOutput.write(buffer, 0, length);
         }
-        // Close the streams
+
         myOutput.flush();
         myOutput.close();
         myInput.close();

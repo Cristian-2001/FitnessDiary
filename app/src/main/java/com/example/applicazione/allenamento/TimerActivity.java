@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,20 +48,6 @@ public class TimerActivity extends AppCompatActivity {
 
     private ColorStateList oldColors;
 
-    /*Handler timerHandler = new Handler();
-    Runnable timerRunnable = new Runnable() {
-        @Override
-        public void run() {
-            long millis = System.currentTimeMillis() - startTime;
-            int seconds = (int) (millis / 1000);
-            int minutes = seconds / 60;
-            seconds = seconds % 60;
-
-            txtTimer.setText(String.format("%d:%02d", minutes, seconds));
-
-            timerHandler.postDelayed(this, 500);
-        }
-    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,20 +151,7 @@ public class TimerActivity extends AppCompatActivity {
         });
 
 
-        /*btnStartPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Button b = (Button) btnStartPause;
-                if (b.getText().equals("Stop")) {
-                    timerHandler.removeCallbacks(timerRunnable);
-                    b.setText("Avvia");
-                } else {
-                    startTime = System.currentTimeMillis();
-                    timerHandler.postDelayed(timerRunnable, 0);
-                    b.setText("stop");
-                }
-            }
-        });*/
+
 
     }
 
@@ -197,11 +168,5 @@ public class TimerActivity extends AppCompatActivity {
         oldColors = btnNextEs.getBackgroundTintList();
     }
 
-    /*@Override
-    public void onPause() {
-        super.onPause();
-        timerHandler.removeCallbacks(timerRunnable);
-        Button b = (Button) findViewById(R.id.btnStartPause);
-        b.setText("Avvia");
-    }*/
+
 }

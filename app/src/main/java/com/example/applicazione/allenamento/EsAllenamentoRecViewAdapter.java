@@ -1,11 +1,8 @@
 package com.example.applicazione.allenamento;
 
-import static com.example.applicazione.allenamento.SelezionaEsercizioActivity.ES_ID_KEY;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.text.InputType;
 import android.util.Log;
@@ -16,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -24,7 +20,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.applicazione.R;
-import com.example.applicazione.dieta.VisualizzaDietaActivity;
 
 import java.util.ArrayList;
 import java.util.List;

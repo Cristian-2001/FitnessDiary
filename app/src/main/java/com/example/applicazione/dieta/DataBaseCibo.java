@@ -62,6 +62,11 @@ public class DataBaseCibo extends SQLiteOpenHelper {
         super.onDowngrade(db, oldVersion, newVersion);
     }
 
+    /**
+     * Copia il tuo database locale dalla cartella locale assets nel database vuoto appena creato nella cartella di sistema
+     * dalla quale puo essere gestito. Questo è effettuato con un trasferimento di byte
+     **/
+
     private void copyDataBase(String dbname) throws IOException {
         // Open your local db as the input stream
         InputStream myInput = myContext.getAssets().open(dbname);
