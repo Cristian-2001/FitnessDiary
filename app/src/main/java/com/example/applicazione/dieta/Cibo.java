@@ -14,9 +14,10 @@ public class Cibo {
     private Double proteine;
     private Double sale;
     private boolean isExpanded;
+    private String inserito;
 
 
-    public Cibo(int id, String nome, String categoria, Double energia, Double lipidi, Double acidigrassi, Double colesterolo, Double carboidrati, Double zuccheri, Double fibre, Double proteine, Double sale) {
+    public Cibo(int id, String nome, String categoria, Double energia, Double lipidi, Double acidigrassi, Double colesterolo, Double carboidrati, Double zuccheri, Double fibre, Double proteine, Double sale, String inserito) {
         this.id = id;
         this.nome = nome;
         this.categoria = categoria;
@@ -29,7 +30,22 @@ public class Cibo {
         this.fibre = fibre;
         this.proteine = proteine;
         this.sale = sale;
+        this.inserito = inserito;
         isExpanded = false;
+    }
+
+    public Cibo(String nome, String categoria, Double energia, Double lipidi, Double acidigrassi, Double colesterolo, Double carboidrati, Double zuccheri, Double fibre, Double proteine, Double sale) {
+        this.nome = nome;
+        this.categoria = categoria;
+        this.energia = energia;
+        this.lipidi = lipidi;
+        this.acidigrassi = acidigrassi;
+        this.colesterolo = colesterolo;
+        this.carboidrati = carboidrati;
+        this.zuccheri = zuccheri;
+        this.fibre = fibre;
+        this.proteine = proteine;
+        this.sale = sale;
     }
 
     public int getId() {

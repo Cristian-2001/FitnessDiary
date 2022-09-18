@@ -17,64 +17,67 @@
         android:theme="@style/Theme.Applicazione"
         tools:targetApi="31">
         <activity
+            android:name=".dieta.AggiungiCiboActivity"
+            android:exported="false" />
+        <activity
             android:name=".allenamento.TimerActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".allenamento.SvolgiEsercizioActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".allenamento.VisualizzaAllenamentoActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".allenamento.SelezionaEsercizioActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".allenamento.FiltriEserciziActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".dieta.VisualizzaDietaActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".dieta.SelezionaCiboActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".dieta.ElencoDieteActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".dieta.AggiungiDietaActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".allenamento.AggiungiAllenamentoActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".allenamento.ElencoAllenamentiActivity"
-            android:exported="false"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
             android:configChanges="orientation"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

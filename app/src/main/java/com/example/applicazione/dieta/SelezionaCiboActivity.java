@@ -82,7 +82,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
         }
 
         btnCalcola.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
+            @SuppressLint({"SetTextI18n", "DefaultLocale"})
             @Override
             public void onClick(View view) {
                 if (edtTxtQta.getText().toString().equals("")) {

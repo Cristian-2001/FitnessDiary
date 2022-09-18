@@ -2,15 +2,20 @@ package com.example.applicazione.dieta;
 
 import static com.example.applicazione.dieta.VisualizzaDietaActivity.DIETA_ID_KEY;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +41,9 @@ public class AggiungiDietaActivity extends AppCompatActivity {
     //id della dieta da modificare
     private static int dietaId;
 
+    //variabile che mi dice se arrivo dall'elenco delle diete o no
+    private static int elencoDiete;
+
     private Spinner spnCategoria;
     private Button btnCerca;
     private RecyclerView cibiRecView;
@@ -56,11 +64,14 @@ public class AggiungiDietaActivity extends AppCompatActivity {
     DataBaseDieta dataBaseDieta;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aggiungi_dieta);
 
+        Log.d(TAG, "onCreate: Called");
+        
         //chiamo l'action bar
         ActionBar actionBar = getSupportActionBar();
 
@@ -78,7 +89,7 @@ public class AggiungiDietaActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            if (intent.getIntExtra(ELENCO_DIETE, -1) == 1) {
+            if ((elencoDiete = intent.getIntExtra(ELENCO_DIETE, -1)) == 1) {
                 Log.d(TAG, "onCreate: ECCOMI");
 
                 nomeDieta = intent.getStringExtra(DIETA_NOME);
@@ -188,29 +199,6 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         Log.d(TAG, "modificaDieta: NUM: " + num);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiDietaActivity.this);
-                builder.setMessage("La dieta corrente non verrà salvata. Vuoi tornare indietro?");
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        AggiungiDietaActivity.this.finish();
-                        Intent intent = new Intent(AggiungiDietaActivity.this, ElencoDieteActivity.class);
-                        AggiungiDietaActivity.this.startActivity(intent);
-                    }
-                });
-                builder.setNegativeButton("Annulla", null);
-
-                final AlertDialog dialog = builder.create();
-                dialog.show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
     @Override
@@ -230,5 +218,48 @@ public class AggiungiDietaActivity extends AppCompatActivity {
 
         final AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    /**
+     * inserisco il menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.modifica_cibi_menu, menu);
+        return true;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.aggiungi_cibo:
+                Intent intent = new Intent(AggiungiDietaActivity.this, AggiungiCiboActivity.class);
+                intent.putExtra(DIETA_ID_KEY, dietaId);
+                intent.putExtra(ELENCO_DIETE, elencoDiete);
+                intent.putExtra(DIETA_NOME, nomeDieta);
+                AggiungiDietaActivity.this.startActivity(intent);
+                return true;
+
+            case android.R.id.home:
+                AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiDietaActivity.this);
+                builder.setMessage("La dieta corrente non verrà salvata. Vuoi tornare indietro?");
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        AggiungiDietaActivity.this.finish();
+                        Intent intent = new Intent(AggiungiDietaActivity.this, ElencoDieteActivity.class);
+                        AggiungiDietaActivity.this.startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("Annulla", null);
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

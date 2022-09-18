@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/modifica_nome"
-        android:title="Modifica nome"/>
+        android:title="@string/modifica_nome" />
 
     <item
         android:id="@+id/salva_menu"

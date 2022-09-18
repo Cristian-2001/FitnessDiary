@@ -76,6 +76,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
         VisualizzaDietaActivity.last_item = true;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -328,6 +329,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
         cibiDietaRecView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    @SuppressLint("DefaultLocale")
     private String calcolaValori(List<Cibo> cibi, List<Double> quantita) {
         Log.d(TAG, "calcolaValori: Called");
 
@@ -369,8 +371,9 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
         return ret;
     }
 
-    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
-    //controllo anche che non ci siano modifiche non salvate, altrimenti lo segnalo
+    /**faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+     * controllo anche che non ci siano modifiche non salvate, altrimenti lo segnalo
+     */
     @Override
     public void onBackPressed() {
         if (modificato) {

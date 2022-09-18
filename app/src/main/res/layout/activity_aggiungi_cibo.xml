@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dieta.AggiungiCiboActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAggiungiCibo"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/txtNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Nome:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt100g" />
+
+            <TextView
+                android:id="@+id/txtCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Categoria:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtNome" />
+
+            <TextView
+                android:id="@+id/txtEnergia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Energia:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spnCat" />
+
+            <TextView
+                android:id="@+id/txtLipidi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Lipidi:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtEnergia" />
+
+            <TextView
+                android:id="@+id/txtColesterolo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Colesterolo:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtAcidiGrassi" />
+
+            <TextView
+                android:id="@+id/txtCarboidrati"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Carboidrati:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtColesterolo" />
+
+            <TextView
+                android:id="@+id/txtAcidiGrassi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Acidi Grassi:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtLipidi" />
+
+            <TextView
+                android:id="@+id/txtFibre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Fibre:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtZuccheri" />
+
+            <TextView
+                android:id="@+id/txtProteine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Proteine:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtFibre" />
+
+            <TextView
+                android:id="@+id/txtSale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Sale:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtProteine" />
+
+            <TextView
+                android:id="@+id/txtZuccheri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="50dp"
+                android:text="Zuccheri:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtCarboidrati" />
+
+            <Spinner
+                android:id="@+id/spnCat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/categorieCibi"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCategoria"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="@+id/txtCategoria" />
+
+            <EditText
+                android:id="@+id/edtTxtNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Nome"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="@+id/txtNome"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="@+id/txtNome" />
+
+            <EditText
+                android:id="@+id/edtTxtEnergia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Energia"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="@+id/txtEnergia"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="@+id/txtEnergia" />
+
+            <EditText
+                android:id="@+id/edtTxtLipidi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Lipidi"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="@+id/txtLipidi"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="@+id/txtLipidi" />
+
+            <EditText
+                android:id="@+id/edtTxtAcidiGrassi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Acidi Grassi"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="@+id/txtAcidiGrassi"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="@+id/txtAcidiGrassi" />
+
+            <EditText
+                android:id="@+id/edtTxtColesterolo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Colesterolo"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="@+id/txtColesterolo"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="@+id/txtColesterolo"
+                app:layout_constraintVertical_bias="0.423" />
+
+            <EditText
+                android:id="@+id/edtTxtCarboidrati"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Carboidrati"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCarboidrati"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="@+id/txtCarboidrati" />
+
+            <EditText
+                android:id="@+id/edtTxtZuccheri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Zuccheri"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="@+id/txtZuccheri"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="@+id/txtZuccheri" />
+
+            <EditText
+                android:id="@+id/edtTxtFibre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Fibre"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="@+id/txtFibre"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="@+id/txtFibre" />
+
+            <EditText
+                android:id="@+id/edtTxtProteine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Proteine"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="@+id/txtProteine"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="@+id/txtProteine" />
+
+            <EditText
+                android:id="@+id/edtTxtSale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Sale"
+                android:inputType="numberDecimal"
+                app:layout_constraintBottom_toBottomOf="@+id/txtSale"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toTopOf="@+id/txtSale" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="99dp" />
+
+            <TextView
+                android:id="@+id/txtKcal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="kCal"
+                app:layout_constraintBottom_toBottomOf="@+id/edtTxtEnergia"
+                app:layout_constraintStart_toEndOf="@+id/edtTxtEnergia"
+                app:layout_constraintTop_toTopOf="@+id/edtTxtEnergia" />
+
+            <TextView
+                android:id="@+id/txtG1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grammi"
+                app:layout_constraintBottom_toBottomOf="@+id/edtTxtLipidi"
+                app:layout_constraintStart_toEndOf="@+id/edtTxtLipidi"
+                app:layout_constraintTop_toTopOf="@+id/edtTxtLipidi" />
+
+            <TextView
+                android:id="@+id/txtG2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grammi"
+                app:layout_constraintBottom_toBottomOf="@+id/edtTxtAcidiGrassi"
+                app:layout_constraintStart_toEndOf="@+id/edtTxtAcidiGrassi"
+                app:layout_constraintTop_toTopOf="@+id/edtTxtAcidiGrassi" />
+
+            <TextView
+                android:id="@+id/txtG3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grammi"
+                app:layout_constraintBottom_toBottomOf="@+id/edtTxtColesterolo"
+                app:layout_constraintStart_toEndOf="@+id/edtTxtColesterolo"
+                app:layout_constraintTop_toTopOf="@+id/edtTxtColesterolo" />
+
+            <TextView
+                android:id="@+id/txtG4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grammi"
+                app:layout_constraintBottom_toBottomOf="@+id/edtTxtCarboidrati"
+                app:layout_constraintStart_toEndOf="@+id/edtTxtCarboidrati"
+                app:layout_constraintTop_toTopOf="@+id/edtTxtCarboidrati" />
+
+            <TextView
+                android:id="@+id/txtG5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grammi"
+                app:layout_constraintBottom_toBottomOf="@+id/edtTxtZuccheri"
+                app:layout_constraintStart_toEndOf="@+id/edtTxtZuccheri"
+                app:layout_constraintTop_toTopOf="@+id/edtTxtZuccheri" />
+
+            <TextView
+                android:id="@+id/txtG6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grammi"
+                app:layout_constraintBottom_toBottomOf="@+id/edtTxtFibre"
+                app:layout_constraintStart_toEndOf="@+id/edtTxtFibre"
+                app:layout_constraintTop_toTopOf="@+id/edtTxtFibre" />
+
+            <TextView
+                android:id="@+id/txtG7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grammi"
+                app:layout_constraintBottom_toBottomOf="@+id/edtTxtProteine"
+                app:layout_constraintStart_toEndOf="@+id/edtTxtProteine"
+                app:layout_constraintTop_toTopOf="@+id/edtTxtProteine" />
+
+            <TextView
+                android:id="@+id/txtG8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grammi"
+                app:layout_constraintBottom_toBottomOf="@+id/edtTxtSale"
+                app:layout_constraintStart_toEndOf="@+id/edtTxtSale"
+                app:layout_constraintTop_toTopOf="@+id/edtTxtSale" />
+
+            <TextView
+                android:id="@+id/txt100g"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Inserire i valori di 100g di prodotto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnUndo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="80dp"
+                android:text="@string/annulla"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnSave"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edtTxtSale" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/salva"
+                app:layout_constraintBottom_toBottomOf="@+id/btnUndo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnUndo"
+                app:layout_constraintTop_toTopOf="@+id/btnUndo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/txtAggiungiCibo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Aggiungi un cibo"
+        android:textSize="30sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

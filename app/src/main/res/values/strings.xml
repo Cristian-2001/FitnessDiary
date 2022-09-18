@@ -9,6 +9,11 @@
     <string name="numero_elementi">Numero di elementi</string>
     <string name="about">MADE BY:\nCasali Cristian\nFlotta Aldo\n\nSOURCES:\nBanca dati svizzera dei valori nutritivi\nDatabase sportivo fornito dal governo di Manitoba (Canada)
 </string>
+    <string name="modifica_nome">Modifica nome</string>
+    <string name="aggiungi_un_cibo">Aggiungi un cibo</string>
+    <string name="rimuovi_un_cibo">Rimuovi un cibo</string>
+    <string name="grammi">g</string>
+    <string name="annulla">Annulla</string>
 
     <string-array name="categorie">
         <item>Tutte</item>
@@ -34,6 +39,33 @@
         <item>Torte salate</item>
         <item>Uova e latticini</item>
         <item>Verdure</item>
+        <item>Altro</item>
+    </string-array>
+
+    <string-array name="categorieCibi">
+        <item>Bevande Alcoliche</item>
+        <item>Bevande Analcoliche</item>
+        <item>Brodi</item>
+        <item>Carne</item>
+        <item>Cibi Asiatici</item>
+        <item>Cibi italiani</item>
+        <item>Cibi salati</item>
+        <item>Dolciumi</item>
+        <item>Frutta</item>
+        <item>Grassi e oli</item>
+        <item>Insaccati</item>
+        <item>Insalate</item>
+        <item>Legumi</item>
+        <item>Pane e cereali</item>
+        <item>Pasta</item>
+        <item>Patate</item>
+        <item>Pesce</item>
+        <item>Salse</item>
+        <item>Spezie</item>
+        <item>Torte salate</item>
+        <item>Uova e latticini</item>
+        <item>Verdure</item>
+        <item>Altro</item>
     </string-array>
 
     <string-array name="gruppo_musc">

@@ -67,6 +67,8 @@ public class CibiRecViewAdapter extends RecyclerView.Adapter<CibiRecViewAdapter.
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, SelezionaCiboActivity.class);
                 intent.putExtra(CIBO_ID_KEY, cibi.get(position).getId());
+                Log.d(TAG, "onClick: POSIZIONE: " + position);
+                Log.d(TAG, "onClick: ID: " + cibi.get(position).getId());
                 mContext.startActivity(intent);
             }
         });

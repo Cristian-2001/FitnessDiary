@@ -6,12 +6,13 @@
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/drawable-anydpi/ic_add.xml" value="0.1515" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/drawable/ic_prova.xml" value="0.1515" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_aggiungi_allenamento.xml" value="0.25" />
-        <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_aggiungi_cibo.xml" value="0.25" />
+        <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_aggiungi_cibo.xml" value="0.264" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_aggiungi_dieta.xml" value="0.25" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_elenco_allenamenti.xml" value="0.2359375" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_elenco_cibo.xml" value="0.2359375" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_elenco_diete.xml" value="0.2359375" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_filtri_allenamenti.xml" value="0.25" />
+        <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_filtri_esercizi.xml" value="0.23796296296296296" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_modifica_esercizio.xml" value="0.25" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/activity_seleziona_allenamento.xml" value="0.25" />
@@ -29,6 +30,7 @@
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/list_item_dieta.xml" value="0.25" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/layout/list_item_esercizio.xml" value="0.25" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/menu/about_menu.xml" value="0.25" />
+        <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/menu/modifica_cibi_menu.xml" value="0.25" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/menu/visualizza_dieta_menu.xml" value="0.25" />
         <entry key="..\:/Users/cicci/Documents/Universita/II anno/II semestre/Programmazione a oggetti/NomeProvvisorio/app/src/main/res/menu/visualizza_elenco_menu.xml" value="0.25" />
         <entry key="..\:/Users/flott/Desktop/ProgettoPalestra/NomeProvvisorio/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1595" />
