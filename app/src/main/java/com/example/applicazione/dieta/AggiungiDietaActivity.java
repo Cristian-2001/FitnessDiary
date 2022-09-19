@@ -71,7 +71,7 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_aggiungi_dieta);
 
         Log.d(TAG, "onCreate: Called");
-        
+
         //chiamo l'action bar
         ActionBar actionBar = getSupportActionBar();
 
@@ -242,6 +242,14 @@ public class AggiungiDietaActivity extends AppCompatActivity {
                 AggiungiDietaActivity.this.startActivity(intent);
                 return true;
 
+            case R.id.elenco_cibi:
+                Intent intent1 = new Intent(AggiungiDietaActivity.this, ElencoCibiActivity.class);
+                intent1.putExtra(DIETA_ID_KEY, dietaId);
+                intent1.putExtra(ELENCO_DIETE, elencoDiete);
+                intent1.putExtra(DIETA_NOME, nomeDieta);
+                AggiungiDietaActivity.this.startActivity(intent1);
+                return true;
+
             case android.R.id.home:
                 AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiDietaActivity.this);
                 builder.setMessage("La dieta corrente non verrà salvata. Vuoi tornare indietro?");
@@ -258,6 +266,7 @@ public class AggiungiDietaActivity extends AppCompatActivity {
                 final AlertDialog dialog = builder.create();
                 dialog.show();
                 return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

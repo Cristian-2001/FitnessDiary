@@ -45,6 +45,7 @@ public class DataBaseCibo extends SQLiteOpenHelper {
 
     /**
      * se è la prima volta che apro il database dopo l'installazione dell'app copio il database, altrimenti non faccio nulla
+     *
      * @param context
      */
     public DataBaseCibo(@Nullable Context context) {
@@ -55,7 +56,7 @@ public class DataBaseCibo extends SQLiteOpenHelper {
 
         SharedPreferences settings = myContext.getSharedPreferences("PREFS_NAME", 0);
         mboolean = settings.getBoolean("FIRST_RUN", false);
-        if(!mboolean){
+        if (!mboolean) {
             Log.d(TAG, "DataBaseCibo: Called");
 
             try {
@@ -63,7 +64,7 @@ public class DataBaseCibo extends SQLiteOpenHelper {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            
+
             settings = myContext.getSharedPreferences("PREFS_NAME", 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("FIRST_RUN", true);
@@ -74,13 +75,13 @@ public class DataBaseCibo extends SQLiteOpenHelper {
     /**
      * chiamato la prima volta che viene fatto un accesso al database
      * quindi deve contenere codice per creare un nuovo db
-     *
+     * <p>
      * creo una tabella che autoincrementa l'id e ci copio la tabella già esistente
      * poi elimino la tabella vecchia e rinomino la nuova come la precedente in modo da utilizzare quella
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableStatement = "CREATE TABLE " + TABLE_CIBI_ID +  " ( " + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+        String createTableStatement = "CREATE TABLE " + TABLE_CIBI_ID + " ( " + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_NOME + " INTEGER, " + COLUMN_CATEGORIA + " INTEGER, " + COLUMN_ENERGIA + " INTEGER, "
                 + COLUMN_LIPIDI + " INTEGER, " + COLUMN_ACIDI_GRASSI_SATURI + " INTEGER, " + COLUMN_COLESTEROLO + " INTEGER, "
                 + COLUMN_CARBOIDRATI + " INTEGER, " + COLUMN_ZUCCHERI + " INTEGER, " + COLUMN_FIBRE + " INTEGER, "
@@ -126,7 +127,6 @@ public class DataBaseCibo extends SQLiteOpenHelper {
      * Copia il tuo database locale dalla cartella locale assets nel database vuoto appena creato nella cartella di sistema
      * dalla quale puo essere gestito. Questo è effettuato con un trasferimento di byte
      **/
-
     private void copyDataBase(String dbname) throws IOException {
         Log.d(TAG, "copyDataBase: Called");
         // Open your local db as the input stream
@@ -149,7 +149,12 @@ public class DataBaseCibo extends SQLiteOpenHelper {
 
     //i miei metodi possono essere messi anche qui
 
-
+    /**
+     * aggiunge un cibo al database
+     *
+     * @param cibo
+     * @return
+     */
     public boolean addOne(Cibo cibo) {
         Log.d(TAG, "addOne: Called");
         SQLiteDatabase db = this.getWritableDatabase();
@@ -177,7 +182,12 @@ public class DataBaseCibo extends SQLiteOpenHelper {
     }
 
 
-    //ritorna il Cibo con l'id dato
+    /**
+     * ritorna il Cibo con l'id dato
+     *
+     * @param id
+     * @return
+     */
     public Cibo getCiboById(int id) {
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -209,7 +219,11 @@ public class DataBaseCibo extends SQLiteOpenHelper {
         return cibo;
     }
 
-    //ritorna l'elenco di tutti i cibi
+    /**
+     * ritorna l'elenco di tutti i cibi
+     *
+     * @return
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public List<Cibo> getAllCibi() {
 
@@ -252,7 +266,13 @@ public class DataBaseCibo extends SQLiteOpenHelper {
         return returnList;
     }
 
-    //ritorna l'elenco di cibi della categoria data
+    /**
+     * ritorna l'elenco di cibi della categoria data
+     *
+     * @param cat
+     * @param name
+     * @return
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public List<Cibo> getCibiByCatNome(String cat, String name) {
 
@@ -306,6 +326,8 @@ public class DataBaseCibo extends SQLiteOpenHelper {
 
     /**
      * ritorna la lista dei nomi dei cibi
+     *
+     * @return
      */
     public List<String> getNomi() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -327,5 +349,81 @@ public class DataBaseCibo extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
+    }
+
+    /**
+     * ritorna la lista di tutti i cibi inseriti
+     *
+     * @return
+     */
+    public List<Cibo> getInseriti() {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String queryString = "SELECT *" + " FROM " + TABLE_CIBI + " WHERE " + COLUMN_INSERITO + " like 'si'";
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        List<Cibo> returnList = new ArrayList<>();
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String nome = cursor.getString(1);
+                String categoria = cursor.getString(2);
+                Double energia = cursor.getDouble(3);
+                Double lipidi = cursor.getDouble(4);
+                Double acidigrassi = cursor.getDouble(5);
+                Double colesterolo = cursor.getDouble(6);
+                Double carboidrati = cursor.getDouble(7);
+                Double zuccheri = cursor.getDouble(8);
+                Double fibre = cursor.getDouble(9);
+                Double proteine = cursor.getDouble(10);
+                Double sale = cursor.getDouble(11);
+                String inserito = cursor.getString(12);
+                returnList.add(new Cibo(id, nome, categoria, energia, lipidi, acidigrassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale, inserito));
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        returnList.sort(new Comparator<Cibo>() {
+            @Override
+            public int compare(Cibo cibo, Cibo t1) {
+                return cibo.getNome().compareTo(t1.getNome());
+            }
+        });
+        return returnList;
+    }
+
+    public boolean modificaCibo(int id, Cibo cibo) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        //cv.put("ID",dieta.getId());
+        cv.put(COLUMN_NOME, cibo.getNome());
+        cv.put(COLUMN_CATEGORIA, cibo.getCategoria());
+        cv.put(COLUMN_ENERGIA, cibo.getEnergia());
+        cv.put(COLUMN_LIPIDI, cibo.getLipidi());
+        cv.put(COLUMN_ACIDI_GRASSI_SATURI, cibo.getAcidigrassi());
+        cv.put(COLUMN_COLESTEROLO, cibo.getColesterolo());
+        cv.put(COLUMN_CARBOIDRATI, cibo.getCarboidrati());
+        cv.put(COLUMN_ZUCCHERI, cibo.getZuccheri());
+        cv.put(COLUMN_FIBRE, cibo.getFibre());
+        cv.put(COLUMN_PROTEINE, cibo.getProteine());
+        cv.put(COLUMN_SALE, cibo.getSale());
+
+
+        long modify = db.update(TABLE_CIBI, cv, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+
+        return modify != -1;
+    }
+
+    public boolean eliminaCibo(int id){
+        SQLiteDatabase db = getWritableDatabase();
+
+        long delete = db.delete(TABLE_CIBI, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
+
+        return delete != -1;
     }
 }

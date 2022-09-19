@@ -6,10 +6,10 @@ import java.util.List;
 public class Dieta {
     public static Object dieta;
     int id;
-    String nome;
-    List<Integer> cibiId;
-    List<Double> cibiQta;
-    Integer numElem;
+    private String nome;
+    private List<Integer> cibiId;
+    private List<Double> cibiQta;
+    private Integer numElem;
 
     public Dieta(String nome, Integer numElem) {
         this.nome = nome;
@@ -142,5 +142,15 @@ public class Dieta {
 
     public void incrementNum(){
         numElem++;
+    }
+
+    public boolean cercaCibo(int id){
+        for(int i : cibiId){
+            if(i == id){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

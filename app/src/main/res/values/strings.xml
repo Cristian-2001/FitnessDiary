@@ -11,9 +11,10 @@
 </string>
     <string name="modifica_nome">Modifica nome</string>
     <string name="aggiungi_un_cibo">Aggiungi un cibo</string>
-    <string name="rimuovi_un_cibo">Rimuovi un cibo</string>
+    <string name="elenco_cibi">Elenco dei cibi inseriti</string>
     <string name="grammi">g</string>
     <string name="annulla">Annulla</string>
+    <string name="elimina_questo_elemento">Elimina questo elemento</string>
 
     <string-array name="categorie">
         <item>Tutte</item>

@@ -4,12 +4,17 @@ import static com.example.applicazione.dieta.AggiungiDietaActivity.DIETA_NOME;
 import static com.example.applicazione.dieta.AggiungiDietaActivity.ELENCO_DIETE;
 import static com.example.applicazione.dieta.VisualizzaDietaActivity.DIETA_ID_KEY;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +52,14 @@ public class AggiungiCiboActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aggiungi_cibo);
+
+        //chiamo l'action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        //mostro il back button
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         initView();
         dataBaseCibo = new DataBaseCibo(this);
@@ -183,6 +196,50 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Il cibo corrente non verrà salvato. Vuoi tornare indietro?");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                AggiungiCiboActivity.this.finish();
+                Intent intent = new Intent(AggiungiCiboActivity.this, ElencoDieteActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Annulla", null);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiCiboActivity.this);
+                builder.setMessage("Il cibo corrente non verrà salvato. Vuoi tornare indietro?");
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        AggiungiCiboActivity.this.finish();
+                        Intent intent = new Intent(AggiungiCiboActivity.this, ElencoDieteActivity.class);
+                        AggiungiCiboActivity.this.startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("Annulla", null);
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**

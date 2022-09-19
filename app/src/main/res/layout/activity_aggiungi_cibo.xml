@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="50dp"
-                android:text="Acidi Grassi:"
+                android:text="Acidi grassi:"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edtTxtLipidi" />
 
@@ -179,7 +179,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Acidi Grassi"
+                android:hint="Acidi grassi"
                 android:inputType="numberDecimal"
                 app:layout_constraintBottom_toBottomOf="@+id/txtAcidiGrassi"
                 app:layout_constraintStart_toStartOf="@+id/guideline6"

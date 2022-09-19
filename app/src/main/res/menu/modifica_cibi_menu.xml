@@ -5,6 +5,6 @@
         android:title="@string/aggiungi_un_cibo"/>
 
     <item
-        android:id="@+id/rimuovi_cibo"
-        android:title="@string/rimuovi_un_cibo"/>
+        android:id="@+id/elenco_cibi"
+        android:title="@string/elenco_cibi"/>
 </menu>
