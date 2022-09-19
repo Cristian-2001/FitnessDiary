@@ -70,7 +70,6 @@ public class ElencoCibiActivity extends AppCompatActivity {
         }
     }
 
-    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
     @Override
     public void onBackPressed() {
         //chiamo AggiungiDietaAcitivity passandogli i parametri che aveva già in precedenza
@@ -85,7 +84,11 @@ public class ElencoCibiActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                ElencoCibiActivity.this.finish();
+                Intent intent1 = new Intent(ElencoCibiActivity.this, AggiungiDietaActivity.class);
+                intent1.putExtra(DIETA_ID_KEY, dietaId);
+                intent1.putExtra(ELENCO_DIETE, elencoDiete);
+                intent1.putExtra(DIETA_NOME, nomeDieta);
+                ElencoCibiActivity.this.startActivity(intent1);
                 return true;
 
             default:

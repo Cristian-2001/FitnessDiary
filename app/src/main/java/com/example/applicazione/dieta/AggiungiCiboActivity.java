@@ -198,7 +198,6 @@ public class AggiungiCiboActivity extends AppCompatActivity {
         });
     }
 
-    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -207,9 +206,6 @@ public class AggiungiCiboActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 AggiungiCiboActivity.this.finish();
-                Intent intent = new Intent(AggiungiCiboActivity.this, ElencoDieteActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
             }
         });
         builder.setNegativeButton("Annulla", null);
@@ -228,8 +224,6 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         AggiungiCiboActivity.this.finish();
-                        Intent intent = new Intent(AggiungiCiboActivity.this, ElencoDieteActivity.class);
-                        AggiungiCiboActivity.this.startActivity(intent);
                     }
                 });
                 builder.setNegativeButton("Annulla", null);
