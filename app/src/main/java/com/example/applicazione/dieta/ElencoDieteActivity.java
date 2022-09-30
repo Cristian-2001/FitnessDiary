@@ -7,6 +7,7 @@ import static com.example.applicazione.dieta.VisualizzaDietaActivity.DIETA_ID_KE
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +81,7 @@ public class ElencoDieteActivity extends AppCompatActivity {
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
                 input.setLayoutParams(lp);
+                input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
                 builder.setView(input);
 
                 builder.setPositiveButton("Avanti", new DialogInterface.OnClickListener() {

@@ -36,7 +36,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
 
     private ColorStateList oldColors;
 
-    private String nome, cat;
+    private String temp, nome, cat;
     private double energia, lipidi, acidigrassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale;
 
     //variabili ricevute da AggiungiDietaActivity
@@ -92,7 +92,8 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                     allData = false;
                 } else {
                     txtNome.setTextColor(oldColors);
-                    nome = edtTxtNome.getText().toString();
+                    temp = edtTxtNome.getText().toString();
+                    nome = temp.substring(0, 1).toUpperCase() + temp.substring(1);
 
                     if (dataBaseCibo.getNomi().contains(nome)) {
                         Toast.makeText(AggiungiCiboActivity.this, "Il cibo " + nome + " esiste già", Toast.LENGTH_SHORT).show();

@@ -663,6 +663,8 @@ public class ModificaCiboActivity extends AppCompatActivity {
 
             case android.R.id.home:
                 ModificaCiboActivity.this.finish();
+                Intent intent = new Intent(this, ElencoCibiActivity.class);
+                this.startActivity(intent);
                 return true;
 
             default:

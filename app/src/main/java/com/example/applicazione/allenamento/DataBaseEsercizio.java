@@ -2,9 +2,11 @@ package com.example.applicazione.allenamento;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -17,8 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataBaseEsercizio extends SQLiteOpenHelper {
+    private static final String TAG = "DataBaseEsercizio";
     private Context myContext;
 
+    /**
+     * se è la prima volta che apro il database dopo l'installazione dell'app copio il database, altrimenti non faccio nulla
+     *
+     * @param context
+     */
     public DataBaseEsercizio(@Nullable Context context) {
         super(context, "Esercizii.db", null, 1);
         myContext = context;
@@ -51,6 +59,7 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
      * dalla quale puo essere gestito. Questo è effettuato con un trasferimento di byte
      **/
     private void copyDataBase(String dbname) throws IOException {
+        Log.d(TAG, "copyDataBase: Called");
         InputStream myInput = myContext.getAssets().open(dbname);
 
         File outFileName = myContext.getDatabasePath(dbname);
