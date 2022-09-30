@@ -84,10 +84,7 @@ public class ElencoCibiActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent1 = new Intent(ElencoCibiActivity.this, AggiungiDietaActivity.class);
-                intent1.putExtra(DIETA_ID_KEY, dietaId);
-                intent1.putExtra(ELENCO_DIETE, elencoDiete);
-                intent1.putExtra(DIETA_NOME, nomeDieta);
+                Intent intent1 = new Intent(ElencoCibiActivity.this, ElencoDieteActivity.class);
                 ElencoCibiActivity.this.startActivity(intent1);
                 return true;
 

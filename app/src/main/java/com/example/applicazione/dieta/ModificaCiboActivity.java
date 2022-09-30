@@ -100,6 +100,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
+                input.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
                 input.setLayoutParams(lp);
                 builder.setView(input);
 
@@ -121,7 +122,8 @@ public class ModificaCiboActivity extends AppCompatActivity {
                         if (input.getText().toString().equals("")) {
                             Toast.makeText(ModificaCiboActivity.this, "Inserire il nome", Toast.LENGTH_SHORT).show();
                         } else {
-                            nomeCibo = input.getText().toString();
+                            String temp = input.getText().toString();
+                            nomeCibo = temp.substring(0, 1).toUpperCase() + temp.substring(1);
                             cibo.setNome(nomeCibo);
                             dataBaseCibo.modificaCibo(ciboId, cibo);
                             txtNomeCiboIns.setText(nomeCibo);

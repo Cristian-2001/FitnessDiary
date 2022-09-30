@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,9 +130,24 @@ public class ElencoDieteActivity extends AppCompatActivity {
         dieteRecView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    /**
+     * inserisco il menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.elenco_cibi_menu, menu);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.elenco_cibi:
+                Intent intent1 = new Intent(this, ElencoCibiActivity.class);
+                this.startActivity(intent1);
+                return true;
+
             case android.R.id.home:
                 this.finish();
                 Intent intent = new Intent(ElencoDieteActivity.this, MainActivity.class);

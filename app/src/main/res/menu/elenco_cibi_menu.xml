@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/aggiungi_cibo"
-        android:title="@string/aggiungi_un_cibo"/>
+        android:id="@+id/elenco_cibi"
+        android:title="@string/elenco_cibi"/>
 </menu>
