@@ -100,13 +100,14 @@ public class AggiungiDietaActivity extends AppCompatActivity {
 
             //prendo l'eventuale id della dieta e setto i dati in base alla dieta
             // se è uguale a -2 significa che sono arrivato da SelezionaCiboActivity quindi non devo modificarlo
+            // se è uguale a -3 significa che sono arrivato da AggiungiCiboActivity quindi non devo modificarlo
             if (intent.getIntExtra(DIETA_ID_KEY, -1) > -1) {
                 dietaId = intent.getIntExtra(DIETA_ID_KEY, -1);
                 nomeDieta = dataBaseDieta.getDietaById(dietaId).getNome();
                 cibiDieta = dataBaseDieta.getDietaById(dietaId).getCibiId();
                 qtaDieta = dataBaseDieta.getDietaById(dietaId).getCibiQta();
                 num = dataBaseDieta.getDietaById(dietaId).getNumElem();
-            } else if (intent.getIntExtra(DIETA_ID_KEY, -1) == -2) {
+            } else if (intent.getIntExtra(DIETA_ID_KEY, -1) == -2 || intent.getIntExtra(DIETA_ID_KEY, -1) == -3) {
                 dietaId = intent.getIntExtra(DIETA_ID_KEY, -1);
             }
         }

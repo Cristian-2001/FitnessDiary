@@ -190,7 +190,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
 
                     //chiamo AggiungiDietaAcitivity passandogli i parametri che aveva già in precedenza
                     Intent intent1 = new Intent(AggiungiCiboActivity.this, AggiungiDietaActivity.class);
-                    intent1.putExtra(DIETA_ID_KEY, dietaId);
+                    intent1.putExtra(DIETA_ID_KEY, -3);
                     intent1.putExtra(ELENCO_DIETE, elencoDiete);
                     intent1.putExtra(DIETA_NOME, nomeDieta);
                     AggiungiCiboActivity.this.startActivity(intent1);
