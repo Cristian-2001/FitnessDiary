@@ -23,7 +23,7 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
     private Context myContext;
 
     /**
-     * se è la prima volta che apro il database dopo l'installazione dell'app copio il database, altrimenti non faccio nulla
+     * copio il database dalla cartella "assets" alla memoria del telefono
      *
      * @param context
      */
