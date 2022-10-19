@@ -70,6 +70,9 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
     //boolean per controllare se ho eliminato l'ultimo elemento di un allenamento
     private static boolean last_item = false;
 
+    //numero di click sul nome dell'allenamento, se sono 5 attivo l'easter egg
+    private int numClick = 0;
+
     private DataBaseAllenamento dataBaseAllenamento;
     private DataBaseEsercizio dataBaseEsercizio;
 
@@ -200,6 +203,16 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
                     intent3.putExtra(NUMERO_SERIE, 1);
                     intent3.putExtra(NUMERO_ES, 0);
                     VisualizzaAllenamentoActivity.this.startActivity(intent3);
+                }
+            }
+        });
+
+        txtAllSel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                numClick++;
+                if(numClick == 10){
+                    TimerActivity.setMajinbool();
                 }
             }
         });
