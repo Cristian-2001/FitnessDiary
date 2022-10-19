@@ -7,10 +7,12 @@ import static com.example.applicazione.allenamento.VisualizzaAllenamentoActivity
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Notification;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -49,6 +51,9 @@ public class TimerActivity extends AppCompatActivity {
 
     //tempo di recupero
     private int time;
+
+    //boolean per controllare se è attivo l'easter egg
+    private static boolean majinbool = false;
 
     private ColorStateList oldColors;
 
@@ -106,9 +111,17 @@ public class TimerActivity extends AppCompatActivity {
 
             public void onFinish() {
                 txtTimer.setText("0");
-                Uri alarm = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
-                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), alarm);
-                r.play();
+
+                Uri alarm;
+                if (majinbool) {
+                    alarm = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.siren);
+                } else {
+                    alarm = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                }
+
+                MediaPlayer r = MediaPlayer.create(getApplicationContext(), alarm);
+
+                r.start();
                 btnNextEs.setClickable(true);
                 int nightModeFlags =
                         getResources().getConfiguration().uiMode &
@@ -125,10 +138,13 @@ public class TimerActivity extends AppCompatActivity {
                     default:
                         break;
                 }
+
                 btnNextEs.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         r.stop();
+                        r.release();
+                        majinbool = false;
 
                         if (numSerie == dataBaseAllenamento.getAllenamentoById(allenamentoid).getEserciziSerie().get(numEs)) {
                             numEs++;
@@ -156,6 +172,8 @@ public class TimerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         r.stop();
+                        r.release();
+                        majinbool = false;
                         Intent intent = new Intent(TimerActivity.this, VisualizzaAllenamentoActivity.class);
                         intent.putExtra(ALLENAMENTO_ID_KEY, allenamentoid);
                         TimerActivity.this.startActivity(intent);
@@ -168,6 +186,7 @@ public class TimerActivity extends AppCompatActivity {
         btnInterrompiTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                majinbool = false;
                 countDownTimer.cancel();
                 Intent intent = new Intent(TimerActivity.this, VisualizzaAllenamentoActivity.class);
                 intent.putExtra(ALLENAMENTO_ID_KEY, allenamentoid);
@@ -191,5 +210,10 @@ public class TimerActivity extends AppCompatActivity {
         oldColors = btnNextEs.getBackgroundTintList();
     }
 
-
+    /**
+     * setta la variabile majinbool a true;
+     */
+    public static void setMajinbool() {
+        majinbool = true;
+    }
 }
