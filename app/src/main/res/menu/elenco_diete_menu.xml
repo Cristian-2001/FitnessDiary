@@ -10,5 +10,5 @@
 
     <item
         android:id="@+id/elimina_menu"
-        android:title="@string/elimina" />
+        android:title="@string/elimina_dieta" />
 </menu>

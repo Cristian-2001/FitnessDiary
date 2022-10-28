@@ -114,6 +114,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog2 = builder.create();
+                dialog2.setView(input, 60, 0, 60, 0);
                 dialog2.show();
 
                 dialog2.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -184,6 +185,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog = builder.create();
+                dialog.setView(sp, 50, 0, 50, 0);
                 dialog.show();
 
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -223,6 +225,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog = builder.create();
+                dialog.setView(input, 60, 0, 60, 0);
                 dialog.show();
 
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -267,6 +270,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog = builder.create();
+                dialog.setView(input, 60, 0, 60, 0);
                 dialog.show();
 
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -310,6 +314,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog = builder.create();
+                dialog.setView(input, 60, 0, 60, 0);
                 dialog.show();
 
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -353,6 +358,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog = builder.create();
+                dialog.setView(input, 60, 0, 60, 0);
                 dialog.show();
 
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -396,6 +402,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog = builder.create();
+                dialog.setView(input, 60, 0, 60, 0);
                 dialog.show();
 
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -439,6 +446,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog = builder.create();
+                dialog.setView(input, 60, 0, 60, 0);
                 dialog.show();
 
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -482,6 +490,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog = builder.create();
+                dialog.setView(input, 60, 0, 60, 0);
                 dialog.show();
 
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -525,6 +534,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog = builder.create();
+                dialog.setView(input, 60, 0, 60, 0);
                 dialog.show();
 
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -568,6 +578,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog = builder.create();
+                dialog.setView(input, 60, 0, 60, 0);
                 dialog.show();
 
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {

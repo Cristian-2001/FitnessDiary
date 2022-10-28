@@ -221,7 +221,7 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.visualizza_elenco_menu, menu);
+        inflater.inflate(R.menu.elenco_allenamenti_menu, menu);
         return true;
     }
 
@@ -250,6 +250,7 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
                 builder2.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog2 = builder2.create();
+                dialog2.setView(input, 60, 0, 60, 0);
                 dialog2.show();
 
                 dialog2.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {

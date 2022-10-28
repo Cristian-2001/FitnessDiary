@@ -3,7 +3,7 @@
     <string name="palestra">Palestra</string>
     <string name="dieta">Dieta</string>
     <string name="salva">Salva</string>
-    <string name="elimina">Elimina</string>
+    <string name="elimina_dieta">Elimina dieta</string>
     <string name="aggiungi_cibi">Aggiungi degli elementi</string>
     <string name="nome_dieta">Nome dieta</string>
     <string name="numero_elementi">Numero di elementi</string>
@@ -15,6 +15,7 @@
     <string name="grammi">g</string>
     <string name="annulla">Annulla</string>
     <string name="elimina_questo_elemento">Elimina questo elemento</string>
+    <string name="elimina_allenamento">Elimina allenamento</string>
 
     <string-array name="categorie">
         <item>Tutte</item>

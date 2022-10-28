@@ -147,7 +147,7 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                     layout.addView(edtSerie);
 
                     final TextView txtReps = new TextView(mContext);
-                    txtReps.setText("Inserisci il numero di ripetizioni: ");
+                    txtReps.setText("\nInserisci il numero di ripetizioni: ");
                     layout.addView(txtReps);
                     final EditText edtReps = new EditText(mContext);
                     edtReps.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -155,7 +155,7 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                     layout.addView(edtReps);
 
                     final TextView txtTRec = new TextView(mContext);
-                    txtTRec.setText("Inserisci il tempo di recupero in secondi: ");
+                    txtTRec.setText("\nInserisci il tempo di recupero in secondi: ");
                     layout.addView(txtTRec);
                     final EditText edtTRec = new EditText(mContext);
                     edtTRec.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -174,6 +174,7 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                     builder.setNegativeButton("Annulla", null);
 
                     final AlertDialog dialog = builder.create();
+                    dialog.setView(layout, 60, 60, 60, 0);
                     dialog.show();
 
                     dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -192,10 +193,10 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                                 newReps = Integer.parseInt(edtReps.getText().toString());
                             }
 
-                            if(edtTRec.getText().toString().equals("")){
-                                newTRec=tRec.get(getAdapterPosition());
-                            }else{
-                                newTRec=Integer.parseInt(edtTRec.getText().toString());
+                            if (edtTRec.getText().toString().equals("")) {
+                                newTRec = tRec.get(getAdapterPosition());
+                            } else {
+                                newTRec = Integer.parseInt(edtTRec.getText().toString());
                             }
 
                             serie.set(getAdapterPosition(), newSerie);

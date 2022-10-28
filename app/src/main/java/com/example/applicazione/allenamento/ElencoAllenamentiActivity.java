@@ -93,6 +93,7 @@ public class ElencoAllenamentiActivity extends AppCompatActivity {
                 builder.setNegativeButton("Annulla", null);
 
                 final AlertDialog dialog = builder.create();
+                dialog.setView(input, 60, 0, 60, 0);
                 dialog.show();
 
                 dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
