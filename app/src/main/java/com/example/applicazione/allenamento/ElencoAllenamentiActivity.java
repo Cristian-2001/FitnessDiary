@@ -177,7 +177,7 @@ public class ElencoAllenamentiActivity extends AppCompatActivity {
             case R.id.elimina:
                 // do your stuff
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Eliminare la dieta " + dataBaseAllenamento.getAllenamentoById(allenamenti.get(adapter.getPosition()).getId()).getNome() + "?");
+                builder.setMessage("Eliminare l'allenamento " + dataBaseAllenamento.getAllenamentoById(allenamenti.get(adapter.getPosition()).getId()).getNome() + "?");
                 builder.setPositiveButton("Elimina", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
