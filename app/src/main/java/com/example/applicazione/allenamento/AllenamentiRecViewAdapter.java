@@ -6,7 +6,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -25,6 +27,8 @@ import java.util.List;
 public class AllenamentiRecViewAdapter extends RecyclerView.Adapter<AllenamentiRecViewAdapter.ViewHolder> {
     private static final String TAG = "AllenamentiRecViewAdapt";
 
+    private int position;
+
     //elenco degli allenamenti
     private List<Allenamento> allenamenti = new ArrayList<>();
 
@@ -37,6 +41,14 @@ public class AllenamentiRecViewAdapter extends RecyclerView.Adapter<AllenamentiR
 
     public void setAllenamenti(List<Allenamento> allenamenti) {
         this.allenamenti = allenamenti;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     @NonNull
@@ -64,6 +76,14 @@ public class AllenamentiRecViewAdapter extends RecyclerView.Adapter<AllenamentiR
                 mContext.startActivity(intent);
             }
         });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setPosition(holder.getPosition());
+                return false;
+            }
+        });
     }
 
     @Override
@@ -71,7 +91,7 @@ public class AllenamentiRecViewAdapter extends RecyclerView.Adapter<AllenamentiR
         return allenamenti.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         private CardView parent;
         private TextView txtNomeAll, txtNumElemAll;
 
@@ -81,6 +101,15 @@ public class AllenamentiRecViewAdapter extends RecyclerView.Adapter<AllenamentiR
             parent = itemView.findViewById(R.id.parent);
             txtNomeAll = itemView.findViewById(R.id.txtNomeALl);
             txtNumElemAll = itemView.findViewById(R.id.txtNumElemAll);
+
+            parent.setOnCreateContextMenuListener(this);
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            //menuInfo is null
+            menu.add(Menu.NONE, R.id.elimina,
+                    Menu.NONE, R.string.elimina_allenamento);
         }
     }
 }

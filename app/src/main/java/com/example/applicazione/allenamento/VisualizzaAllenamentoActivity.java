@@ -213,6 +213,7 @@ public class VisualizzaAllenamentoActivity extends AppCompatActivity {
                 numClick++;
                 if(numClick == 10){
                     TimerActivity.setMajinbool();
+                    Toast.makeText(VisualizzaAllenamentoActivity.this, "Attenzione al volume...", Toast.LENGTH_SHORT).show();
                 }
             }
         });

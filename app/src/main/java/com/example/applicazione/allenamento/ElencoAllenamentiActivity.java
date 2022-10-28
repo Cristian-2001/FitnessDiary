@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.applicazione.MainActivity;
 import com.example.applicazione.R;
+import com.example.applicazione.dieta.ElencoDieteActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
 public class ElencoAllenamentiActivity extends AppCompatActivity {
+    private static final String TAG = "ElencoAllActivity";
 
     private FloatingActionButton fltABAddAll;
     private TextView txtEmptyAll;
@@ -67,6 +70,9 @@ public class ElencoAllenamentiActivity extends AppCompatActivity {
         if (adapter.getItemCount() == 0) {
             txtEmptyAll.setVisibility(View.VISIBLE);
         }
+
+        //registro la RecView per un ContextMenu
+        registerForContextMenu(allenamentiRecView);
 
         //creo un OnClickListener per il pulsante (apre l'Activity per aggiungere un allenamento)
         fltABAddAll.setOnClickListener(new View.OnClickListener() {
@@ -151,5 +157,41 @@ public class ElencoAllenamentiActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    /**
+     * creo e setto il ContextMenu per eliminare l'allenamento
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int position = -1;
+        try {
+            position = adapter.getPosition();
+        } catch (Exception e) {
+            Log.d(TAG, e.getLocalizedMessage(), e);
+            return super.onContextItemSelected(item);
+        }
+        switch (item.getItemId()) {
+            case R.id.elimina:
+                // do your stuff
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Eliminare la dieta " + dataBaseAllenamento.getAllenamentoById(allenamenti.get(adapter.getPosition()).getId()).getNome() + "?");
+                builder.setPositiveButton("Elimina", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ElencoAllenamentiActivity.this.finish();
+                        startActivity(getIntent());
+                        dataBaseAllenamento.eliminaAllenamento(allenamenti.get(adapter.getPosition()).getId());
+                    }
+                });
+                builder.setNegativeButton("Annulla", null);
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 }

@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -71,6 +72,9 @@ public class ElencoDieteActivity extends AppCompatActivity {
         if (adapter.getItemCount() == 0) {
             txtEmptyDiete.setVisibility(View.VISIBLE);
         }
+
+        //registro la RecView per un ContextMenu
+        registerForContextMenu(dieteRecView);
 
         fltABAddDieta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,5 +170,41 @@ public class ElencoDieteActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    /**
+     * creo e setto il ContextMenu per eliminare la dieta
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int position = -1;
+        try {
+            position = adapter.getPosition();
+        } catch (Exception e) {
+            Log.d(TAG, e.getLocalizedMessage(), e);
+            return super.onContextItemSelected(item);
+        }
+        switch (item.getItemId()) {
+            case R.id.elimina:
+                // do your stuff
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Eliminare la dieta " + dataBaseDieta.getDietaById(diete.get(adapter.getPosition()).getId()).getNome() + "?");
+                builder.setPositiveButton("Elimina", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ElencoDieteActivity.this.finish();
+                        startActivity(getIntent());
+                        dataBaseDieta.eliminaDieta(diete.get(adapter.getPosition()).getId());
+                    }
+                });
+                builder.setNegativeButton("Annulla", null);
+
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 }

@@ -6,7 +6,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -23,6 +25,8 @@ import java.util.List;
 public class DieteRecViewAdapter extends RecyclerView.Adapter<DieteRecViewAdapter.ViewHolder> {
     private final static String TAG = "DieteRecViewAdapter";
 
+    private int position;
+
     //elenco diete
     private List<Dieta> diete = new ArrayList<>();
 
@@ -35,6 +39,14 @@ public class DieteRecViewAdapter extends RecyclerView.Adapter<DieteRecViewAdapte
 
     public void setDiete(List<Dieta> diete) {
         this.diete = diete;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     @NonNull
@@ -67,6 +79,14 @@ public class DieteRecViewAdapter extends RecyclerView.Adapter<DieteRecViewAdapte
                 mContext.startActivity(intent);
             }
         });
+
+        holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                setPosition(holder.getPosition());
+                return false;
+            }
+        });
     }
 
     @Override
@@ -74,7 +94,7 @@ public class DieteRecViewAdapter extends RecyclerView.Adapter<DieteRecViewAdapte
         return diete.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         private CardView parent;
         private TextView txtNomeDieta, txtNumElem;
 
@@ -83,6 +103,16 @@ public class DieteRecViewAdapter extends RecyclerView.Adapter<DieteRecViewAdapte
             parent = itemView.findViewById(R.id.parent);
             txtNomeDieta = itemView.findViewById(R.id.txtNomeDieta);
             txtNumElem = itemView.findViewById(R.id.txtNumElem);
+
+            parent.setOnCreateContextMenuListener(this);
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v,
+                                        ContextMenu.ContextMenuInfo menuInfo) {
+            //menuInfo is null
+            menu.add(Menu.NONE, R.id.elimina,
+                    Menu.NONE, R.string.elimina_dieta);
         }
     }
 }
