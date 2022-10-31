@@ -35,7 +35,7 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
     private Button btnInsEs, btnAnnullaEs;
 
     //variabili per salvare i valori inseriti
-    private int serie, reps, rec;
+    private int serie = -1, reps = -1, rec = -1;
 
     private int esId;
 
@@ -94,49 +94,56 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
         btnInsEs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(edtTxtSerie.getText().toString().equals("")) {
+                if (edtTxtSerie.getText().toString().equals("")) {
                     txtInsSerie.setTextColor(getResources().getColor(R.color.red));
-                }else {
+                } else {
                     txtInsSerie.setTextColor(oldColors);
                     serie = Integer.parseInt(edtTxtSerie.getText().toString());
+                }
 
-                    if(edtTxtReps.getText().toString().equals("")) {
-                        txtInsReps.setTextColor(getResources().getColor(R.color.red));
-                    }else {
-                        txtInsReps.setTextColor(oldColors);
-                        reps = Integer.parseInt(edtTxtReps.getText().toString());
+                if (edtTxtReps.getText().toString().equals("")) {
+                    txtInsReps.setTextColor(getResources().getColor(R.color.red));
+                } else {
+                    txtInsReps.setTextColor(oldColors);
+                    reps = Integer.parseInt(edtTxtReps.getText().toString());
+                }
 
-                        if(edtTxtRec.getText().toString().equals("")) {
-                            txtInsRec.setTextColor(getResources().getColor(R.color.red));
-                        }else {
-                            txtInsRec.setTextColor(oldColors);
-                            rec = Integer.parseInt(edtTxtRec.getText().toString());
+                if (edtTxtRec.getText().toString().equals("")) {
+                    txtInsRec.setTextColor(getResources().getColor(R.color.red));
+                } else {
+                    txtInsRec.setTextColor(oldColors);
+                    rec = Integer.parseInt(edtTxtRec.getText().toString());
+                }
 
-                            AggiungiAllenamentoActivity.modificaAllenamento(esId, serie, reps, rec);
+                if (serie > 0 && reps > 0 && rec > 0) {
+                    AggiungiAllenamentoActivity.modificaAllenamento(esId, serie, reps, rec);
 
-                            Toast.makeText(SelezionaEsercizioActivity.this, dataBaseEsercizio.getEsercizioById(esId).getNome()
-                                            + " inserito", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SelezionaEsercizioActivity.this, dataBaseEsercizio.getEsercizioById(esId).getNome()
+                            + " inserito", Toast.LENGTH_SHORT).show();
 
-                            Intent intent1 = new Intent(SelezionaEsercizioActivity.this, AggiungiAllenamentoActivity.class);
-                            intent1.putExtra(ELENCO_ALL, -1);
-                            intent1.putExtra(ALLENAMENTO_ID_KEY, allenamentoId);
-                            SelezionaEsercizioActivity.this.startActivity(intent1);
-                        }
+                    Intent intent1 = new Intent(SelezionaEsercizioActivity.this, AggiungiAllenamentoActivity.class);
+                    intent1.putExtra(ELENCO_ALL, -1);
+                    intent1.putExtra(ALLENAMENTO_ID_KEY, allenamentoId);
+                    SelezionaEsercizioActivity.this.startActivity(intent1);
+                } else {
+                    if (serie == 0 || reps == 0 || rec == 0) {
+                        Toast.makeText(SelezionaEsercizioActivity.this, "I valori inseriti devono essere diversi da zero",
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
     }
 
-    private void initView(){
+    private void initView() {
         txtNomeEsercizio = findViewById(R.id.txtNomeEsercizio);
         txtInsSerie = findViewById(R.id.txtInsSerie);
         txtInsReps = findViewById(R.id.txtInsReps);
         txtInsRec = findViewById(R.id.txtInsRec);
 
         edtTxtSerie = findViewById(R.id.edtTxtSerie);
-        edtTxtReps=findViewById(R.id.edtTxtReps);
-        edtTxtRec= findViewById(R.id.edtTxtRec);
+        edtTxtReps = findViewById(R.id.edtTxtReps);
+        edtTxtRec = findViewById(R.id.edtTxtRec);
 
         btnInsEs = findViewById(R.id.btnInsModifiche);
         btnAnnullaEs = findViewById(R.id.btnAnnullaEs);

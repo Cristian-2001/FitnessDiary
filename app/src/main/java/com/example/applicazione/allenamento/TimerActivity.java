@@ -6,6 +6,8 @@ import static com.example.applicazione.allenamento.VisualizzaAllenamentoActivity
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.app.Notification;
 import android.content.DialogInterface;
@@ -23,6 +25,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.applicazione.MainActivity;
 import com.example.applicazione.R;
 import com.example.applicazione.dieta.ElencoDieteActivity;
 import com.example.applicazione.dieta.VisualizzaDietaActivity;

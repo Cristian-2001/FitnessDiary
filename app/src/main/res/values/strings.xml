@@ -16,6 +16,7 @@
     <string name="annulla">Annulla</string>
     <string name="elimina_questo_elemento">Elimina questo elemento</string>
     <string name="elimina_allenamento">Elimina allenamento</string>
+    <string name="ChannelId">ChannelId</string>
 
     <string-array name="categorie">
         <item>Tutte</item>
