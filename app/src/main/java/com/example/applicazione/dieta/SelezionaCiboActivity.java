@@ -88,7 +88,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
                 if (edtTxtQta.getText().toString().equals("")) {
                     //Toast.makeText(SelezionaCiboActivity.this, "Inserire la quantità", Toast.LENGTH_SHORT).show();
                     txtInsMsg.setTextColor(getResources().getColor(R.color.red));
-                }else{
+                } else {
                     InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 

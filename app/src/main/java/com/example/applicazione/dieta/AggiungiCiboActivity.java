@@ -66,7 +66,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
 
         //ricevo le variabili da AggiungiDietaActivity
         Intent intent = getIntent();
-        if(intent != null){
+        if (intent != null) {
             dietaId = intent.getIntExtra(DIETA_ID_KEY, -1);
             elencoDiete = intent.getIntExtra(ELENCO_DIETE, -1);
             nomeDieta = intent.getStringExtra(DIETA_NOME);
@@ -108,7 +108,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                 } else {
                     txtEnergia.setTextColor(oldColors);
                     energia = Double.parseDouble(edtTxtEnergia.getText().toString());
-                    if(energia > 1000){
+                    if (energia > 1000) {
                         txtEnergia.setTextColor(getResources().getColor(R.color.red));
                         allData = false;
                         Toast.makeText(AggiungiCiboActivity.this, "L'energia non può superare le 1000 kcal", Toast.LENGTH_SHORT).show();
@@ -122,7 +122,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                 } else {
                     txtLipidi.setTextColor(oldColors);
                     lipidi = Double.parseDouble(edtTxtLipidi.getText().toString());
-                    if(lipidi > 100){
+                    if (lipidi > 100) {
                         txtLipidi.setTextColor(getResources().getColor(R.color.red));
                         allData = false;
                         Toast.makeText(AggiungiCiboActivity.this, "Il valore di lipidi non può superare i 100 g", Toast.LENGTH_SHORT).show();
@@ -136,7 +136,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                 } else {
                     txtAcidiGrassi.setTextColor(oldColors);
                     acidigrassi = Double.parseDouble(edtTxtAcidiGrassi.getText().toString());
-                    if(acidigrassi > 100){
+                    if (acidigrassi > 100) {
                         txtAcidiGrassi.setTextColor(getResources().getColor(R.color.red));
                         allData = false;
                         Toast.makeText(AggiungiCiboActivity.this, "Il valore di acidi grassi non può superare i 100 g", Toast.LENGTH_SHORT).show();
@@ -150,7 +150,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                 } else {
                     txtColesterolo.setTextColor(oldColors);
                     colesterolo = Double.parseDouble(edtTxtColesterolo.getText().toString());
-                    if(colesterolo > 100){
+                    if (colesterolo > 100) {
                         txtColesterolo.setTextColor(getResources().getColor(R.color.red));
                         allData = false;
                         Toast.makeText(AggiungiCiboActivity.this, "Il valore di colesterolo non può superare i 100 g", Toast.LENGTH_SHORT).show();
@@ -164,7 +164,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                 } else {
                     txtCarboidrati.setTextColor(oldColors);
                     carboidrati = Double.parseDouble(edtTxtCarboidrati.getText().toString());
-                    if(carboidrati > 100){
+                    if (carboidrati > 100) {
                         txtCarboidrati.setTextColor(getResources().getColor(R.color.red));
                         allData = false;
                         Toast.makeText(AggiungiCiboActivity.this, "Il valore dei carboidrati non può superare i 100 g", Toast.LENGTH_SHORT).show();
@@ -178,7 +178,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                 } else {
                     txtZuccheri.setTextColor(oldColors);
                     zuccheri = Double.parseDouble(edtTxtZuccheri.getText().toString());
-                    if(zuccheri > 100){
+                    if (zuccheri > 100) {
                         txtZuccheri.setTextColor(getResources().getColor(R.color.red));
                         allData = false;
                         Toast.makeText(AggiungiCiboActivity.this, "Il valore degli zuccheri non può superare i 100 g", Toast.LENGTH_SHORT).show();
@@ -192,7 +192,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                 } else {
                     txtFibre.setTextColor(oldColors);
                     fibre = Double.parseDouble(edtTxtFibre.getText().toString());
-                    if(fibre > 100){
+                    if (fibre > 100) {
                         txtFibre.setTextColor(getResources().getColor(R.color.red));
                         allData = false;
                         Toast.makeText(AggiungiCiboActivity.this, "Il valore delle fibre non può superare i 100 g", Toast.LENGTH_SHORT).show();
@@ -206,7 +206,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                 } else {
                     txtProteine.setTextColor(oldColors);
                     proteine = Double.parseDouble(edtTxtProteine.getText().toString());
-                    if(proteine > 100){
+                    if (proteine > 100) {
                         txtProteine.setTextColor(getResources().getColor(R.color.red));
                         allData = false;
                         Toast.makeText(AggiungiCiboActivity.this, "Il valore di proteine non può superare i 100 g", Toast.LENGTH_SHORT).show();
@@ -220,7 +220,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                 } else {
                     txtSale.setTextColor(oldColors);
                     sale = Double.parseDouble(edtTxtSale.getText().toString());
-                    if(sale > 100){
+                    if (sale > 100) {
                         txtSale.setTextColor(getResources().getColor(R.color.red));
                         allData = false;
                         Toast.makeText(AggiungiCiboActivity.this, "Il valore di sale non può superare i 100 g", Toast.LENGTH_SHORT).show();
@@ -229,7 +229,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
 
                 cat = spnCat.getSelectedItem().toString();
 
-                if(allData){
+                if (allData) {
                     boolean inserito = dataBaseCibo.addOne(new Cibo(nome, cat, energia, lipidi, acidigrassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale));
                     Log.d(TAG, "onClick: INSERITO: " + inserito);
 
