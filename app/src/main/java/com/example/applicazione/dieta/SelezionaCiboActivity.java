@@ -1,6 +1,7 @@
 package com.example.applicazione.dieta;
 
 import static com.example.applicazione.dieta.AggiungiDietaActivity.ELENCO_DIETE;
+import static com.example.applicazione.dieta.ElencoDieteActivity.LIQUIDS;
 import static com.example.applicazione.dieta.VisualizzaDietaActivity.DIETA_ID_KEY;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,8 @@ import android.widget.Toast;
 
 import com.example.applicazione.R;
 
+import java.util.Arrays;
+
 public class SelezionaCiboActivity extends AppCompatActivity {
     //chiave per l'id del cibo selezionato
     public static final String CIBO_ID_KEY = "ciboId";
@@ -31,7 +34,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
     // vale -2 se nuova, l'id della dieta se è già esistente, -1 default
     private int dietaId;
 
-    private TextView txtNomeCibo, txtInsMsg, txtValori;
+    private TextView txtNomeCibo, txtInsMsg, txtValori, txtG;
     private EditText edtTxtQta;
     private Button btnAnnulla, btnInserisci, btnCalcola;
     private int ciboId;
@@ -64,6 +67,11 @@ public class SelezionaCiboActivity extends AppCompatActivity {
             if (ciboId != -1) {
                 cibo = dataBaseCibo.getCiboById(ciboId);
                 txtNomeCibo.setText(cibo.getNome());
+                if (Arrays.asList(LIQUIDS).contains(cibo.getCategoria())) {
+                    txtG.setText("mL");
+                } else {
+                    txtG.setText("g");
+                }
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SelezionaCiboActivity.this);
                 builder.setMessage("Errore nella selezione del cibo");
@@ -155,6 +163,7 @@ public class SelezionaCiboActivity extends AppCompatActivity {
         txtNomeCibo = findViewById(R.id.txtNomeCibo);
         txtInsMsg = findViewById(R.id.txtInsMsg);
         txtValori = findViewById(R.id.txtValori);
+        txtG = findViewById(R.id.txtG);
 
         edtTxtQta = findViewById(R.id.edtTxtQta);
 

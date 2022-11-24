@@ -35,6 +35,7 @@ import java.util.List;
 
 public class ElencoDieteActivity extends AppCompatActivity {
     private static final String TAG = "ElencoDieteActivity";
+    public static final String[] LIQUIDS = new String[] {"Bevande Alcoliche", "Bevande Analcoliche", "Brodi"};
 
     private FloatingActionButton fltABAddDieta;
     private TextView txtEmptyDiete;

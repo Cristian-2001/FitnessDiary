@@ -1,5 +1,7 @@
 package com.example.applicazione.dieta;
 
+import static com.example.applicazione.dieta.ElencoDieteActivity.LIQUIDS;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
@@ -24,6 +26,7 @@ import androidx.transition.TransitionManager;
 import com.example.applicazione.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecViewAdapter.ViewHolder> {
@@ -77,8 +80,13 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
         holder.txtCategoria.setText(cibi.get(position).getCategoria());
 
         double energia, lipidi, acidi_grassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale;
+        String categoria = cibi.get(position).getCategoria();
         Double qta = quantita.get(position);
-        holder.txtQta.setText(qta.toString() + " g");
+        if (Arrays.asList(LIQUIDS).contains(categoria)) {
+            holder.txtQta.setText(qta.toString() + " mL");
+        } else {
+            holder.txtQta.setText(qta.toString() + " g");
+        }
 
         energia = cibi.get(position).getEnergia() * qta / 100;
         lipidi = cibi.get(position).getLipidi() * qta / 100;
@@ -99,7 +107,6 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
         holder.txtZuccheri.setText(String.format("Zuccheri: %.2f g", zuccheri));
         holder.txtFibre.setText(String.format("Fibre: %.2f g", fibre));
         holder.txtSale.setText(String.format("Sale: %.2f g", sale));
-
 
 
         if (cibi.get(position).isExpanded()) {
@@ -245,7 +252,7 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
         }
     }
 
-    private void removeAt(int position){
+    private void removeAt(int position) {
         cibiId.remove(position);
         cibi.remove(position);
         quantita.remove(position);
@@ -254,7 +261,7 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, numElem);
         VisualizzaDietaActivity.setModificato();
-        if(numElem == 0){
+        if (numElem == 0) {
             VisualizzaDietaActivity.setLast_item();
         }
     }

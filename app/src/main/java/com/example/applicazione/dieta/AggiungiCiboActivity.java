@@ -2,6 +2,7 @@ package com.example.applicazione.dieta;
 
 import static com.example.applicazione.dieta.AggiungiDietaActivity.DIETA_NOME;
 import static com.example.applicazione.dieta.AggiungiDietaActivity.ELENCO_DIETE;
+import static com.example.applicazione.dieta.ElencoDieteActivity.LIQUIDS;
 import static com.example.applicazione.dieta.VisualizzaDietaActivity.DIETA_ID_KEY;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -23,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.applicazione.R;
+
+import java.util.Arrays;
 
 public class AggiungiCiboActivity extends AppCompatActivity {
     private static final String TAG = "AggiungiCiboActivity";
@@ -32,7 +36,7 @@ public class AggiungiCiboActivity extends AppCompatActivity {
     private Spinner spnCat;
     private Button btnUndo, btnSave;
     private TextView txtNome, txtEnergia, txtLipidi, txtAcidiGrassi, txtColesterolo,
-            txtCarboidrati, txtZuccheri, txtFibre, txtProteine, txtSale;
+            txtCarboidrati, txtZuccheri, txtFibre, txtProteine, txtSale, txt100g;
 
     private ColorStateList oldColors;
 
@@ -72,6 +76,23 @@ public class AggiungiCiboActivity extends AppCompatActivity {
             nomeDieta = intent.getStringExtra(DIETA_NOME);
         }
 
+        spnCat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                cat = spnCat.getSelectedItem().toString();
+                if (Arrays.asList(LIQUIDS).contains(cat)) {
+                    txt100g.setText("Inserire i valori di 100mL di prodotto");
+                } else {
+                    txt100g.setText("Inserire i valori di 100g di prodotto");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
+            }
+        });
+
         //btnUndo chiude l'activity senza salvare nulla
         btnUndo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +121,9 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                         allData = false;
                     }
                 }
+
+
+                cat = spnCat.getSelectedItem().toString();
 
 
                 if (edtTxtEnergia.getText().toString().equals("")) {
@@ -227,8 +251,6 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                     }
                 }
 
-                cat = spnCat.getSelectedItem().toString();
-
                 if (allData) {
                     boolean inserito = dataBaseCibo.addOne(new Cibo(nome, cat, energia, lipidi, acidigrassi, colesterolo, carboidrati, zuccheri, fibre, proteine, sale));
                     Log.d(TAG, "onClick: INSERITO: " + inserito);
@@ -312,6 +334,8 @@ public class AggiungiCiboActivity extends AppCompatActivity {
         txtFibre = findViewById(R.id.txtFibre);
         txtProteine = findViewById(R.id.txtProteine);
         txtSale = findViewById(R.id.txtSale);
+
+        txt100g = findViewById(R.id.txt100g);
 
         oldColors = txtNome.getTextColors();
     }
