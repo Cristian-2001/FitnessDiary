@@ -127,6 +127,25 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
                     SelezionaEsercizioActivity.this.startActivity(intent1);
                 } else {
                     if (serie == 0 || reps == 0 || rec == 0) {
+
+                        if (serie == 0) {
+                            txtInsSerie.setTextColor(getResources().getColor(R.color.red));
+                        } else {
+                            txtInsSerie.setTextColor(oldColors);
+                        }
+
+                        if (reps == 0) {
+                            txtInsReps.setTextColor(getResources().getColor(R.color.red));
+                        } else {
+                            txtInsReps.setTextColor(oldColors);
+                        }
+
+                        if (rec == 0) {
+                            txtInsRec.setTextColor(getResources().getColor(R.color.red));
+                        } else {
+                            txtInsRec.setTextColor(oldColors);
+                        }
+
                         Toast.makeText(SelezionaEsercizioActivity.this, "I valori inseriti devono essere diversi da zero",
                                 Toast.LENGTH_SHORT).show();
                     }

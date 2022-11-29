@@ -268,7 +268,7 @@ public class DataBaseCibo extends SQLiteOpenHelper {
     }
 
     /**
-     * ritorna l'elenco di cibi della categoria data
+     * ritorna l'elenco di cibi della categoria e del nome dati
      *
      * @param cat
      * @param name
@@ -316,10 +316,17 @@ public class DataBaseCibo extends SQLiteOpenHelper {
 
         cursor.close();
         db.close();
+        String finalName = name;
         returnList.sort(new Comparator<Cibo>() {
             @Override
             public int compare(Cibo cibo, Cibo t1) {
-                return cibo.getNome().compareTo(t1.getNome());
+                if (cibo.getNome().startsWith(finalName) && !t1.getNome().startsWith(finalName)) {
+                    return -1;
+                } else if (!cibo.getNome().startsWith(finalName) && t1.getNome().startsWith(finalName)) {
+                    return 1;
+                } else {
+                    return cibo.getNome().compareTo(t1.getNome());
+                }
             }
         });
         return returnList;
@@ -420,7 +427,7 @@ public class DataBaseCibo extends SQLiteOpenHelper {
         return modify != -1;
     }
 
-    public boolean eliminaCibo(int id){
+    public boolean eliminaCibo(int id) {
         SQLiteDatabase db = getWritableDatabase();
 
         long delete = db.delete(TABLE_CIBI, COLUMN_ID + " = ?", new String[]{String.valueOf(id)});
