@@ -6,6 +6,8 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -121,6 +124,35 @@ public class AggiungiDietaActivity extends AppCompatActivity {
             txtNumCorr.setText(num + " elementi");
         }
 
+        edtTxtCercaNome.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                cercaCibi();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //do nothing
+            }
+        });
+
+        spnCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                cercaCibi();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
+            }
+        });
+
         btnCerca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,24 +160,8 @@ public class AggiungiDietaActivity extends AppCompatActivity {
                 if (imm.isAcceptingText()) {
                     imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 }
-                txtEmpty.setVisibility(View.GONE);
 
-                String cat = spnCategoria.getSelectedItem().toString();
-                String nome = edtTxtCercaNome.getText().toString();
-
-                if (cat.equals("Tutte") && nome.equals("")) {
-                    cibi = dataBaseCibo.getAllCibi();
-                } else {
-                    Log.d(TAG, "onClick: ECCOMI");
-                    cibi = dataBaseCibo.getCibiByCatNome(cat, nome);
-                }
-
-                adapter.setCibi(cibi);
-                cibiRecView.setAdapter(adapter);
-
-                if (adapter.getItemCount() == 0) {
-                    txtEmpty.setVisibility(View.VISIBLE);
-                }
+                cercaCibi();
             }
         });
 
@@ -262,6 +278,30 @@ public class AggiungiDietaActivity extends AppCompatActivity {
 
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * cerca i cibi con i criteri inseriti e aggiorna l'elenco
+     */
+    private void cercaCibi() {
+        txtEmpty.setVisibility(View.GONE);
+
+        String cat = spnCategoria.getSelectedItem().toString();
+        String nome = edtTxtCercaNome.getText().toString();
+
+        if (cat.equals("Tutte") && nome.equals("")) {
+            cibi = dataBaseCibo.getAllCibi();
+        } else {
+            Log.d(TAG, "onClick: ECCOMI");
+            cibi = dataBaseCibo.getCibiByCatNome(cat, nome);
+        }
+
+        adapter.setCibi(cibi);
+        cibiRecView.setAdapter(adapter);
+
+        if (adapter.getItemCount() == 0) {
+            txtEmpty.setVisibility(View.VISIBLE);
         }
     }
 }
