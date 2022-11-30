@@ -8,15 +8,19 @@ import static com.example.applicazione.allenamento.AggiungiAllenamentoActivity.E
 import static com.example.applicazione.allenamento.AggiungiAllenamentoActivity.ES_PARTECORPO_KEY;
 import static com.example.applicazione.allenamento.AggiungiAllenamentoActivity.ES_TIPO_KEY;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.applicazione.MainActivity;
 import com.example.applicazione.R;
 
 public class FiltriEserciziActivity extends AppCompatActivity {
@@ -34,6 +38,14 @@ public class FiltriEserciziActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filtri_esercizi);
+
+        //chiamo l'action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        //mostro il back button
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         initView();
 
@@ -67,6 +79,30 @@ public class FiltriEserciziActivity extends AppCompatActivity {
                 FiltriEserciziActivity.this.startActivity(intent);
             }
         });
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //this.finish();
+                goBack();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        goBack();
+    }
+
+    /**
+     * funzione per tornare indietro
+     * faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+     */
+    private void goBack() {
+        finish();
     }
 
     private void initView() {

@@ -216,25 +216,9 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         Log.d(TAG, "modificaDieta: NUM: " + num);
     }
 
-
-    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiDietaActivity.this);
-        builder.setMessage("La dieta corrente non verrà salvata. Vuoi tornare indietro?");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                AggiungiDietaActivity.this.finish();
-                Intent intent = new Intent(AggiungiDietaActivity.this, ElencoDieteActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });
-        builder.setNegativeButton("Annulla", null);
-
-        final AlertDialog dialog = builder.create();
-        dialog.show();
+        goBack();
     }
 
     /**
@@ -260,25 +244,33 @@ public class AggiungiDietaActivity extends AppCompatActivity {
                 return true;
 
             case android.R.id.home:
-                AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiDietaActivity.this);
-                builder.setMessage("La dieta corrente non verrà salvata. Vuoi tornare indietro?");
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        AggiungiDietaActivity.this.finish();
-                        Intent intent = new Intent(AggiungiDietaActivity.this, ElencoDieteActivity.class);
-                        AggiungiDietaActivity.this.startActivity(intent);
-                    }
-                });
-                builder.setNegativeButton("Annulla", null);
-
-                final AlertDialog dialog = builder.create();
-                dialog.show();
+                goBack();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * funzione per tornare indietro
+     * faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+     */
+    private void goBack() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiDietaActivity.this);
+        builder.setMessage("La dieta corrente non verrà salvata. Vuoi tornare indietro?");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                AggiungiDietaActivity.this.finish();
+                Intent intent = new Intent(AggiungiDietaActivity.this, ElencoDieteActivity.class);
+                AggiungiDietaActivity.this.startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Annulla", null);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     /**

@@ -268,7 +268,26 @@ public class AggiungiCiboActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        goBack();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                goBack();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * funzione per tornare indietro
+     * faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+     */
+    private void goBack() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiCiboActivity.this);
         builder.setMessage("Il cibo corrente non verrà salvato. Vuoi tornare indietro?");
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
@@ -280,28 +299,6 @@ public class AggiungiCiboActivity extends AppCompatActivity {
 
         final AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiCiboActivity.this);
-                builder.setMessage("Il cibo corrente non verrà salvato. Vuoi tornare indietro?");
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        AggiungiCiboActivity.this.finish();
-                    }
-                });
-                builder.setNegativeButton("Annulla", null);
-
-                final AlertDialog dialog = builder.create();
-                dialog.show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     /**

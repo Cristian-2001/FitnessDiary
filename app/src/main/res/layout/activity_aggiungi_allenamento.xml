@@ -7,16 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".allenamento.AggiungiAllenamentoActivity">
 
-    <Button
-        android:id="@+id/btnFiltra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Filtra"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/esRecView"
         android:layout_width="match_parent"
@@ -25,7 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFiltra" />
+        app:layout_constraintTop_toBottomOf="@+id/expandableConsLayout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -64,10 +54,192 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nessun allenamento trovato"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtNomeCerca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Nome"
+        app:layout_constraintEnd_toStartOf="@+id/edtTxtNomeCercaEs"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtTxtNomeCercaEs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nome"
+        android:inputType="textCapSentences"
+        app:layout_constraintBottom_toBottomOf="@+id/txtNomeCerca"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/txtNomeCerca"
+        app:layout_constraintTop_toTopOf="@+id/txtNomeCerca" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/expandableConsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtNomeCercaEs">
+
+        <TextView
+            android:id="@+id/txtGruppoMusc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gruppo muscolare:"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="19dp" />
+
+        <Spinner
+            android:id="@+id/spnGruppoMusc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:entries="@array/gruppo_musc"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/txtGruppoMusc"
+            tools:layout_editor_absoluteX="118dp" />
+
+        <TextView
+            android:id="@+id/txtDifficolta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Difficoltà:"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/spnGruppoMusc"
+            tools:layout_editor_absoluteX="19dp" />
+
+        <Spinner
+            android:id="@+id/spnDifficolta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/difficolta"
+            app:layout_constraintBottom_toBottomOf="@+id/txtDifficolta"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/txtDifficolta"
+            tools:layout_editor_absoluteX="147dp" />
+
+        <TextView
+            android:id="@+id/txtParteCorpo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Parte del corpo:"
+
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/txtDifficolta"
+            tools:layout_editor_absoluteX="19dp" />
+
+        <Spinner
+            android:id="@+id/spnParteCorpo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/parte_corpo"
+            app:layout_constraintBottom_toBottomOf="@+id/txtParteCorpo"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/txtParteCorpo"
+            tools:layout_editor_absoluteX="147dp" />
+
+        <TextView
+            android:id="@+id/txtTipologia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Tipologia:"
+            app:layout_constraintStart_toEndOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/txtParteCorpo"
+            tools:layout_editor_absoluteX="19dp" />
+
+        <Spinner
+            android:id="@+id/spnTipologia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/tipologia"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTipologia"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/txtTipologia"
+            tools:layout_editor_absoluteX="147dp" />
+
+        <TextView
+            android:id="@+id/txtModalita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Modalità:"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/txtTipologia"
+            tools:layout_editor_absoluteX="19dp" />
+
+        <Spinner
+            android:id="@+id/spnModalita"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/modalita"
+            app:layout_constraintBottom_toBottomOf="@+id/txtModalita"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toTopOf="@+id/txtModalita"
+            tools:layout_editor_absoluteX="147dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="119dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="148dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/btnFiltra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtTxtNomeCercaEs"
+        app:layout_constraintStart_toEndOf="@+id/edtTxtNomeCercaEs"
+        app:layout_constraintTop_toTopOf="@+id/edtTxtNomeCercaEs"
+        app:srcCompat="@drawable/ic_filter" />
+
+    <ImageView
+        android:id="@+id/btnFiltraExp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:rotation="180"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/edtTxtNomeCercaEs"
+        app:layout_constraintStart_toEndOf="@+id/edtTxtNomeCercaEs"
+        app:layout_constraintTop_toTopOf="@+id/edtTxtNomeCercaEs"
+        app:srcCompat="@drawable/ic_filter" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

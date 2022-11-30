@@ -96,6 +96,7 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (edtTxtSerie.getText().toString().equals("")) {
                     txtInsSerie.setTextColor(getResources().getColor(R.color.red));
+                    serie = -1;
                 } else {
                     txtInsSerie.setTextColor(oldColors);
                     serie = Integer.parseInt(edtTxtSerie.getText().toString());
@@ -103,6 +104,7 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
 
                 if (edtTxtReps.getText().toString().equals("")) {
                     txtInsReps.setTextColor(getResources().getColor(R.color.red));
+                    reps = -1;
                 } else {
                     txtInsReps.setTextColor(oldColors);
                     reps = Integer.parseInt(edtTxtReps.getText().toString());
@@ -110,6 +112,7 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
 
                 if (edtTxtRec.getText().toString().equals("")) {
                     txtInsRec.setTextColor(getResources().getColor(R.color.red));
+                    rec = -1;
                 } else {
                     txtInsRec.setTextColor(oldColors);
                     rec = Integer.parseInt(edtTxtRec.getText().toString());
@@ -130,19 +133,19 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
 
                         if (serie == 0) {
                             txtInsSerie.setTextColor(getResources().getColor(R.color.red));
-                        } else {
+                        } else if (serie > 0) {
                             txtInsSerie.setTextColor(oldColors);
                         }
 
                         if (reps == 0) {
                             txtInsReps.setTextColor(getResources().getColor(R.color.red));
-                        } else {
+                        } else if (reps > 0) {
                             txtInsReps.setTextColor(oldColors);
                         }
 
                         if (rec == 0) {
                             txtInsRec.setTextColor(getResources().getColor(R.color.red));
-                        } else {
+                        } else if (rec > 0) {
                             txtInsRec.setTextColor(oldColors);
                         }
 
@@ -176,17 +179,24 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                goBack();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, AggiungiDietaActivity.class);
+        goBack();
+    }
+
+    /**
+     * funzione per tornare indietro
+     * faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+     */
+    private void goBack() {
+        Intent intent = new Intent(this, AggiungiAllenamentoActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

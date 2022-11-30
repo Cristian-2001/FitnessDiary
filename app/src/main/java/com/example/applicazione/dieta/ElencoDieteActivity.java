@@ -35,7 +35,7 @@ import java.util.List;
 
 public class ElencoDieteActivity extends AppCompatActivity {
     private static final String TAG = "ElencoDieteActivity";
-    public static final String[] LIQUIDS = new String[] {"Bevande Alcoliche", "Bevande Analcoliche", "Brodi"};
+    public static final String[] LIQUIDS = new String[]{"Bevande Alcoliche", "Bevande Analcoliche", "Brodi"};
 
     private FloatingActionButton fltABAddDieta;
     private TextView txtEmptyDiete;
@@ -155,19 +155,23 @@ public class ElencoDieteActivity extends AppCompatActivity {
                 return true;
 
             case android.R.id.home:
-                this.finish();
-                Intent intent = new Intent(ElencoDieteActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                ElencoDieteActivity.this.startActivity(intent);
+                goBack();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
     @Override
     public void onBackPressed() {
+        goBack();
+    }
+
+    /**
+     * funzione per tornare indietro
+     * faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+     */
+    private void goBack() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -175,6 +179,7 @@ public class ElencoDieteActivity extends AppCompatActivity {
 
     /**
      * creo e setto il ContextMenu per eliminare la dieta
+     *
      * @param item
      * @return
      */

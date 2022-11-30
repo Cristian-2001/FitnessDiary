@@ -141,19 +141,24 @@ public class ElencoAllenamentiActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
-                Intent intent = new Intent(ElencoAllenamentiActivity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                ElencoAllenamentiActivity.this.startActivity(intent);
+                //this.finish();
+                goBack();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
     @Override
     public void onBackPressed() {
+        goBack();
+    }
+
+    /**
+     * funzione per tornare indietro
+     * faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+     */
+    private void goBack() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -161,6 +166,7 @@ public class ElencoAllenamentiActivity extends AppCompatActivity {
 
     /**
      * creo e setto il ContextMenu per eliminare l'allenamento
+     *
      * @param item
      * @return
      */

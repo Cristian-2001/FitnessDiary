@@ -6,16 +6,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +55,17 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
     private DataBaseEsercizio dataBaseEsercizio;
 
     private TextView txtNumEs, txtEmptyEs;
-    private Button btnFiltra, btnSalvaALl;
+    private EditText edtTxtNomeCercaEs;
+    private Button btnSalvaALl;
+    private ImageView btnFiltra, btnFiltraExp;
+
+    private ConstraintLayout expandableConsLayout;
+
+    private Spinner spnGruppoMusc;
+    private Spinner spnDifficolta;
+    private Spinner spnParteCorpo;
+    private Spinner spnTipologia;
+    private Spinner spnModalita;
 
     private RecyclerView esRecView;
     private EserciziRecViewAdapter adapter;
@@ -89,7 +106,7 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
                 eserciziReps.clear();
                 eserciziTRec.clear();
                 numElem = 0;
-            }else if (intent.getIntExtra(ELENCO_ALL, -1) == 2) {
+            } else if (intent.getIntExtra(ELENCO_ALL, -1) == 2) {
                 //sono arrivato dai filtri quindi li applico
                 nome = intent.getStringExtra(ES_NOME_KEY);
                 gruppoMusc = intent.getStringExtra(ES_GRUPPOMUSC_KEY);
@@ -114,7 +131,6 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
             }
 
 
-
         }
 
         if (adapter.getItemCount() == 0) {
@@ -132,8 +148,20 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
         btnFiltra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AggiungiAllenamentoActivity.this, FiltriEserciziActivity.class);
-                AggiungiAllenamentoActivity.this.startActivity(intent);
+                btnFiltraExp.setVisibility(View.VISIBLE);
+                expandableConsLayout.setVisibility(View.VISIBLE);
+                btnFiltra.setVisibility(View.GONE);
+                /*Intent intent = new Intent(AggiungiAllenamentoActivity.this, FiltriEserciziActivity.class);
+                AggiungiAllenamentoActivity.this.startActivity(intent);*/
+            }
+        });
+
+        btnFiltraExp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnFiltraExp.setVisibility(View.GONE);
+                expandableConsLayout.setVisibility(View.GONE);
+                btnFiltra.setVisibility(View.VISIBLE);
             }
         });
 
@@ -161,22 +189,111 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
                 AggiungiAllenamentoActivity.this.startActivity(intent1);
             }
         });
+
+        edtTxtNomeCercaEs.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                cercaEsercizi();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //do nothing
+            }
+        });
+
+        spnGruppoMusc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                cercaEsercizi();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
+            }
+        });
+
+        spnDifficolta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                cercaEsercizi();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
+            }
+        });
+
+        spnParteCorpo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                cercaEsercizi();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
+            }
+        });
+
+        spnTipologia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                cercaEsercizi();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
+            }
+        });
+
+        spnModalita.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                cercaEsercizi();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //do nothing
+            }
+        });
     }
 
     private void initView() {
         /* inizializzo gli elementi dell'activity */
         txtNumEs = findViewById(R.id.txtNumEs);
         txtEmptyEs = findViewById(R.id.txtEmptyEs);
+        edtTxtNomeCercaEs = findViewById(R.id.edtTxtNomeCercaEs);
         btnFiltra = findViewById(R.id.btnFiltra);
+        btnFiltraExp = findViewById(R.id.btnFiltraExp);
         btnSalvaALl = findViewById(R.id.btnSalvaAll);
 
         adapter = new EserciziRecViewAdapter(this);
         esRecView = findViewById(R.id.esRecView);
         esRecView.setAdapter(adapter);
         esRecView.setLayoutManager(new LinearLayoutManager(this));
+
+        expandableConsLayout = findViewById(R.id.expandableConsLayout);
+
+        spnGruppoMusc = findViewById(R.id.spnGruppoMusc);
+        spnDifficolta = findViewById(R.id.spnDifficolta);
+        spnParteCorpo = findViewById(R.id.spnParteCorpo);
+        spnTipologia = findViewById(R.id.spnTipologia);
+        spnModalita = findViewById(R.id.spnModalita);
     }
 
-    //metodo per salvare i dati
+    /**
+     * metodo per salvare i dati
+     */
     public static void modificaAllenamento(int esId, int serie, int reps, int rec) {
         eserciziId.add(esId);
         eserciziSerie.add(serie);
@@ -188,29 +305,23 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiAllenamentoActivity.this);
-                builder.setMessage("L'allenamento corrente non verrà salvato. Vuoi tornare indietro?");
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        AggiungiAllenamentoActivity.this.finish();
-                        Intent intent = new Intent(AggiungiAllenamentoActivity.this, ElencoAllenamentiActivity.class);
-                        AggiungiAllenamentoActivity.this.startActivity(intent);
-                    }
-                });
-                builder.setNegativeButton("Annulla", null);
-
-                final AlertDialog dialog = builder.create();
-                dialog.show();
+                goBack();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
     @Override
     public void onBackPressed() {
+        goBack();
+    }
+
+    /**
+     * funzione per tornare indietro
+     * faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+     */
+    private void goBack() {
         AlertDialog.Builder builder = new AlertDialog.Builder(AggiungiAllenamentoActivity.this);
         builder.setMessage("L'allenamento corrente non verrà salvato. Vuoi tornare indietro?");
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -226,5 +337,27 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
 
         final AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    /**
+     * cerca gli esercizi con i criteri inseriti e aggiorna l'elenco
+     */
+    private void cercaEsercizi() {
+        txtEmptyEs.setVisibility(View.GONE);
+
+        nome = edtTxtNomeCercaEs.getText().toString();
+        gruppoMusc = spnGruppoMusc.getSelectedItem().toString();
+        difficolta = spnDifficolta.getSelectedItem().toString();
+        parteCorpo = spnParteCorpo.getSelectedItem().toString();
+        tipologia = spnTipologia.getSelectedItem().toString();
+        modalita = spnModalita.getSelectedItem().toString();
+
+        esercizi = dataBaseEsercizio.getEserciziFiltri(nome, gruppoMusc, difficolta, parteCorpo, tipologia, modalita);
+        adapter.setEsercizi(esercizi);
+        esRecView.setAdapter(adapter);
+
+        if(adapter.getItemCount() == 0){
+            txtEmptyEs.setVisibility(View.VISIBLE);
+        }
     }
 }

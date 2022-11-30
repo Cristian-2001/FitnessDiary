@@ -285,30 +285,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
                 return true;
 
             case android.R.id.home:
-                //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
-                //controllo anche che non ci siano modifiche non salvate, altrimenti lo segnalo
-                if (modificato) {
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(VisualizzaDietaActivity.this);
-                    builder1.setMessage("Le modifiche non verranno salvate. Vuoi tornare indietro?");
-                    builder1.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            VisualizzaDietaActivity.this.finish();
-                            Intent intent1 = new Intent(VisualizzaDietaActivity.this, ElencoDieteActivity.class);
-                            intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            VisualizzaDietaActivity.this.startActivity(intent1);
-                        }
-                    });
-                    builder1.setNegativeButton("Annulla", null);
-
-                    final AlertDialog dialog1 = builder1.create();
-                    dialog1.show();
-                } else {
-                    VisualizzaDietaActivity.this.finish();
-                    Intent intent1 = new Intent(VisualizzaDietaActivity.this, ElencoDieteActivity.class);
-                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    VisualizzaDietaActivity.this.startActivity(intent1);
-                }
+                goBack();
                 return true;
 
             default:
@@ -372,11 +349,17 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
         return ret;
     }
 
-    /**faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
-     * controllo anche che non ci siano modifiche non salvate, altrimenti lo segnalo
-     */
     @Override
     public void onBackPressed() {
+        goBack();
+    }
+
+    /**
+     * funzione per tornare indietro
+     * faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+     * controllo anche che non ci siano modifiche non salvate, altrimenti lo segnalo
+     */
+    private void goBack() {
         if (modificato) {
             AlertDialog.Builder builder = new AlertDialog.Builder(VisualizzaDietaActivity.this);
             builder.setMessage("Le modifiche non verranno salvate. Vuoi tornare indietro?");

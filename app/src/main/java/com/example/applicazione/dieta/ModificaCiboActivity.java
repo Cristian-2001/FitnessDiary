@@ -616,10 +616,9 @@ public class ModificaCiboActivity extends AppCompatActivity {
         txtSal.setText("Sale: " + cibo.getSale().toString() + " g");
     }
 
-    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
     @Override
     public void onBackPressed() {
-        this.finish();
+        goBack();
     }
 
     /**
@@ -646,7 +645,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
 
                         if (nomiDiete.size() > 0) {
                             StringBuilder sb = new StringBuilder();
-                            for(String s : nomiDiete){
+                            for (String s : nomiDiete) {
                                 sb.append(s);
                                 sb.append("\n");
                             }
@@ -675,14 +674,22 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 return true;
 
             case android.R.id.home:
-                ModificaCiboActivity.this.finish();
-                Intent intent = new Intent(this, ElencoCibiActivity.class);
-                this.startActivity(intent);
+                goBack();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * funzione per tornare indietro
+     * faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+     */
+    private void goBack() {
+        Intent intent = new Intent(this, ElencoCibiActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     /**

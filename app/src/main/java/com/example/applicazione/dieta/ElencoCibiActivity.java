@@ -56,7 +56,7 @@ public class ElencoCibiActivity extends AppCompatActivity {
 
         //ricevo le variabili da AggiungiDietaActivity
         Intent intent = getIntent();
-        if(intent != null){
+        if (intent != null) {
             dietaId = intent.getIntExtra(DIETA_ID_KEY, -1);
             elencoDiete = intent.getIntExtra(ELENCO_DIETE, -1);
             nomeDieta = intent.getStringExtra(DIETA_NOME);
@@ -65,27 +65,21 @@ public class ElencoCibiActivity extends AppCompatActivity {
         cibi = dataBaseCibo.getInseriti();
         adapter.setCibi(cibi);
 
-        if(adapter.getItemCount() == 0){
+        if (adapter.getItemCount() == 0) {
             txtEmptyElenco.setVisibility(View.VISIBLE);
         }
     }
 
-    //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
     @Override
     public void onBackPressed() {
-        Intent intent1 = new Intent(this, ElencoDieteActivity.class);
-        intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        ElencoCibiActivity.this.startActivity(intent1);
+        goBack();
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                //faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
-                Intent intent1 = new Intent(ElencoCibiActivity.this, ElencoDieteActivity.class);
-                intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                ElencoCibiActivity.this.startActivity(intent1);
+                goBack();
                 return true;
 
             default:
@@ -93,7 +87,17 @@ public class ElencoCibiActivity extends AppCompatActivity {
         }
     }
 
-    private void initView(){
+    /**
+     * funzione per tornare indietro
+     * faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
+     */
+    private void goBack() {
+        Intent intent1 = new Intent(ElencoCibiActivity.this, ElencoDieteActivity.class);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        ElencoCibiActivity.this.startActivity(intent1);
+    }
+
+    private void initView() {
         adapter = new CibiInsRecViewAdapter(this);
         cibiInsRecView = findViewById(R.id.cibiInsRecView);
         txtEmptyElenco = findViewById(R.id.txtEmptyElenco);
