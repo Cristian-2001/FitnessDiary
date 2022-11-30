@@ -196,8 +196,9 @@ public class SelezionaEsercizioActivity extends AppCompatActivity {
      * faccio in modo che quando clicco per tornare indietro, lo stack delle activity venga pulito
      */
     private void goBack() {
-        Intent intent = new Intent(this, AggiungiAllenamentoActivity.class);
+        finish();
+        /*Intent intent = new Intent(this, AggiungiAllenamentoActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 }
