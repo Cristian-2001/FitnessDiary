@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,7 +57,9 @@ public class AggiungiDietaActivity extends AppCompatActivity {
     private EditText edtTxtCercaNome;
     private TextView txtEmpty;
     private TextView txtNumCorr;
-    private Button btnSalvaDieta;
+    private Button btnSalvaDieta, btnResetFiltri, btnCercaEsExp;
+    private ImageView btnFiltri, btnFiltriExp;
+    private ConstraintLayout expandableConsLayout;
 
     public static Dieta dieta = null;
     private static List<Integer> cibiDieta = new ArrayList<>();
@@ -165,6 +169,46 @@ public class AggiungiDietaActivity extends AppCompatActivity {
             }
         });
 
+        btnFiltri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnFiltriExp.setVisibility(View.VISIBLE);
+                expandableConsLayout.setVisibility(View.VISIBLE);
+                btnFiltri.setVisibility(View.GONE);
+                btnCerca.setVisibility(View.GONE);
+            }
+        });
+
+        btnFiltriExp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnFiltriExp.setVisibility(View.GONE);
+                expandableConsLayout.setVisibility(View.GONE);
+                btnFiltri.setVisibility(View.VISIBLE);
+                btnCerca.setVisibility(View.VISIBLE);
+            }
+        });
+
+        btnCercaEsExp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm.isAcceptingText()) {
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                }
+
+                cercaCibi();
+            }
+        });
+
+        btnResetFiltri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtTxtCercaNome.setText("");
+                spnCategoria.setSelection(0);
+            }
+        });
+
         btnSalvaDieta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -202,6 +246,12 @@ public class AggiungiDietaActivity extends AppCompatActivity {
         txtEmpty = findViewById(R.id.txtEmpty);
         txtNumCorr = findViewById(R.id.txtNumCorr);
         btnSalvaDieta = findViewById(R.id.btnSalvaDieta);
+        btnCercaEsExp = findViewById(R.id.btnCercaEsExp);
+        btnResetFiltri = findViewById(R.id.btnResetFiltri);
+        btnFiltri = findViewById(R.id.btnFiltri);
+        btnFiltriExp = findViewById(R.id.btnFiltriExp);
+
+        expandableConsLayout = findViewById(R.id.expandableConsLayout);
 
 
         cibiRecView.setAdapter(adapter);

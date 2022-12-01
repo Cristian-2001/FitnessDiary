@@ -6,27 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".dieta.AggiungiDietaActivity">
 
-    <Spinner
-        android:id="@+id/spnCategoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/categorie"
-        app:layout_constraintBottom_toBottomOf="@+id/txtCategoria"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtCategoria"
-        app:layout_constraintTop_toTopOf="@+id/txtCategoria" />
-
-    <TextView
-        android:id="@+id/txtCategoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Scegli categoria:"
-        app:layout_constraintEnd_toStartOf="@+id/spnCategoria"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCercaNome" />
-
     <Button
         android:id="@+id/btnCerca"
         android:layout_width="wrap_content"
@@ -35,7 +14,7 @@
         android:text="Cerca"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spnCategoria" />
+        app:layout_constraintTop_toBottomOf="@+id/expandableConsLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cibiRecView"
@@ -124,6 +103,79 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/txtNumCorr"
             app:layout_constraintTop_toTopOf="@+id/txtNumCorr" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/btnFiltri"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/edtTxtCercaNome"
+        app:layout_constraintStart_toEndOf="@+id/edtTxtCercaNome"
+        app:layout_constraintTop_toTopOf="@+id/edtTxtCercaNome"
+        app:srcCompat="@drawable/ic_filter" />
+
+    <ImageView
+        android:id="@+id/btnFiltriExp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/edtTxtCercaNome"
+        app:layout_constraintStart_toEndOf="@+id/edtTxtCercaNome"
+        app:layout_constraintTop_toTopOf="@+id/edtTxtCercaNome"
+        app:srcCompat="@drawable/ic_filter_open" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/expandableConsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtCercaNome">
+
+        <TextView
+            android:id="@+id/txtCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scegli categoria:"
+            app:layout_constraintEnd_toStartOf="@+id/spnCategoria"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Spinner
+            android:id="@+id/spnCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/categorie"
+            app:layout_constraintBottom_toBottomOf="@+id/txtCategoria"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/txtCategoria"
+            app:layout_constraintTop_toTopOf="@+id/txtCategoria" />
+
+        <Button
+            android:id="@+id/btnResetFiltri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Reset"
+            app:layout_constraintEnd_toStartOf="@+id/btnCercaEsExp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnCategoria" />
+
+        <Button
+            android:id="@+id/btnCercaEsExp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cerca"
+            app:layout_constraintBottom_toBottomOf="@+id/btnResetFiltri"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnResetFiltri"
+            app:layout_constraintTop_toTopOf="@+id/btnResetFiltri"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

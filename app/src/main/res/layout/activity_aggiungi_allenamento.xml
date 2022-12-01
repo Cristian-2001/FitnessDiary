@@ -11,11 +11,10 @@
         android:id="@+id/esRecView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expandableConsLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCercaEs" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -55,10 +54,10 @@
         android:layout_height="wrap_content"
         android:text="Nessun esercizio trovato"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/esRecView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCercaEs" />
 
     <TextView
         android:id="@+id/txtNomeCerca"
@@ -183,8 +182,7 @@
             android:layout_marginTop="24dp"
             android:text="Modalità:"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/txtTipologia"
-            tools:layout_editor_absoluteX="19dp" />
+            app:layout_constraintTop_toBottomOf="@+id/txtTipologia" />
 
         <Spinner
             android:id="@+id/spnModalita"
@@ -217,13 +215,35 @@
             android:orientation="vertical"
             app:layout_constraintGuide_begin="148dp" />
 
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Reset"
+            app:layout_constraintEnd_toStartOf="@+id/btnCercaExp"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtModalita" />
+
+        <Button
+            android:id="@+id/btnCercaExp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cerca"
+            app:layout_constraintBottom_toBottomOf="@+id/btnReset"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnReset"
+            app:layout_constraintTop_toTopOf="@+id/btnReset" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
         android:id="@+id/btnFiltra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/edtTxtNomeCercaEs"
         app:layout_constraintStart_toEndOf="@+id/edtTxtNomeCercaEs"
         app:layout_constraintTop_toTopOf="@+id/edtTxtNomeCercaEs"
@@ -233,13 +253,22 @@
         android:id="@+id/btnFiltraExp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:rotation="180"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/edtTxtNomeCercaEs"
         app:layout_constraintStart_toEndOf="@+id/edtTxtNomeCercaEs"
         app:layout_constraintTop_toTopOf="@+id/edtTxtNomeCercaEs"
-        app:srcCompat="@drawable/ic_filter" />
+        app:srcCompat="@drawable/ic_filter_open" />
+
+    <Button
+        android:id="@+id/btnCercaEs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Cerca"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expandableConsLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

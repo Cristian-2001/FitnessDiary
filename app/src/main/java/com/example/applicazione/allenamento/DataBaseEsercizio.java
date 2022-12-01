@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class DataBaseEsercizio extends SQLiteOpenHelper {
@@ -154,6 +155,14 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
 
         cursor.close();
         db.close();
+
+        returnList.sort(new Comparator<Esercizio>() {
+            @Override
+            public int compare(Esercizio esercizio, Esercizio t1) {
+                return esercizio.getNome().compareTo(t1.getNome());
+            }
+        });
+
         return returnList;
     }
 
@@ -212,6 +221,21 @@ public class DataBaseEsercizio extends SQLiteOpenHelper {
 
         cursor.close();
         db.close();
+
+        String finalNome = nome;
+        returnList.sort(new Comparator<Esercizio>() {
+            @Override
+            public int compare(Esercizio esercizio, Esercizio t1) {
+                if (esercizio.getNome().startsWith(finalNome) && !t1.getNome().startsWith(finalNome)) {
+                    return -1;
+                } else if (!esercizio.getNome().startsWith(finalNome) && t1.getNome().startsWith(finalNome)) {
+                    return 1;
+                } else {
+                    return esercizio.getNome().compareTo(t1.getNome());
+                }
+            }
+        });
+
         return returnList;
     }
 }

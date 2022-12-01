@@ -18,6 +18,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -60,6 +61,8 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
     private ImageView btnFiltra, btnFiltraExp;
 
     private ConstraintLayout expandableConsLayout;
+
+    private Button btnCercaEs, btnReset,btnCercaExp;
 
     private Spinner spnGruppoMusc;
     private Spinner spnDifficolta;
@@ -151,6 +154,7 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
                 btnFiltraExp.setVisibility(View.VISIBLE);
                 expandableConsLayout.setVisibility(View.VISIBLE);
                 btnFiltra.setVisibility(View.GONE);
+                btnCercaEs.setVisibility(View.GONE);
                 /*Intent intent = new Intent(AggiungiAllenamentoActivity.this, FiltriEserciziActivity.class);
                 AggiungiAllenamentoActivity.this.startActivity(intent);*/
             }
@@ -162,6 +166,41 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
                 btnFiltraExp.setVisibility(View.GONE);
                 expandableConsLayout.setVisibility(View.GONE);
                 btnFiltra.setVisibility(View.VISIBLE);
+                btnCercaEs.setVisibility(View.VISIBLE);
+            }
+        });
+
+        btnCercaEs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm.isAcceptingText()) {
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                }
+                cercaEsercizi();
+            }
+        });
+
+        btnCercaExp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm.isAcceptingText()) {
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                }
+                cercaEsercizi();
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edtTxtNomeCercaEs.setText("");
+                spnGruppoMusc.setSelection(0);
+                spnDifficolta.setSelection(0);
+                spnParteCorpo.setSelection(0);
+                spnTipologia.setSelection(0);
+                spnModalita.setSelection(0);
             }
         });
 
@@ -182,11 +221,10 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
                         dataBaseAllenamento.addOne(allenamento);
                     }
 
+                    Intent intent1 = new Intent(AggiungiAllenamentoActivity.this, ElencoAllenamentiActivity.class);
+                    intent1.putExtra(ALLENAMENTO_ID_KEY, allenamento.getId());
+                    AggiungiAllenamentoActivity.this.startActivity(intent1);
                 }
-
-                Intent intent1 = new Intent(AggiungiAllenamentoActivity.this, ElencoAllenamentiActivity.class);
-                intent1.putExtra(ALLENAMENTO_ID_KEY, allenamento.getId());
-                AggiungiAllenamentoActivity.this.startActivity(intent1);
             }
         });
 
@@ -276,6 +314,9 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
         btnFiltra = findViewById(R.id.btnFiltra);
         btnFiltraExp = findViewById(R.id.btnFiltraExp);
         btnSalvaALl = findViewById(R.id.btnSalvaAll);
+        btnCercaEs = findViewById(R.id.btnCercaEs);
+        btnReset = findViewById(R.id.btnReset);
+        btnCercaExp = findViewById(R.id.btnCercaExp);
 
         adapter = new EserciziRecViewAdapter(this);
         esRecView = findViewById(R.id.esRecView);
