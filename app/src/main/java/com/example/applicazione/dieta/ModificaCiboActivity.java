@@ -97,6 +97,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setMessage("Inserisci il nuovo nome: ");
 
                 final EditText input = new EditText(ModificaCiboActivity.this);
+                input.setText(cibo.getNome());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
@@ -125,10 +126,14 @@ public class ModificaCiboActivity extends AppCompatActivity {
                         } else {
                             String temp = input.getText().toString();
                             nomeCibo = temp.substring(0, 1).toUpperCase() + temp.substring(1);
-                            cibo.setNome(nomeCibo);
-                            dataBaseCibo.modificaCibo(ciboId, cibo);
-                            txtNomeCiboIns.setText(nomeCibo);
-                            dialog2.dismiss();
+                            if (dataBaseCibo.getNomi().contains(nomeCibo)) {
+                                Toast.makeText(ModificaCiboActivity.this, "Il cibo " + nomeCibo + " esiste già", Toast.LENGTH_SHORT).show();
+                            } else {
+                                cibo.setNome(nomeCibo);
+                                dataBaseCibo.modificaCibo(ciboId, cibo);
+                                txtNomeCiboIns.setText(nomeCibo);
+                                dialog2.dismiss();
+                            }
                         }
                     }
                 });
@@ -207,6 +212,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setMessage("Inserisci il nuovo valore: ");
 
                 final EditText input = new EditText(ModificaCiboActivity.this);
+                input.setText(cibo.getEnergia().toString());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
@@ -234,10 +240,15 @@ public class ModificaCiboActivity extends AppCompatActivity {
                         if (input.getText().toString().equals("")) {
                             Toast.makeText(ModificaCiboActivity.this, "Inserire il valore", Toast.LENGTH_SHORT).show();
                         } else {
-                            cibo.setEnergia(Double.parseDouble(input.getText().toString()));
-                            dataBaseCibo.modificaCibo(ciboId, cibo);
-                            txtEner.setText("Calorie: " + Double.parseDouble(input.getText().toString()) + " kcal");
-                            dialog.dismiss();
+                            double energia = Double.parseDouble(input.getText().toString());
+                            if (energia > 1000) {
+                                Toast.makeText(ModificaCiboActivity.this, "L'energia non può superare le 1000 kcal", Toast.LENGTH_SHORT).show();
+                            } else {
+                                cibo.setEnergia(energia);
+                                dataBaseCibo.modificaCibo(ciboId, cibo);
+                                txtEner.setText("Calorie: " + Double.parseDouble(input.getText().toString()) + " kcal");
+                                dialog.dismiss();
+                            }
                         }
                     }
                 });
@@ -252,6 +263,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setMessage("Inserisci il nuovo valore: ");
 
                 final EditText input = new EditText(ModificaCiboActivity.this);
+                input.setText(cibo.getLipidi().toString());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
@@ -279,10 +291,15 @@ public class ModificaCiboActivity extends AppCompatActivity {
                         if (input.getText().toString().equals("")) {
                             Toast.makeText(ModificaCiboActivity.this, "Inserire il valore", Toast.LENGTH_SHORT).show();
                         } else {
-                            cibo.setLipidi(Double.parseDouble(input.getText().toString()));
-                            dataBaseCibo.modificaCibo(ciboId, cibo);
-                            txtLip.setText("Lipidi: " + Double.parseDouble(input.getText().toString()) + " g");
-                            dialog.dismiss();
+                            double lipidi = Double.parseDouble(input.getText().toString());
+                            if (lipidi > 100) {
+                                Toast.makeText(ModificaCiboActivity.this, "Il valore di lipidi non può superare i 100 g", Toast.LENGTH_SHORT).show();
+                            } else {
+                                cibo.setLipidi(lipidi);
+                                dataBaseCibo.modificaCibo(ciboId, cibo);
+                                txtLip.setText("Lipidi: " + Double.parseDouble(input.getText().toString()) + " g");
+                                dialog.dismiss();
+                            }
                         }
                     }
                 });
@@ -296,6 +313,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setMessage("Inserisci il nuovo valore: ");
 
                 final EditText input = new EditText(ModificaCiboActivity.this);
+                input.setText(cibo.getAcidigrassi().toString());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
@@ -323,10 +341,15 @@ public class ModificaCiboActivity extends AppCompatActivity {
                         if (input.getText().toString().equals("")) {
                             Toast.makeText(ModificaCiboActivity.this, "Inserire il valore", Toast.LENGTH_SHORT).show();
                         } else {
-                            cibo.setAcidigrassi(Double.parseDouble(input.getText().toString()));
-                            dataBaseCibo.modificaCibo(ciboId, cibo);
-                            txtAcidi.setText("Acidi grassi: " + Double.parseDouble(input.getText().toString()) + " g");
-                            dialog.dismiss();
+                            double acidigrassi = Double.parseDouble(input.getText().toString());
+                            if (acidigrassi > 100) {
+                                Toast.makeText(ModificaCiboActivity.this, "Il valore di acidi grassi non può superare i 100 g", Toast.LENGTH_SHORT).show();
+                            } else {
+                                cibo.setAcidigrassi(acidigrassi);
+                                dataBaseCibo.modificaCibo(ciboId, cibo);
+                                txtAcidi.setText("Acidi grassi: " + Double.parseDouble(input.getText().toString()) + " g");
+                                dialog.dismiss();
+                            }
                         }
                     }
                 });
@@ -340,6 +363,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setMessage("Inserisci il nuovo valore: ");
 
                 final EditText input = new EditText(ModificaCiboActivity.this);
+                input.setText(cibo.getColesterolo().toString());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
@@ -367,10 +391,15 @@ public class ModificaCiboActivity extends AppCompatActivity {
                         if (input.getText().toString().equals("")) {
                             Toast.makeText(ModificaCiboActivity.this, "Inserire il valore", Toast.LENGTH_SHORT).show();
                         } else {
-                            cibo.setColesterolo(Double.parseDouble(input.getText().toString()));
-                            dataBaseCibo.modificaCibo(ciboId, cibo);
-                            txtCol.setText("Colesterolo: " + Double.parseDouble(input.getText().toString()) + " g");
-                            dialog.dismiss();
+                            double colesterolo = Double.parseDouble(input.getText().toString());
+                            if (colesterolo > 100) {
+                                Toast.makeText(ModificaCiboActivity.this, "Il valore di colesterolo non può superare i 100 g", Toast.LENGTH_SHORT).show();
+                            } else {
+                                cibo.setColesterolo(colesterolo);
+                                dataBaseCibo.modificaCibo(ciboId, cibo);
+                                txtCol.setText("Colesterolo: " + Double.parseDouble(input.getText().toString()) + " g");
+                                dialog.dismiss();
+                            }
                         }
                     }
                 });
@@ -384,6 +413,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setMessage("Inserisci il nuovo valore: ");
 
                 final EditText input = new EditText(ModificaCiboActivity.this);
+                input.setText(cibo.getCarboidrati().toString());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
@@ -411,10 +441,15 @@ public class ModificaCiboActivity extends AppCompatActivity {
                         if (input.getText().toString().equals("")) {
                             Toast.makeText(ModificaCiboActivity.this, "Inserire il valore", Toast.LENGTH_SHORT).show();
                         } else {
-                            cibo.setCarboidrati(Double.parseDouble(input.getText().toString()));
-                            dataBaseCibo.modificaCibo(ciboId, cibo);
-                            txtCarbo.setText("Carboidrati: " + Double.parseDouble(input.getText().toString()) + " g");
-                            dialog.dismiss();
+                            double carbo = Double.parseDouble(input.getText().toString());
+                            if (carbo > 100) {
+                                Toast.makeText(ModificaCiboActivity.this, "Il valore dei carboidrati non può superare i 100 g", Toast.LENGTH_SHORT).show();
+                            } else {
+                                cibo.setCarboidrati(carbo);
+                                dataBaseCibo.modificaCibo(ciboId, cibo);
+                                txtCarbo.setText("Carboidrati: " + Double.parseDouble(input.getText().toString()) + " g");
+                                dialog.dismiss();
+                            }
                         }
                     }
                 });
@@ -428,6 +463,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setMessage("Inserisci il nuovo valore: ");
 
                 final EditText input = new EditText(ModificaCiboActivity.this);
+                input.setText(cibo.getZuccheri().toString());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
@@ -455,10 +491,15 @@ public class ModificaCiboActivity extends AppCompatActivity {
                         if (input.getText().toString().equals("")) {
                             Toast.makeText(ModificaCiboActivity.this, "Inserire il valore", Toast.LENGTH_SHORT).show();
                         } else {
-                            cibo.setZuccheri(Double.parseDouble(input.getText().toString()));
-                            dataBaseCibo.modificaCibo(ciboId, cibo);
-                            txtZucc.setText("Zuccheri: " + Double.parseDouble(input.getText().toString()) + " g");
-                            dialog.dismiss();
+                            double zuccheri = Double.parseDouble(input.getText().toString());
+                            if (zuccheri > 100) {
+                                Toast.makeText(ModificaCiboActivity.this, "Il valore degli zuccheri non può superare i 100 g", Toast.LENGTH_SHORT).show();
+                            } else {
+                                cibo.setZuccheri(zuccheri);
+                                dataBaseCibo.modificaCibo(ciboId, cibo);
+                                txtZucc.setText("Zuccheri: " + Double.parseDouble(input.getText().toString()) + " g");
+                                dialog.dismiss();
+                            }
                         }
                     }
                 });
@@ -472,6 +513,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setMessage("Inserisci il nuovo valore: ");
 
                 final EditText input = new EditText(ModificaCiboActivity.this);
+                input.setText(cibo.getFibre().toString());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
@@ -499,10 +541,15 @@ public class ModificaCiboActivity extends AppCompatActivity {
                         if (input.getText().toString().equals("")) {
                             Toast.makeText(ModificaCiboActivity.this, "Inserire il valore", Toast.LENGTH_SHORT).show();
                         } else {
-                            cibo.setFibre(Double.parseDouble(input.getText().toString()));
-                            dataBaseCibo.modificaCibo(ciboId, cibo);
-                            txtFib.setText("Fibre: " + Double.parseDouble(input.getText().toString()) + " g");
-                            dialog.dismiss();
+                            double fibre = Double.parseDouble(input.getText().toString());
+                            if (fibre > 100) {
+                                Toast.makeText(ModificaCiboActivity.this, "Il valore delle fibre non può superare i 100 g", Toast.LENGTH_SHORT).show();
+                            } else {
+                                cibo.setFibre(fibre);
+                                dataBaseCibo.modificaCibo(ciboId, cibo);
+                                txtFib.setText("Fibre: " + Double.parseDouble(input.getText().toString()) + " g");
+                                dialog.dismiss();
+                            }
                         }
                     }
                 });
@@ -516,6 +563,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setMessage("Inserisci il nuovo valore: ");
 
                 final EditText input = new EditText(ModificaCiboActivity.this);
+                input.setText(cibo.getProteine().toString());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
@@ -543,10 +591,15 @@ public class ModificaCiboActivity extends AppCompatActivity {
                         if (input.getText().toString().equals("")) {
                             Toast.makeText(ModificaCiboActivity.this, "Inserire il valore", Toast.LENGTH_SHORT).show();
                         } else {
-                            cibo.setProteine(Double.parseDouble(input.getText().toString()));
-                            dataBaseCibo.modificaCibo(ciboId, cibo);
-                            txtProt.setText("Proteine: " + Double.parseDouble(input.getText().toString()) + " g");
-                            dialog.dismiss();
+                            double proteine = Double.parseDouble(input.getText().toString());
+                            if (proteine > 100) {
+                                Toast.makeText(ModificaCiboActivity.this, "Il valore di proteine non può superare i 100 g", Toast.LENGTH_SHORT).show();
+                            } else {
+                                cibo.setProteine(proteine);
+                                dataBaseCibo.modificaCibo(ciboId, cibo);
+                                txtProt.setText("Proteine: " + Double.parseDouble(input.getText().toString()) + " g");
+                                dialog.dismiss();
+                            }
                         }
                     }
                 });
@@ -560,6 +613,7 @@ public class ModificaCiboActivity extends AppCompatActivity {
                 builder.setMessage("Inserisci il nuovo valore: ");
 
                 final EditText input = new EditText(ModificaCiboActivity.this);
+                input.setText(cibo.getSale().toString());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);
@@ -587,10 +641,15 @@ public class ModificaCiboActivity extends AppCompatActivity {
                         if (input.getText().toString().equals("")) {
                             Toast.makeText(ModificaCiboActivity.this, "Inserire il valore", Toast.LENGTH_SHORT).show();
                         } else {
-                            cibo.setSale(Double.parseDouble(input.getText().toString()));
-                            dataBaseCibo.modificaCibo(ciboId, cibo);
-                            txtSal.setText("Sale: " + Double.parseDouble(input.getText().toString()) + " g");
-                            dialog.dismiss();
+                            double sale = Double.parseDouble(input.getText().toString());
+                            if (sale > 100) {
+                                Toast.makeText(ModificaCiboActivity.this, "Il valore di sale non può superare i 100 g", Toast.LENGTH_SHORT).show();
+                            } else {
+                                cibo.setSale(sale);
+                                dataBaseCibo.modificaCibo(ciboId, cibo);
+                                txtSal.setText("Sale: " + Double.parseDouble(input.getText().toString()) + " g");
+                                dialog.dismiss();
+                            }
                         }
                     }
                 });

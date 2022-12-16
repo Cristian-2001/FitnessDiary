@@ -193,6 +193,7 @@ public class CibiDietaRecViewAdapter extends RecyclerView.Adapter<CibiDietaRecVi
                     builder.setMessage("Inserisci la quantità: ");
 
                     final EditText input = new EditText(mContext);
+                    input.setText(quantita.get(getAdapterPosition()).toString());
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.MATCH_PARENT);

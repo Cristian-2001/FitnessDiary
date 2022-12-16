@@ -199,6 +199,7 @@ public class VisualizzaDietaActivity extends AppCompatActivity {
                 builder2.setMessage("Inserisci il nuovo nome: ");
 
                 final EditText input = new EditText(this);
+                input.setText(nomeDieta);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT);

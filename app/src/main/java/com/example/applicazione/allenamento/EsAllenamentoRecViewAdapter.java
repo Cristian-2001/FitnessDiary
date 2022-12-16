@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -142,7 +143,8 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                     txtSerie.setText("Inserisci il numero di serie: ");
                     layout.addView(txtSerie);
                     final EditText edtSerie = new EditText(mContext);
-                    edtSerie.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    edtSerie.setText(serie.get(getAdapterPosition()).toString());
+                    edtSerie.setInputType(InputType.TYPE_CLASS_NUMBER);
                     edtSerie.setRawInputType(Configuration.KEYBOARD_12KEY);
                     layout.addView(edtSerie);
 
@@ -150,7 +152,8 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                     txtReps.setText("\nInserisci il numero di ripetizioni: ");
                     layout.addView(txtReps);
                     final EditText edtReps = new EditText(mContext);
-                    edtReps.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    edtReps.setText(reps.get(getAdapterPosition()).toString());
+                    edtReps.setInputType(InputType.TYPE_CLASS_NUMBER);
                     edtReps.setRawInputType(Configuration.KEYBOARD_12KEY);
                     layout.addView(edtReps);
 
@@ -158,7 +161,8 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                     txtTRec.setText("\nInserisci il tempo di recupero in secondi: ");
                     layout.addView(txtTRec);
                     final EditText edtTRec = new EditText(mContext);
-                    edtTRec.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                    edtTRec.setText(tRec.get(getAdapterPosition()).toString());
+                    edtTRec.setInputType(InputType.TYPE_CLASS_NUMBER);
                     edtTRec.setRawInputType(Configuration.KEYBOARD_12KEY);
                     layout.addView(edtTRec);
 
@@ -180,31 +184,35 @@ public class EsAllenamentoRecViewAdapter extends RecyclerView.Adapter<EsAllename
                     dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            int newSerie, newReps, newTRec;
+                            int newSerie = 0, newReps = 0, newTRec = 0;
                             if (edtSerie.getText().toString().equals("")) {
-                                newSerie = serie.get(getAdapterPosition());
+                                Toast.makeText(mContext, "Inserire il numero di serie", Toast.LENGTH_SHORT).show();
                             } else {
                                 newSerie = Integer.parseInt(edtSerie.getText().toString());
                             }
 
                             if (edtReps.getText().toString().equals("")) {
-                                newReps = reps.get(getAdapterPosition());
+                                Toast.makeText(mContext, "Inserire il numero di ripetizioni", Toast.LENGTH_SHORT).show();
                             } else {
                                 newReps = Integer.parseInt(edtReps.getText().toString());
                             }
 
                             if (edtTRec.getText().toString().equals("")) {
-                                newTRec = tRec.get(getAdapterPosition());
+                                Toast.makeText(mContext, "Inserire il tempo di recupero", Toast.LENGTH_SHORT).show();
                             } else {
                                 newTRec = Integer.parseInt(edtTRec.getText().toString());
                             }
 
-                            serie.set(getAdapterPosition(), newSerie);
-                            reps.set(getAdapterPosition(), newReps);
-                            tRec.set(getAdapterPosition(), newTRec);
-                            dialog.dismiss();
-                            notifyItemChanged(getAdapterPosition());
-                            VisualizzaAllenamentoActivity.setModificato();
+                            if (newSerie != 0 && newReps != 0 && newTRec != 0) {
+                                serie.set(getAdapterPosition(), newSerie);
+                                reps.set(getAdapterPosition(), newReps);
+                                tRec.set(getAdapterPosition(), newTRec);
+                                dialog.dismiss();
+                                notifyItemChanged(getAdapterPosition());
+                                VisualizzaAllenamentoActivity.setModificato();
+                            } else {
+                                Toast.makeText(mContext, "I valori inseriti devono essere diversi da 0", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     });
                 }
