@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.TransitionManager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -62,7 +63,7 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
 
     private ConstraintLayout expandableConsLayout;
 
-    private Button btnCercaEs, btnReset,btnCercaExp;
+    private Button btnCercaEs, btnReset, btnCercaExp;
 
     private Spinner spnGruppoMusc;
     private Spinner spnDifficolta;
@@ -155,6 +156,8 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
                 expandableConsLayout.setVisibility(View.VISIBLE);
                 btnFiltra.setVisibility(View.GONE);
                 btnCercaEs.setVisibility(View.GONE);
+
+                //TODO eliminare questo quando si elimina l'activity filtra
                 /*Intent intent = new Intent(AggiungiAllenamentoActivity.this, FiltriEserciziActivity.class);
                 AggiungiAllenamentoActivity.this.startActivity(intent);*/
             }
@@ -397,7 +400,7 @@ public class AggiungiAllenamentoActivity extends AppCompatActivity {
         adapter.setEsercizi(esercizi);
         esRecView.setAdapter(adapter);
 
-        if(adapter.getItemCount() == 0){
+        if (adapter.getItemCount() == 0) {
             txtEmptyEs.setVisibility(View.VISIBLE);
         }
     }

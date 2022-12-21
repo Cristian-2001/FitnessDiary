@@ -15,14 +15,14 @@
 
     <TextView
         android:id="@+id/txtNomeCiboIns"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Nome Cibo"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imgNome"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -126,9 +126,8 @@
         android:id="@+id/imgNome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/txtNomeCiboIns"
-        app:layout_constraintStart_toEndOf="@+id/txtNomeCiboIns"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="@+id/txtNomeCiboIns"
         app:srcCompat="@drawable/ic_edit" />
 

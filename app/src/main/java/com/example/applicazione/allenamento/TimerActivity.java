@@ -10,16 +10,22 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -33,6 +39,7 @@ import com.example.applicazione.dieta.VisualizzaDietaActivity;
 import java.util.concurrent.TimeUnit;
 
 public class TimerActivity extends AppCompatActivity {
+    private static final String TAG = "TimerActivity";
     private TextView txtTimer;
     private Button btnInterrompiTimer, btnNextEs;
 
@@ -65,6 +72,13 @@ public class TimerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
+
+        //creo un Notification Channel
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("Timer Notification", "Timer Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
 
         dataBaseAllenamento = new DataBaseAllenamento(TimerActivity.this);
 
@@ -182,6 +196,21 @@ public class TimerActivity extends AppCompatActivity {
                         TimerActivity.this.startActivity(intent);
                     }
                 });
+
+                Intent reopenActivityIntent = new Intent(TimerActivity.this, TimerActivity.class);
+                PendingIntent launchIntent = PendingIntent.getActivity(TimerActivity.this, 0, reopenActivityIntent, PendingIntent.FLAG_IMMUTABLE);
+
+                //creo la notifica
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(TimerActivity.this, "Timer Notification");
+                builder.setContentTitle("Recupero terminato")
+                        .setContentText("Riprendi l'allenamento")
+                        .setSmallIcon(R.drawable.ic_fitness)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                        .setAutoCancel(true)
+                        .setContentIntent(launchIntent);
+
+                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(TimerActivity.this);
+                managerCompat.notify(1, builder.build());
             }
 
         }.start();

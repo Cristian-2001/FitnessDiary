@@ -116,10 +116,10 @@ public class AggiungiCiboActivity extends AppCompatActivity {
                     temp = edtTxtNome.getText().toString();
                     nome = temp.substring(0, 1).toUpperCase() + temp.substring(1);
 
-                    if(nome.length() > 25){
+                    /*if(nome.length() > 25){
                         Toast.makeText(AggiungiCiboActivity.this, "Il nome può contenere al massimo 25 caratteri", Toast.LENGTH_SHORT).show();
                         allData = false;
-                    }
+                    }*/
 
                     if (dataBaseCibo.getNomi().contains(nome)) {
                         Toast.makeText(AggiungiCiboActivity.this, "Il cibo " + nome + " esiste già", Toast.LENGTH_SHORT).show();
