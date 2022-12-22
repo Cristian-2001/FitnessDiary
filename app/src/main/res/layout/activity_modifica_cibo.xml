@@ -6,219 +6,262 @@
     android:layout_height="match_parent"
     tools:context=".dieta.ModificaCiboActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/txtNomeCiboIns"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Nome Cibo"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/imgNome"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txtCat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Categoria"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/txtNomeCiboIns" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="20dp" />
 
-    <TextView
-        android:id="@+id/txtEner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Energia"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/txtCat" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
 
-    <TextView
-        android:id="@+id/txtLip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Lipidi"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/txtEner" />
+            <TextView
+                android:id="@+id/txtNomeCiboIns"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Nome Cibo"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtAcidi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Acidi Grassi"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/txtLip" />
+            <ImageView
+                android:id="@+id/imgNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txtNomeCiboIns"
+                app:layout_constraintEnd_toEndOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/txtNomeCiboIns"
+                app:srcCompat="@drawable/ic_edit" />
 
-    <TextView
-        android:id="@+id/txtCol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Colesterolo"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/txtAcidi" />
+            <TextView
+                android:id="@+id/txtCat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Categoria"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toBottomOf="@+id/txtNomeCiboIns" />
 
-    <TextView
-        android:id="@+id/txtCarbo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Carboidrati"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/txtCol" />
+            <ImageView
+                android:id="@+id/imgCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCat"
+                app:layout_constraintEnd_toEndOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/txtCat"
+                app:srcCompat="@drawable/ic_edit" />
 
-    <TextView
-        android:id="@+id/txtZucc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Zuccheri"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/txtCarbo" />
+            <TextView
+                android:id="@+id/txtEner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Energia"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toBottomOf="@+id/txtCat" />
 
-    <TextView
-        android:id="@+id/txtFib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Fibre"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/txtZucc" />
+            <ImageView
+                android:id="@+id/imgEnergia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txtEner"
+                app:layout_constraintEnd_toEndOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/txtEner"
+                app:srcCompat="@drawable/ic_edit" />
 
-    <TextView
-        android:id="@+id/txtProt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Proteine"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/txtFib" />
+            <TextView
+                android:id="@+id/txtLip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Lipidi"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toBottomOf="@+id/txtEner"
+                tools:layout_editor_absoluteX="19dp" />
 
-    <TextView
-        android:id="@+id/txtSal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Sale"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/txtProt" />
+            <ImageView
+                android:id="@+id/imgLipidi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txtLip"
+                app:layout_constraintEnd_toEndOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/txtLip"
+                app:srcCompat="@drawable/ic_edit"
+                tools:layout_editor_absoluteX="370dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
+            <TextView
+                android:id="@+id/txtAcidi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Acidi Grassi"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toBottomOf="@+id/txtLip"
+                tools:layout_editor_absoluteX="19dp" />
 
-    <ImageView
-        android:id="@+id/imgNome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txtNomeCiboIns"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/txtNomeCiboIns"
-        app:srcCompat="@drawable/ic_edit" />
+            <ImageView
+                android:id="@+id/imgAcidiGrassi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txtAcidi"
+                app:layout_constraintEnd_toEndOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/txtAcidi"
+                app:srcCompat="@drawable/ic_edit"
+                tools:layout_editor_absoluteX="370dp" />
 
-    <ImageView
-        android:id="@+id/imgCategoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txtCat"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/txtCat"
-        app:srcCompat="@drawable/ic_edit" />
+            <TextView
+                android:id="@+id/txtCol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Colesterolo"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toBottomOf="@+id/txtAcidi"
+                tools:layout_editor_absoluteX="19dp"
+                tools:layout_editor_absoluteY="13dp" />
 
-    <ImageView
-        android:id="@+id/imgEnergia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txtEner"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/txtEner"
-        app:srcCompat="@drawable/ic_edit" />
+            <ImageView
+                android:id="@+id/imgColesterolo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCol"
+                app:layout_constraintEnd_toEndOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/txtCol"
+                app:srcCompat="@drawable/ic_edit"
+                tools:layout_editor_absoluteX="370dp"
+                tools:layout_editor_absoluteY="11dp" />
 
-    <ImageView
-        android:id="@+id/imgLipidi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txtLip"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/txtLip"
-        app:srcCompat="@drawable/ic_edit" />
+            <TextView
+                android:id="@+id/txtCarbo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Carboidrati"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toBottomOf="@+id/txtCol"
+                tools:layout_editor_absoluteX="19dp"
+                tools:layout_editor_absoluteY="64dp" />
 
-    <ImageView
-        android:id="@+id/imgAcidiGrassi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txtAcidi"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/txtAcidi"
-        app:srcCompat="@drawable/ic_edit" />
+            <ImageView
+                android:id="@+id/imgCarboidrati"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCarbo"
+                app:layout_constraintEnd_toEndOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/txtCarbo"
+                app:srcCompat="@drawable/ic_edit"
+                tools:layout_editor_absoluteX="370dp"
+                tools:layout_editor_absoluteY="62dp" />
 
-    <ImageView
-        android:id="@+id/imgColesterolo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txtCol"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/txtCol"
-        app:srcCompat="@drawable/ic_edit" />
+            <TextView
+                android:id="@+id/txtZucc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Zuccheri"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toBottomOf="@+id/txtCarbo"
+                tools:layout_editor_absoluteX="19dp"
+                tools:layout_editor_absoluteY="116dp" />
 
-    <ImageView
-        android:id="@+id/imgCarboidrati"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txtCarbo"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/txtCarbo"
-        app:srcCompat="@drawable/ic_edit" />
+            <ImageView
+                android:id="@+id/imgZuccheri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txtZucc"
+                app:layout_constraintEnd_toEndOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/txtZucc"
+                app:srcCompat="@drawable/ic_edit"
+                tools:layout_editor_absoluteX="370dp"
+                tools:layout_editor_absoluteY="114dp" />
 
-    <ImageView
-        android:id="@+id/imgZuccheri"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txtZucc"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/txtZucc"
-        app:srcCompat="@drawable/ic_edit" />
+            <TextView
+                android:id="@+id/txtFib"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Fibre"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toBottomOf="@+id/txtZucc"
+                tools:layout_editor_absoluteX="19dp"
+                tools:layout_editor_absoluteY="167dp" />
 
-    <ImageView
-        android:id="@+id/imgFibre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txtFib"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/txtFib"
-        app:srcCompat="@drawable/ic_edit" />
+            <ImageView
+                android:id="@+id/imgFibre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txtFib"
+                app:layout_constraintEnd_toEndOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/txtFib"
+                app:srcCompat="@drawable/ic_edit"
+                tools:layout_editor_absoluteX="370dp"
+                tools:layout_editor_absoluteY="165dp" />
 
-    <ImageView
-        android:id="@+id/imgProteine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txtProt"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/txtProt"
-        app:srcCompat="@drawable/ic_edit" />
+            <TextView
+                android:id="@+id/txtProt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Proteine"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toBottomOf="@+id/txtFib"
+                tools:layout_editor_absoluteX="19dp"
+                tools:layout_editor_absoluteY="219dp" />
 
-    <ImageView
-        android:id="@+id/imgSale"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/txtSal"
-        app:layout_constraintEnd_toStartOf="@+id/guideline8"
-        app:layout_constraintTop_toTopOf="@+id/txtSal"
-        app:srcCompat="@drawable/ic_edit" />
+            <ImageView
+                android:id="@+id/imgProteine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txtProt"
+                app:layout_constraintEnd_toEndOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/txtProt"
+                app:srcCompat="@drawable/ic_edit"
+                tools:layout_editor_absoluteX="370dp"
+                tools:layout_editor_absoluteY="216dp" />
+
+            <TextView
+                android:id="@+id/txtSal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="Sale"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline7"
+                app:layout_constraintTop_toBottomOf="@+id/txtProt" />
+
+            <ImageView
+                android:id="@+id/imgSale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/txtSal"
+                app:layout_constraintEnd_toEndOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/txtSal"
+                app:srcCompat="@drawable/ic_edit"
+                tools:layout_editor_absoluteX="370dp"
+                tools:layout_editor_absoluteY="268dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

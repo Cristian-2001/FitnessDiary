@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.applicazione.ExitService;
 import com.example.applicazione.MainActivity;
 import com.example.applicazione.R;
 import com.example.applicazione.dieta.ElencoDieteActivity;
@@ -120,6 +121,24 @@ public class TimerActivity extends AppCompatActivity {
             dialog.show();
         }
 
+        Intent reopenActivityIntent = new Intent(TimerActivity.this, TimerActivity.class);
+        PendingIntent launchIntent = PendingIntent.getActivity(TimerActivity.this, 0, reopenActivityIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        //creo la notifica
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(TimerActivity.this, "Timer Notification");
+        builder.setContentTitle("Recupero in corso")
+                .setContentText("Riprendi l'allenamento")
+                .setSmallIcon(R.drawable.ic_fitness)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                .setContentIntent(launchIntent);
+
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(TimerActivity.this);
+        managerCompat.notify(1, builder.build());
+
+        //chiamo l'ExitService per eliminare la notifica alla chiusura dell'app
+        Intent intent2 = new Intent(this, ExitService.class);
+        startService(intent2);
+
         CountDownTimer countDownTimer = new CountDownTimer(TimeUnit.SECONDS.toMillis(time), 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -159,6 +178,10 @@ public class TimerActivity extends AppCompatActivity {
                 btnNextEs.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        //cancello la notifica
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                        notificationManager.cancel(1);
+
                         r.stop();
                         r.release();
                         majinbool = false;
@@ -188,6 +211,10 @@ public class TimerActivity extends AppCompatActivity {
                 btnInterrompiTimer.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        //cancello la notifica
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                        notificationManager.cancel(1);
+
                         r.stop();
                         r.release();
                         majinbool = false;
@@ -196,21 +223,6 @@ public class TimerActivity extends AppCompatActivity {
                         TimerActivity.this.startActivity(intent);
                     }
                 });
-
-                Intent reopenActivityIntent = new Intent(TimerActivity.this, TimerActivity.class);
-                PendingIntent launchIntent = PendingIntent.getActivity(TimerActivity.this, 0, reopenActivityIntent, PendingIntent.FLAG_IMMUTABLE);
-
-                //creo la notifica
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(TimerActivity.this, "Timer Notification");
-                builder.setContentTitle("Recupero terminato")
-                        .setContentText("Riprendi l'allenamento")
-                        .setSmallIcon(R.drawable.ic_fitness)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
-                        .setAutoCancel(true)
-                        .setContentIntent(launchIntent);
-
-                NotificationManagerCompat managerCompat = NotificationManagerCompat.from(TimerActivity.this);
-                managerCompat.notify(1, builder.build());
             }
 
         }.start();
@@ -218,6 +230,10 @@ public class TimerActivity extends AppCompatActivity {
         btnInterrompiTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //cancello la notifica
+                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                notificationManager.cancel(1);
+
                 majinbool = false;
                 countDownTimer.cancel();
                 Intent intent = new Intent(TimerActivity.this, VisualizzaAllenamentoActivity.class);
