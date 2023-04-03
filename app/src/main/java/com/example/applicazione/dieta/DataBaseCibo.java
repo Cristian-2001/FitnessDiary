@@ -69,7 +69,7 @@ public class DataBaseCibo extends SQLiteOpenHelper {
             settings = myContext.getSharedPreferences("PREFS_NAME", 0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("FIRST_RUN", true);
-            editor.commit();
+            editor.apply();
         }
     }
 
